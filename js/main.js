@@ -20,7 +20,7 @@ function preload() {
 	game.load.image('poo', 'assets/img/poo.png');
 	//game.load.spritesheet('dude', 'assets/img/dude.png', 32, 48);
 	//game.load.spritesheet('baddie', 'assets/img/baddie.png', 32, 32);
-	game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 140, 200);
+	game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 }
 
 // place your assets
@@ -45,10 +45,10 @@ function create() {
 	player.body.collideWorldBounds = true;
 
 	// Adding the player animations, left and right.
-	player.animations.add('down', [0,2],10, true);
-	player.animations.add('left', [3,5],10,true);
-	player.animations.add('right',[6,8],10,true);
-	player.animations.add('up', [9,11],10,true);
+	player.animations.add('down', [0,1,2,1],10, true);
+	player.animations.add('left', [3,4,54,],10,true);
+	player.animations.add('right',[6,7,8,7],10,true);
+	player.animations.add('up', [9,10,11,10],10,true);
 
 	//Adding the player controls
 	controls = {
