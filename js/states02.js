@@ -43,8 +43,7 @@ GamePlay.prototype = {
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 		game.load.image('scene1', 'assets/img/scene1.png');
-		game.load.image('scene1', 'assets/img/scene2.png');
-		game.load.image('scene1', 'assets/img/scene3.png');
+	
 	},
 
 	// Creating assets into game world.
@@ -136,13 +135,12 @@ GamePlay1.prototype = {
 	preload: function() {
 
 		// Outputting to console.
-		console.log('GamePlay: preload');
+		console.log('GamePlay1: preload');
 
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene1', 'assets/img/scene1.png');
-		game.load.image('scene1', 'assets/img/scene2.png');
-		game.load.image('scene1', 'assets/img/scene3.png');
+		game.load.image('scene2', 'assets/img/scene2.png');
+	
 	},
 
 	// Creating assets into game world.
@@ -239,9 +237,8 @@ GamePlay2.prototype = {
 
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene1', 'assets/img/scene1.png');
-		game.load.image('scene1', 'assets/img/scene2.png');
-		game.load.image('scene1', 'assets/img/scene3.png');
+		game.load.image('scene3', 'assets/img/scene3.png');
+		
 	},
 
 	// Creating assets into game world.
