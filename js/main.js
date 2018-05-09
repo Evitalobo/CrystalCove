@@ -1,6 +1,8 @@
-var game = new Phaser.Game(575, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 var map;
+var map1;
+var map2;
 var layer;
 var player;
 var controls = {};
@@ -13,7 +15,7 @@ var platforms;
 
 function preload() {
 	// preload assets
-	game.load.image('sky', 'assets/img/sky.png');
+	game.load.image('scene1', 'assets/img/scene1.png');
 	game.load.image('ground', 'assets/img/platform.png');
 	game.load.image('star', 'assets/img/star.png');
 	game.load.image('diamond', 'assets/img/diamond.png');
@@ -30,7 +32,7 @@ function create() {
 
 
 	// Adding a backgrofund.
-	map = game.add.sprite(0, 0, 'sky');
+	//map = game.add.sprite(0, 0, 'scene1');
 
 
 	//Adding the player sprite
