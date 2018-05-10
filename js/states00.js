@@ -1,6 +1,42 @@
+//This code has been adapted from Professor Nathan Altice's states 02.js file.
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO);
+
+var menuText;
+var gameText;
+var gameOverText;
+var playerSpeed = 5;
+var faceUp = false;
+var faceDown = false;
+var faceLeft = false;
+var faceRight = false;
+
+// define MainMenu state and methods
+var MainMenu = function(game) {};
+MainMenu.prototype = 
+{
+	preload: function() 
+	{
+		console.log('You are now in the Main menu state.');
+	},
+	create: function() 
+	{
+		console.log('MainMenu: create');
+		game.stage.backgroundColor = "#999999";
+	},
+	update: function() 
+	{
+		// main menu logic
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+		{
+			game.state.start('GamePlay');
+		}
+	}
+}
+
 // define GamePlay state and methods
-var GamePlay2 = function(game) {};
-GamePlay2.prototype = {
+var GamePlay = function(game) {};
+GamePlay.prototype = {
 
 	// preloading assets.
 	preload: function() {
@@ -10,8 +46,8 @@ GamePlay2.prototype = {
 
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene3', 'assets/img/scene3.png');
-		
+		game.load.image('scene1', 'assets/img/scene1.png');
+	
 	},
 
 	// Creating assets into game world.
@@ -24,7 +60,7 @@ GamePlay2.prototype = {
 
 
 		// Adding a backgrofund.
-		map2 = game.add.sprite(0, 0,'scene3');
+		map = game.add.sprite(0, 0, 'scene1');
 		// Setting the background color to a dark gray.
 		//game.stage.backgroundColor = "#454545";
 
@@ -61,10 +97,11 @@ GamePlay2.prototype = {
 
 		// If the player presses SPACEBAR, go to next state.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start('GameOver');
+			game.state.start('GamePlay1');
 		}
 
-		//controls movement of character
+		//Resets player velocity
+
 		if(controls.right.isDown)
 		{
 			player.body.x += playerSpeed;
@@ -114,37 +151,6 @@ GamePlay2.prototype = {
 			if(faceRight)
 				player.frame = 7;
 		}
-
 	}
 }
-
-
-// define GameOver state and methods
-var GameOver = function(game) {};
-GameOver.prototype = {
-	preload: function() {
-		console.log('GameOver: preload');
-	},
-	create: function() {
-		console.log('GameOver: create');
-		game.stage.backgroundColor = "#000000";
-		// GUI status text.
-		menuText = game.add.text(75,250,'        You are in the game over state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#FFFFFF' });
-	},
-	update: function() {
-		// GameOver logic
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
-		{
-			game.state.start('MainMenu');
-		}
-	}
-}
-
-// add states to StateManager and start MainMenu
-game.state.add('MainMenu', MainMenu);
-game.state.add('GamePlay', GamePlay);
-game.state.add('GamePlay1', GamePlay1 );
-game.state.add('GamePlay2', GamePlay2);
-game.state.add('GameOver', GameOver);
-game.state.start('MainMenu');
 
