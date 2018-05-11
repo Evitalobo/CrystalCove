@@ -12,6 +12,7 @@ var faceLeft = false;
 var faceRight = false;
 var fernCt=0;
 var j=1;
+var mapCt;
 
 // define MainMenu state and methods
 var MainMenu = function(game) {};
@@ -74,9 +75,14 @@ GamePlay.prototype = {
 		//game.stage.backgroundColor = "#454545";
 
 		//Adding the player sprite
+		if(mapCt>=1){
+			player = game.add.sprite(650, 475, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		else{
 		player = game.add.sprite(25, 475, 'scientist');
 		player.anchor.setTo(.5);
-
+		}
 		//Adding the player physics
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
@@ -112,10 +118,9 @@ GamePlay.prototype = {
 		fern = ferns.create(650,400,'fern');
 		fern.scale.setTo(0.5,0.5);
 
-
 		//GUI status text
 		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
-		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
+		//woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 	},
 	update: function() 
@@ -178,6 +183,13 @@ GamePlay.prototype = {
 			if(faceRight)
 				player.frame = 7;
 		}
+
+		if(player.body.x > 690 && player.body.y > 400){
+			mapCt=1;
+			game.state.start('GamePlay1');
+		}
 	}
 }
+
+
 

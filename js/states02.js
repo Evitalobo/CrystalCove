@@ -113,6 +113,11 @@ GamePlay2.prototype = {
 				player.frame = 4;
 			if(faceRight)
 				player.frame = 7;
+
+
+			if(player.body.x < 1){
+			game.state.start('GamePlay1');
+			}
 		}
 
 	}

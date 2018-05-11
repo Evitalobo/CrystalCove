@@ -35,9 +35,17 @@ GamePlay1.prototype = {
 		// Adding a backgrofund.
 		map1 = game.add.sprite(0, 0, 'scene2');
 
-		//Adding the player sprite
+		
+		//Adding the player sprite->Position depending on the bounds of map
+		if(mapCt>1){
+			player = game.add.sprite(690, 475, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		else{
 		player = game.add.sprite(25, 475, 'scientist');
 		player.anchor.setTo(.5);
+		}
+
 
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
@@ -53,7 +61,7 @@ GamePlay1.prototype = {
 		woods = game.add.group();
 		woods.enableBody = true;
 
-		j=2;
+
 		//spawning wood
 		for (i = 0; i < 12; i++){
 			j = i+1;
@@ -127,6 +135,16 @@ GamePlay1.prototype = {
 				player.frame = 4;
 			if(faceRight)
 				player.frame = 7;
+		}
+
+		//go to beach state of near left world bound
+		if(player.body.x < 1){
+			game.state.start('GamePlay');
+		}
+		//go to river state if player is at lower right world bound
+		if(player.body.x > 699 ){
+			mapCt= mapCt +1;
+			game.state.start('GamePlay2');
 		}
 
 		// Checking for an overlap between the player and any wood in the woods group.
