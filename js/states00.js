@@ -10,6 +10,8 @@ var faceUp = false;
 var faceDown = false;
 var faceLeft = false;
 var faceRight = false;
+var fernCt=0;
+var j=1;
 
 // define MainMenu state and methods
 var MainMenu = function(game) {};
@@ -47,6 +49,13 @@ GamePlay.prototype = {
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 		game.load.image('scene1', 'assets/img/scene1.png');
+
+		//driftwood = 1 wood
+		game.load.image('driftwood', 'assets/img/obj3.png');
+		//fern = must clear to pass to next side of map
+		game.load.image('fern', 'assets/img/obj.png');
+		//boat = 2 wood
+		game.load.image('boat', 'assets/img/obj2.png');
 	
 	},
 
@@ -87,8 +96,26 @@ GamePlay.prototype = {
 			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
 		};
 
+		//wood physics
+		woods = game.add.group();
+		woods.enableBody = true;
+
+		driftwood = woods.create((j+ 200)*3,Math.random()*500,'driftwood');
+		driftwood.scale.setTo(0.3,0.3);
+
+		//fern physics
+		ferns = game.add.group();
+		ferns.enableBody = true;
+
+		//ADD FERN COUNTER TO UNLOCK NEXT PART OF MAP AND SET WORLD BOUND TO COLLIDE WITH PATH
+
+		fern = ferns.create(650,400,'fern');
+		fern.scale.setTo(0.5,0.5);
+
+
 		//GUI status text
 		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
+		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 	},
 	update: function() 

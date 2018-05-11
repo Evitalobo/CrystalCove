@@ -2,6 +2,10 @@ var GamePlay1 = function(game) {};
 var woodText;
 var woodNumber = 0;
 var score =0;
+var i;
+var wood;
+var woodSpawnX;
+var woodSpawnY;
 
 GamePlay1.prototype = {
 
@@ -14,8 +18,11 @@ GamePlay1.prototype = {
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 		game.load.image('scene2', 'assets/img/scene2.png');
-		game.load.image('wood', 'assets/img/obj3.png');
-	
+		//wood pre chopping
+		game.load.image('wood', 'assets/img/obj5.png');
+		//wood post chopping
+		game.load.image('wood', 'assets/img/obj4.png');
+
 	},
 
 	// Creating assets into game world.
@@ -46,12 +53,16 @@ GamePlay1.prototype = {
 		woods = game.add.group();
 		woods.enableBody = true;
 
+		j=2;
 		//spawning wood
-		for (var i = 0; i < 12; i++){
-
+		for (i = 0; i < 12; i++){
+			j = i+1;
 			//Create a star inside of the 'stars"'group
-			var wood = woods.create(i*50,Math.random()*500,'wood');
-			wood.scale.setTo(0.1,0.1);
+			woodSpawnX = (i*50);
+			woodSpawnY = (Math.random()* 500);
+
+			wood = woods.create(i*50,Math.random()*500,'wood');
+			wood.scale.setTo(0.3,0.3);
 		}
 
 		//GUI status text
@@ -128,7 +139,7 @@ GamePlay1.prototype = {
 	function collectWood(player, wood){
 		//remove the star from the screen
 		wood.kill();
-
+		//instead of killing wood-> Just change sprite from OBJ 5 to OBJ4
 		woodNumber += 1;
 		woodText.text =  'Wood: ' +woodNumber;
 
