@@ -173,7 +173,7 @@ function collectStar(player, star){
 	star.kill();
 
 	score += 10;
-	scoreText.text =  'Score: ' +score;
+	scoreText.text =  'Wood: ' +score;
 }
 
 function collectDiamond(player, diamond){

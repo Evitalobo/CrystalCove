@@ -1,4 +1,8 @@
 var GamePlay1 = function(game) {};
+var woodText;
+var woodNumber = 0;
+var score =0;
+
 GamePlay1.prototype = {
 
 	// preloading assets.
@@ -10,22 +14,19 @@ GamePlay1.prototype = {
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 		game.load.image('scene2', 'assets/img/scene2.png');
+		game.load.image('wood', 'assets/img/obj3.png');
 	
 	},
 
 	// Creating assets into game world.
-	create: function() 
-	{
+	create: function() {
 		console.log('GamePlay: create');
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
-
 		// Adding a backgrofund.
 		map1 = game.add.sprite(0, 0, 'scene2');
-		// Setting the background color to a dark gray.
-		//game.stage.backgroundColor = "#454545";
 
 		//Adding the player sprite
 		player = game.add.sprite(25, 475, 'scientist');
@@ -41,12 +42,24 @@ GamePlay1.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
+		// Creating the stars group.
+		woods = game.add.group();
+		woods.enableBody = true;
+
+		//spawning wood
+		for (var i = 0; i < 12; i++){
+
+			//Create a star inside of the 'stars"'group
+			var wood = woods.create(i*50,Math.random()*500,'wood');
+			wood.scale.setTo(0.1,0.1);
+		}
+
 		//GUI status text
 		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
+		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 	},
-	update: function() 
-	{
+	update: function() {
 		// GamePlay logic
 
 		// If the player presses SPACEBAR, go to next state.
@@ -104,5 +117,19 @@ GamePlay1.prototype = {
 			if(faceRight)
 				player.frame = 7;
 		}
-	}
+
+		// Checking for an overlap between the player and any wood in the woods group.
+		// If yes, pass onto collectWood function.
+		game.physics.arcade.overlap(player, woods, collectWood, null, this);
+	},
+
 }
+
+	function collectWood(player, wood){
+		//remove the star from the screen
+		wood.kill();
+
+		woodNumber += 1;
+		woodText.text =  'Wood: ' +woodNumber;
+
+	}
