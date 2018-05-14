@@ -74,7 +74,7 @@ GamePlay1.prototype = {
 		}
 
 		//GUI status text
-		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
+		menuText = game.add.text(100,40,'           Move to right edge to change states', {fontSize: '32px', fill: '#999' });
 		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');

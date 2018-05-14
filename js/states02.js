@@ -52,7 +52,7 @@ GamePlay2.prototype = {
 		};
 
 		//GUI status text
-		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
+		menuText = game.add.text(300,60,'          Map 3', {fontSize: '32px', fill: '#999' });
 
 		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
 		toolUI.scale.setTo(.4);
@@ -284,6 +284,9 @@ GamePlay2.prototype = {
 		if(player.body.x < 1)
 		{
 			game.state.start('GamePlay1');
+
+		
+		}
 		}
 	}
 }

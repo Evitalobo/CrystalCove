@@ -136,7 +136,7 @@ GamePlay.prototype = {
 		fern.scale.setTo(0.5,0.5);
 
 		//GUI status text
-		menuText = game.add.text(75,250,'           You are in the gameplay state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#999' });
+		menuText = game.add.text(300,50,'  Move to the fern to change states', {fontSize: '32px', fill: '#FFFFFF' });
 		//woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
