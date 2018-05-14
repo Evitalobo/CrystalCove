@@ -21,11 +21,20 @@ MainMenu.prototype =
 	{
 		console.log('You are now in the Main menu state.');
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
+
+		// load audio assets
+		game.load.path = 'assets/audio/';
+		game.load.audio('autumnVoyage', ['rs_autumnVoyage.mp3']);
+
 	},
 	create: function() 
 	{
 		console.log('MainMenu: create');
 		game.stage.backgroundColor = "#999999";
+
+		// loop and play background music
+		this.autumnVoyage = game.add.audio('autumnVoyage');
+		this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 	},
 	update: function() 
 	{
@@ -48,6 +57,7 @@ GamePlay.prototype = {
 		console.log('GamePlay: preload');
 
 		// preloading assets
+		game.load.path = '';
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 		game.load.image('scene1', 'assets/img/scene1.png');
 
@@ -64,6 +74,9 @@ GamePlay.prototype = {
 	create: function() 
 	{
 		console.log('GamePlay: create');
+
+		// this.autumnVoyage = game.add.audio('autumnVoyage');
+		// this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
