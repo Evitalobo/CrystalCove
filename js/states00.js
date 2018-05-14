@@ -12,6 +12,7 @@ var j=1;
 var mapCt;
 var toolType = 0;
 var tools = 3;
+var menu;
 
 // define MainMenu state and methods
 var MainMenu = function(game) {};
@@ -22,7 +23,13 @@ MainMenu.prototype =
 		console.log('You are now in the Main menu state.');
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
 
+<<<<<<< HEAD
 		//test
+=======
+		//MenuBG
+		game.load.image('menuBG', 'assets/img/MenuBG.png');
+
+>>>>>>> 74e29f276500c20609bda3657a54b8b5c8ad2be7
 		// load audio assets
 		game.load.path = 'assets/audio/';
 		game.load.audio('autumnVoyage', ['rs_autumnVoyage.mp3']);
@@ -31,7 +38,7 @@ MainMenu.prototype =
 	create: function() 
 	{
 		console.log('MainMenu: create');
-		game.stage.backgroundColor = "#999999";
+		menu = game.add.sprite(0, 0, 'menuBG');
 
 		// loop and play background music
 		this.autumnVoyage = game.add.audio('autumnVoyage');
