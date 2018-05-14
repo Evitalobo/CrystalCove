@@ -22,6 +22,7 @@ MainMenu.prototype =
 		console.log('You are now in the Main menu state.');
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
 
+		//test
 		// load audio assets
 		game.load.path = 'assets/audio/';
 		game.load.audio('autumnVoyage', ['rs_autumnVoyage.mp3']);
