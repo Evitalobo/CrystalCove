@@ -52,7 +52,7 @@ GamePlay2.prototype = {
 		};
 
 		//GUI status text
-		menuText = game.add.text(300,60,'          Map 3', {fontSize: '32px', fill: '#999' });
+		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
 
 		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
 		toolUI.scale.setTo(.4);
@@ -284,10 +284,15 @@ GamePlay2.prototype = {
 		if(player.body.x < 1)
 		{
 			game.state.start('GamePlay1');
+		}
 
-		
+		//menustateswitch
+		if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
+			game.state.start('MainMenu');
+
 		}
-		}
+
+
 	}
 }
 
