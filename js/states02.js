@@ -25,6 +25,17 @@ GamePlay2.prototype = {
 
 		// Adding a backgrofund.
 		map2 = game.add.sprite(0, 0,'scene3');
+		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');
+		game.physics.arcade.enable(riverTop);
+		riverTop.body.immovable = true;
+
+		riverBot = game.add.sprite(170, 389, 'assets', 'RiverBot');
+		game.physics.arcade.enable(riverBot);
+		riverBot.body.immovable = true;
+
+		riverMid = game.add.sprite(253, 289, 'assets', 'RiverMid');
+		game.physics.arcade.enable(riverMid);
+		riverMid.body.immovable = true;
 
 		//Adding the player sprite
 		player = game.add.sprite(25, 475, 'scientist');
@@ -87,6 +98,7 @@ GamePlay2.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
+		//game.debug.body(riverMid);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
@@ -115,92 +127,7 @@ GamePlay2.prototype = {
 		else if (toolType == 2)
 			toolUI.animations.play('bonder');
 
-		if(controls.right.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x += playerSpeed;
-			player.animations.play('right');
-			face = 'R';
-		}
-
-		else if(controls.left.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x -= playerSpeed;
-			player.animations.play('left');
-			face = 'L';
-		}
-		else if(controls.up.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y -= playerSpeed;
-			player.animations.play('up');
-			face = 'U';
-		}
-		else if(controls.down.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y += playerSpeed;
-			player.animations.play('down');
-			face = 'D';
-		}
-		else if(controls.right.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x += playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-
-		else if(controls.left.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x -= playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else if(controls.up.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y -= playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else if(controls.down.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y += playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else
-		{
-			player.animations.stop();
-			if(face == 'U')
-				player.frame = 10;
-			else if(face == 'D')
-				player.frame = 1;
-			else if(face == 'L')
-				player.frame = 4;
-			if(face == 'R')
-				player.frame = 7;
-		}
+		movement();
 			
 		if(player.body.x < 1)
 		{
@@ -214,7 +141,9 @@ GamePlay2.prototype = {
 
 		}
 
-
+		game.physics.arcade.collide(player, riverTop);
+		game.physics.arcade.collide(player, riverBot);
+		game.physics.arcade.collide(player, riverMid);
 	}
 }
 

@@ -41,9 +41,10 @@ GamePlay1.prototype = {
 			player = game.add.sprite(690, 475, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		else{
-		player = game.add.sprite(25, 475, 'scientist');
-		player.anchor.setTo(.5);
+		else
+		{
+			player = game.add.sprite(25, 475, 'scientist');
+			player.anchor.setTo(.5);
 		}
 
 
@@ -106,9 +107,6 @@ GamePlay1.prototype = {
 	},
 	update: function() {
 		// GamePlay logic
-		game.debug.physicsGroup(woods);
-		game.debug.body(player);
-
 		// If the player presses SPACEBAR, activate current tool function.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
@@ -136,92 +134,7 @@ GamePlay1.prototype = {
 		else if (toolType == 2)
 			toolUI.animations.play('bonder');
 
-		if(controls.right.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x += playerSpeed;
-			player.animations.play('right');
-			face = 'R';
-		}
-
-		else if(controls.left.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x -= playerSpeed;
-			player.animations.play('left');
-			face = 'L';
-		}
-		else if(controls.up.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y -= playerSpeed;
-			player.animations.play('up');
-			face = 'U';
-		}
-		else if(controls.down.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y += playerSpeed;
-			player.animations.play('down');
-			face = 'D';
-		}
-		else if(controls.right.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x += playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-
-		else if(controls.left.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.x -= playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else if(controls.up.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y -= playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else if(controls.down.isDown && game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-		{
-			player.body.y += playerSpeed;
-			if (face == 'U')
-				player.animations.play('up');
-			else if (face == 'D')
-				player.animations.play('down');
-			else if (face == 'L')
-				player.animations.play('left');
-			else if (face == 'R')
-				player.animations.play('right');
-		}
-		else
-		{
-			player.animations.stop();
-			if(face == 'U')
-				player.frame = 10;
-			else if(face == 'D')
-				player.frame = 1;
-			else if(face == 'L')
-				player.frame = 4;
-			if(face == 'R')
-				player.frame = 7;
-		}
+		movement();
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1){
