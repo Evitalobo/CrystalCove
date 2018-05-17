@@ -14,6 +14,91 @@ var toolType = 0;
 var tools = 3;
 var menu;
 
+function activateTool()
+{
+	if (toolType == 0)
+	{
+		if (face == 'U')
+		{
+			scanEffect.body.x = player.body.x;
+			scanEffect.body.y = player.body.y - 72;
+			scanEffect.animations.play('scanUp');
+		}
+		else if (face == 'D')
+		{
+			scanEffect.body.x = player.body.x;
+			scanEffect.body.y = player.body.y + 12;
+			scanEffect.animations.play('scanDown');
+		}
+		else if (face == 'L')
+		{
+			scanEffect.body.x = player.body.x - 36;
+			scanEffect.body.y = player.body.y - 24;
+			scanEffect.animations.play('scanLeft');
+		}
+		else if (face == 'R')
+		{
+			scanEffect.body.x = player.body.x + 36;
+			scanEffect.body.y = player.body.y - 24;
+			scanEffect.animations.play('scanRight');
+		}
+	}
+	if (toolType == 1)
+	{
+		if (face == 'U')
+		{
+			cutEffect.body.x = player.body.x;
+			cutEffect.body.y = player.body.y - 72;
+			cutEffect.animations.play('cutUp');
+		}
+		else if (face == 'D')
+		{
+			cutEffect.body.x = player.body.x;
+			cutEffect.body.y = player.body.y + 12;
+			cutEffect.animations.play('cutDown');
+		}
+		else if (face == 'L')
+		{
+			cutEffect.body.x = player.body.x - 36;
+			cutEffect.body.y = player.body.y - 24;
+			cutEffect.animations.play('cutLeft');
+		}
+		else if (face == 'R')
+		{
+			cutEffect.body.x = player.body.x + 36;
+			cutEffect.body.y = player.body.y - 24;
+			cutEffect.animations.play('cutRight');
+		}
+	}
+	if (toolType == 2)
+	{
+		if (face == 'U')
+		{
+			bondEffect.body.x = player.body.x;
+			bondEffect.body.y = player.body.y - 72;
+			bondEffect.animations.play('bond');
+		}
+		else if (face == 'D')
+		{
+			bondEffect.body.x = player.body.x;
+			bondEffect.body.y = player.body.y + 12;
+			bondEffect.animations.play('bond');
+		}
+		else if (face == 'L')
+		{
+			bondEffect.body.x = player.body.x - 36;
+			bondEffect.body.y = player.body.y - 24;
+			bondEffect.animations.play('bond');
+		}
+		else if (face == 'R')
+		{
+			bondEffect.body.x = player.body.x + 36;
+			bondEffect.body.y = player.body.y - 24;
+			bondEffect.animations.play('bond');
+		}
+	}
+}
+
 // define MainMenu state and methods
 var MainMenu = function(game) {};
 MainMenu.prototype = 
@@ -102,6 +187,7 @@ GamePlay.prototype = {
 		}
 		//Adding the player physics
 		game.physics.arcade.enable(player);
+		player.body.setSize(48, 24, 0, 24);
 		//game.camera.follow(player);
 		player.body.collideWorldBounds = true;
 
@@ -175,88 +261,7 @@ GamePlay.prototype = {
 		// If the player presses SPACEBAR, activate current tool function.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
-			if (toolType == 0)
-			{
-				if (face == 'U')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y - 40;
-					scanEffect.animations.play('scanUp');
-				}
-				else if (face == 'D')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y + 40;
-					scanEffect.animations.play('scanDown');
-				}
-				else if (face == 'L')
-				{
-					scanEffect.body.x = player.body.x - 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanLeft');
-				}
-				else if (face == 'R')
-				{
-					scanEffect.body.x = player.body.x + 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanRight');
-				}
-			}
-
-			if (toolType == 1)
-			{
-				if (face == 'U')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y - 40;
-					cutEffect.animations.play('cutUp');
-				}
-				else if (face == 'D')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y + 36;
-					cutEffect.animations.play('cutDown');
-				}
-				else if (face == 'L')
-				{
-					cutEffect.body.x = player.body.x - 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutLeft');
-				}
-				else if (face == 'R')
-				{
-					cutEffect.body.x = player.body.x + 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutRight');
-				}
-			}
-			if (toolType == 2)
-			{
-				if (face == 'U')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y - 40;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'D')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y + 40;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'L')
-				{
-					bondEffect.body.x = player.body.x - 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'R')
-				{
-					bondEffect.body.x = player.body.x + 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-			}
+			activateTool();
 		}
 		else
 		{

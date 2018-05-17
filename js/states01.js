@@ -50,6 +50,8 @@ GamePlay1.prototype = {
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
 		player.body.collideWorldBounds = true;
+		player.body.setSize(48, 24, 0, 24);
+
 
 		// Adding the player animations, left and right.
 		player.animations.add('down', [0,1,2,1],10, true);
@@ -64,13 +66,10 @@ GamePlay1.prototype = {
 
 		//spawning wood
 		for (i = 0; i < 12; i++){
-			j = i+1;
-			//Create a star inside of the 'stars"'group
-			woodSpawnX = (i*50);
-			woodSpawnY = (Math.random()* 500);
-
-			wood = woods.create(i*50,Math.random()*500,'wood');
+			wood = woods.create(i*50,Math.random()*400,'wood');
 			wood.scale.setTo(0.3,0.3);
+			wood.body.setSize(110, 100, 140, 575);
+			wood.body.immovable = true;
 		}
 
 		//GUI status text
@@ -107,92 +106,13 @@ GamePlay1.prototype = {
 	},
 	update: function() {
 		// GamePlay logic
+		game.debug.physicsGroup(woods);
+		game.debug.body(player);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
-			if (toolType == 0)
-			{
-				if (face == 'U')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y - 40;
-					scanEffect.animations.play('scanUp');
-				}
-				else if (face == 'D')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y + 40;
-					scanEffect.animations.play('scanDown');
-				}
-				else if (face == 'L')
-				{
-					scanEffect.body.x = player.body.x - 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanLeft');
-				}
-				else if (face == 'R')
-				{
-					scanEffect.body.x = player.body.x + 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanRight');
-				}
-			}
-
-			if (toolType == 1)
-			{
-				if (face == 'U')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y - 40;
-					cutEffect.animations.play('cutUp');
-				}
-				else if (face == 'D')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y + 36;
-					cutEffect.animations.play('cutDown');
-				}
-				else if (face == 'L')
-				{
-					cutEffect.body.x = player.body.x - 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutLeft');
-				}
-				else if (face == 'R')
-				{
-					cutEffect.body.x = player.body.x + 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutRight');
-				}
-			}
-			if (toolType == 2)
-			{
-				if (face == 'U')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y - 40;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'D')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y + 40;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'L')
-				{
-					bondEffect.body.x = player.body.x - 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'R')
-				{
-					bondEffect.body.x = player.body.x + 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-			}
+			activateTool();
 		}
 		else
 		{
@@ -315,19 +235,19 @@ GamePlay1.prototype = {
 
 		// Checking for an overlap between the player and any wood in the woods group.
 		// If yes, pass onto collectWood function.
-		if( (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) ) {
-		game.physics.arcade.overlap(player, woods, collectWood, null, this);
-		}
-
+		game.physics.arcade.overlap(cutEffect, woods, collectWood, null, this);
+		game.physics.arcade.collide(player, woods);
 	},
 
 }
 
-	function collectWood(player, wood){
-		//remove the star from the screen
-		wood.kill();
-		//instead of killing wood-> Just change sprite from OBJ 5 to OBJ4
+	function collectWood(cutEffect, wood){
+		//changes trees to stumps when certain conditions are met
+		stump = game.add.sprite(wood.body.x, wood.body.y, 'assets', 'stump');
+		stump.enableBody = true;
+		stump.scale.setTo(0.1,0.1);
+		wood.destroy();
 		woodNumber += 1;
-		woodText.text =  'Wood: ' +woodNumber;
+		woodText.text =  'Wood: ' + woodNumber;
 
 	}

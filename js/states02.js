@@ -25,8 +25,6 @@ GamePlay2.prototype = {
 
 		// Adding a backgrofund.
 		map2 = game.add.sprite(0, 0,'scene3');
-		// Setting the background color to a dark gray.
-		//game.stage.backgroundColor = "#454545";
 
 		//Adding the player sprite
 		player = game.add.sprite(25, 475, 'scientist');
@@ -36,6 +34,8 @@ GamePlay2.prototype = {
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
 		player.body.collideWorldBounds = true;
+		player.body.setSize(48, 24, 0, 24);
+
 
 		// Adding the player animations, left and right.
 		player.animations.add('down', [0,1,2,1],10, true);
@@ -50,6 +50,8 @@ GamePlay2.prototype = {
 			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
 			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
 		};
+
+		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
 		//GUI status text
 		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
@@ -89,94 +91,13 @@ GamePlay2.prototype = {
 		// If the player presses SPACEBAR, activate current tool function.
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
-			if (toolType == 0)
-			{
-				if (face == 'U')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y - 40;
-					scanEffect.animations.play('scanUp');
-				}
-				else if (face == 'D')
-				{
-					scanEffect.body.x = player.body.x;
-					scanEffect.body.y = player.body.y + 40;
-					scanEffect.animations.play('scanDown');
-				}
-				else if (face == 'L')
-				{
-					scanEffect.body.x = player.body.x - 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanLeft');
-				}
-				else if (face == 'R')
-				{
-					scanEffect.body.x = player.body.x + 36;
-					scanEffect.body.y = player.body.y;
-					scanEffect.animations.play('scanRight');
-				}
-			}
-
-			if (toolType == 1)
-			{
-				if (face == 'U')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y - 40;
-					cutEffect.animations.play('cutUp');
-				}
-				else if (face == 'D')
-				{
-					cutEffect.body.x = player.body.x;
-					cutEffect.body.y = player.body.y + 40;
-					cutEffect.animations.play('cutDown');
-				}
-				else if (face == 'L')
-				{
-					cutEffect.body.x = player.body.x - 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutLeft');
-				}
-				else if (face == 'R')
-				{
-					cutEffect.body.x = player.body.x + 36;
-					cutEffect.body.y = player.body.y;
-					cutEffect.animations.play('cutRight');
-				}
-			}
-			if (toolType == 2)
-			{
-				if (face == 'U')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y - 40;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'D')
-				{
-					bondEffect.body.x = player.body.x;
-					bondEffect.body.y = player.body.y + 36;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'L')
-				{
-					bondEffect.body.x = player.body.x - 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-				else if (face == 'R')
-				{
-					bondEffect.body.x = player.body.x + 36;
-					bondEffect.body.y = player.body.y;
-					bondEffect.animations.play('bond');
-				}
-			}
-			else
-			{
-				scanEffect.body.x = -48;
-				cutEffect.body.x = -48;
-				bondEffect.body.x = -48;
-			}
+			activateTool();
+		}
+		else
+		{
+			scanEffect.body.x = -48;
+			cutEffect.body.x = -48;
+			bondEffect.body.x = -48;
 		}
 
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.E))
@@ -288,6 +209,7 @@ GamePlay2.prototype = {
 
 		//menustateswitch
 		if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
+			this.autumnVoyage.stop();
 			game.state.start('MainMenu');
 
 		}
