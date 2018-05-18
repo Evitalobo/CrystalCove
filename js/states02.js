@@ -44,8 +44,8 @@ GamePlay2.prototype = {
 		//Adding the player physics
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
+		player.body.setSize(24, 48, 12, 0);
 		player.body.collideWorldBounds = true;
-		player.body.setSize(48, 24, 0, 24);
 
 
 		// Adding the player animations, left and right.
@@ -67,7 +67,7 @@ GamePlay2.prototype = {
 		//GUI status text
 		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
 
-		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
+		toolUI = game.add.sprite(0, -30, 'assets', 'Scanner');
 		toolUI.scale.setTo(.4);
 		toolUI.animations.add('scanner', ['Scanner'], true);
 		toolUI.animations.add('cutter', ['Cutter'], true);
@@ -128,22 +128,23 @@ GamePlay2.prototype = {
 			toolUI.animations.play('bonder');
 
 		movement();
-			
+
+		game.physics.arcade.collide(player, riverTop);
+		game.physics.arcade.collide(player, riverBot);
+		game.physics.arcade.collide(player, riverMid);
+
 		if(player.body.x < 1)
 		{
 			game.state.start('GamePlay1');
 		}
 
 		//menustateswitch
-		if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.M))
+		{
 			this.autumnVoyage.stop();
 			game.state.start('MainMenu');
 
 		}
-
-		game.physics.arcade.collide(player, riverTop);
-		game.physics.arcade.collide(player, riverBot);
-		game.physics.arcade.collide(player, riverMid);
 	}
 }
 

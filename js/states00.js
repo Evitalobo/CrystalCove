@@ -3,6 +3,8 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO);
 
 var menuText;
+var line = 0;
+var tutorial = false
 var gameText;
 var gameOverText;
 var playerSpeed = 5;
@@ -11,8 +13,10 @@ var fernCt=0;
 var j=1;
 var mapCt;
 var toolType = 0;
-var tools = 3;
+var tools = 0;
 var menu;
+var pickedUpTool = false;
+var dialogue = false;
 
 
 // define MainMenu state and methods
@@ -94,6 +98,14 @@ GamePlay.prototype = {
 		game.physics.arcade.enable(boundary);
 		boundary.body.immovable = true;
 
+		handitool = game.add.sprite(305, 250, 'assets', 'Handitool');
+		game.physics.arcade.enable(handitool);
+		handitool.scale.setTo(.5);
+
+		note = game.add.sprite(0, game.height, 'assets', 'Note')
+		game.physics.arcade.enable(note);
+		note.scale.setTo(.5);
+
 		//Adding the player sprite
 		if(mapCt>=1){
 			player = game.add.sprite(650, 475, 'scientist');
@@ -107,9 +119,9 @@ GamePlay.prototype = {
 		}
 		//Adding the player physics
 		game.physics.arcade.enable(player);
-		player.body.setSize(48, 24, 0, 24);
 		//game.camera.follow(player);
 		player.body.collideWorldBounds = true;
+		player.body.setSize(24, 48, 12, 0);
 
 		// Adding the player animations, left and right.
 		player.animations.add('down', [0,1,2,1],10, true);
@@ -130,6 +142,8 @@ GamePlay.prototype = {
 		woods.enableBody = true;
 
 		driftwood = woods.create((j+ 200)*3,Math.random()*500,'driftwood');
+		driftwood.body.collideWorldBounds = true;
+		driftwood.body.setSize(250, 100, 20, 100);
 		driftwood.scale.setTo(0.3,0.3);
 
 		//fern physics
@@ -137,15 +151,17 @@ GamePlay.prototype = {
 		ferns.enableBody = true;
 
 		//ADD FERN COUNTER TO UNLOCK NEXT PART OF MAP AND SET WORLD BOUND TO COLLIDE WITH PATH
+		for (i = -1; i < 12; i++)
+		{
+			fern = ferns.create(700, i*50,'assets', 'obj');
+			fern.scale.setTo(0.5,0.5);
+			fern.body.setSize(100, 100, 100, 50);
+			fern.body.immovable = true;
+		}
 
-		fern = ferns.create(650,400,'fern');
-		fern.scale.setTo(0.5,0.5);
 
-		//GUI status text
-		menuText = game.add.text(150,50,'  Move to the fern to change states', {fontSize: '32px', fill: '#FFFFFF' });
-		//woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
-
-		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
+		toolUI = game.add.sprite(0, game.height, 'assets', 'Scanner');
+		game.physics.arcade.enable(toolUI);
 		toolUI.scale.setTo(.4);
 		toolUI.animations.add('scanner', ['Scanner'], true);
 		toolUI.animations.add('cutter', ['Cutter'], true);
@@ -173,24 +189,25 @@ GamePlay.prototype = {
 		bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
 
 
+		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
+		game.physics.arcade.enable(dialogueBox);
+		dialogueBox.scale.setTo(.48, .4);
+
+		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
 	update: function() 
 	{
 		// GamePlay logic
 
-		// If the player presses SPACEBAR, activate current tool function.
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+		if(pickedUpTool)
 		{
-			activateTool();
-		}
-		else
-		{
-			scanEffect.body.x = -48;
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;
+			toolUI.body.y = -30;
 		}
 
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E))
+		// If the player presses SPACEBAR, activate current tool function.
+		activateTool();
+
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool && !dialogue)
 		{
 			if (toolType < tools)
 				toolType += 1;
@@ -205,16 +222,34 @@ GamePlay.prototype = {
 		else if (toolType == 2)
 			toolUI.animations.play('bonder');
 
-		movement();
+		if(!dialogue)
+			movement();
+		else
+			player.animations.stop();
+
+		advanceText();
+
+		scannerBoxMovement();
 
 		game.physics.arcade.collide(player, boundary);
+		game.physics.arcade.collide(player, ferns);
+		game.physics.arcade.collide(player, driftwood);
+		game.physics.arcade.collide(ferns, driftwood);
+		game.physics.arcade.overlap(player, handitool, toolTutorial, null, this);
+		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
+		game.physics.arcade.overlap(scanEffect, driftwood, driftwoodFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, boundary, oceanFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, note, noteFlavor, null, this);
 
-		if(player.body.x > 690 && player.body.y > 400){
+		if(player.body.x > 750){
 			mapCt=1;
 			game.state.start('GamePlay1');
 		}
 	}
 }
 
-
-
+function burnFern(cutEffect, fern)
+{
+	fern.kill();
+}

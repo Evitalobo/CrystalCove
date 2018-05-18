@@ -50,8 +50,8 @@ GamePlay1.prototype = {
 
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
+		player.body.setSize(24, 48, 12, 0);
 		player.body.collideWorldBounds = true;
-		player.body.setSize(48, 24, 0, 24);
 
 
 		// Adding the player animations, left and right.
@@ -77,7 +77,7 @@ GamePlay1.prototype = {
 		menuText = game.add.text(100,40,' Move to right edge to change states', {fontSize: '32px', fill: '#ffffff' });
 		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
-		toolUI = game.add.sprite(0, game.height - 100, 'assets', 'Scanner');
+		toolUI = game.add.sprite(0, -30, 'assets', 'Scanner');
 		toolUI.scale.setTo(.4);
 		toolUI.animations.add('scanner', ['Scanner'], true);
 		toolUI.animations.add('cutter', ['Cutter'], true);
@@ -108,7 +108,7 @@ GamePlay1.prototype = {
 	update: function() {
 		// GamePlay logic
 		// If the player presses SPACEBAR, activate current tool function.
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && pickedUpTool) 
 		{
 			activateTool();
 		}
@@ -119,7 +119,7 @@ GamePlay1.prototype = {
 			bondEffect.body.x = -48;
 		}
 
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E))
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool)
 		{
 			if (toolType < tools)
 				toolType += 1;
