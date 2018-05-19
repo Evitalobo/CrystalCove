@@ -242,3 +242,67 @@ function noteFlavor()
 		}		
 	}
 }
+
+function treeFlavor()
+{
+	dialogue = true;
+	if (dialogue)
+	{
+		if(line == 0 && treesScanned == 0)
+			menuText.text = 'This is a tree.';
+		if(line == 0 && treesScanned == 1)
+			menuText.text = "This is also a tree.";
+		if(line == 0 && treesScanned == 2)
+			menuText.text = "Yet another tree.";
+		if(line == 0 && treesScanned == 3)
+			menuText.text = "Tree.";
+		if(line == 0 && treesScanned == 4)
+			menuText.text = "Aren't you getting bored at all?";
+		if(line == 0 && treesScanned == 5)
+			menuText.text = "What's so great about scanning trees?";
+		if(line == 0 && treesScanned == 6)
+			menuText.text = "This is your seventh tree. Congrats.";
+		if(line == 0 && treesScanned == 7)
+			menuText.text = "What are you expecting? An achievement?";
+		if(line == 0 && treesScanned == 8)
+			menuText.text = "You're just wasting both of our time.";
+		if(line == 0 && treesScanned == 9)
+			menuText.text = "It's a tree. MOVE ON.";
+		if(line == 0 && treesScanned == 10)
+			menuText.text = "Don't you dare scan another one! You better not!";
+		if(line == 0 && treesScanned > 10)
+			menuText.text = "I hate you."
+		if (line > 0)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			treesScanned += 1;
+			scanEffect.body.x = -48;
+		}		
+	}
+}
+
+function stumpFlavor()
+{
+	dialogue = true;
+	if (dialogue)
+	{
+		if(line == 0 && stumpsScanned == 0)
+			menuText.text = 'This is a stump.';
+		if(line == 0 && treesScanned == 1)
+			menuText.text = "This is also a stump.";
+		if(line == 0 && treesScanned == 2)
+			menuText.text = "Yet another stum- OH NO! WE'RE NOT DOING THIS!";
+		if(line == 0 && treesScanned > 2)
+			menuText.text = "Stump. There was once a tree here. Who would've thought...";
+		if (line > 0)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			stumpsScanned += 1;
+			scanEffect.body.x = -48;
+		}		
+	}
+}

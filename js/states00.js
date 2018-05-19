@@ -61,7 +61,7 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
-			game.state.start('GamePlay1');
+			game.state.start('GamePlay');
 		}
 	}
 }

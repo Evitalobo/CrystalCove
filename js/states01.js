@@ -1,7 +1,8 @@
 var GamePlay1 = function(game) {};
 var woodText;
 var woodNumber = 0;
-var score = 0;
+var treesScanned = 0;
+var stumpsScanned = 0;
 var wood;
 
 GamePlay1.prototype = {
@@ -56,6 +57,8 @@ GamePlay1.prototype = {
 		// Creating the stars group.
 		woods = game.add.group();
 		woods.enableBody = true;
+		stumps = game.add.group();
+		stumps.enableBody = true;
 
 
 		//spawning wood
@@ -138,22 +141,23 @@ GamePlay1.prototype = {
 			game.state.start('GamePlay2');
 		}
 
-		// Checking for an overlap between the player and any wood in the woods group.
-		// If yes, pass onto collectWood function.
+		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, woods, collectWood, null, this);
+		game.physics.arcade.overlap(scanEffect, woods, treeFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, stumps, stumpFlavor, null, this);
 		game.physics.arcade.collide(player, woods);
+		game.physics.arcade.collide(player, stumps);
 	},
 
 }
 
-	function collectWood(cutEffect, wood)
-	{
-		//changes trees to stumps when certain conditions are met
-		stump = game.add.sprite(wood.body.x, wood.body.y, 'assets', 'stump');
-		stump.enableBody = true;
-		stump.scale.setTo(0.1,0.1);
-		wood.destroy();
-		woodNumber += 1;
-		woodText.text =  'Wood: ' + woodNumber;
-
-	}
+function collectWood(cutEffect, wood)
+{
+	//changes trees to stumps when certain conditions are met
+	stump = stumps.create(wood.body.x, wood.body.y, 'assets', 'stump');
+	stump.scale.setTo(0.1,0.1);
+	stump.body.immovable = true;
+	wood.destroy();
+	woodNumber += 1;
+	woodText.text =  'Wood: ' + woodNumber;
+}
