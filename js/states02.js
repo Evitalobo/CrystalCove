@@ -94,6 +94,11 @@ GamePlay2.prototype = {
 		game.physics.arcade.enable(bondEffect);
 		bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
 
+		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
+		game.physics.arcade.enable(dialogueBox);
+		dialogueBox.scale.setTo(.48, .4);
+
+		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
 	update: function() 
 	{
@@ -101,33 +106,18 @@ GamePlay2.prototype = {
 		//game.debug.body(riverMid);
 
 		// If the player presses SPACEBAR, activate current tool function.
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
-		{
-			activateTool();
-		}
+		activateTool();
+		// If player presses SHIFT, change the current tool function.
+		toolToggle();
+
+		if(!dialogue)
+			movement();
 		else
-		{
-			scanEffect.body.x = -48;
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;
-		}
+			player.animations.stop();
 
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E))
-		{
-			if (toolType < tools)
-				toolType += 1;
-			if (toolType >= tools)
-				toolType = 0;
-		}
+		advanceText();
 
-		if (toolType == 0)
-			toolUI.animations.play('scanner');
-		else if (toolType == 1)
-			toolUI.animations.play('cutter');
-		else if (toolType == 2)
-			toolUI.animations.play('bonder');
-
-		movement();
+		scannerBoxMovement();
 
 		game.physics.arcade.collide(player, riverTop);
 		game.physics.arcade.collide(player, riverBot);
@@ -139,7 +129,7 @@ GamePlay2.prototype = {
 		}
 
 		//menustateswitch
-		if(game.input.keyboard.isDown(Phaser.Keyboard.M))
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.M))
 		{
 			this.autumnVoyage.stop();
 			game.state.start('MainMenu');

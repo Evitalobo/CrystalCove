@@ -4,17 +4,17 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO);
 
 var menuText;
 var line = 0;
-var tutorial = false
+var tutorialStart = false
+var tutorialDone = false
 var gameText;
 var gameOverText;
 var playerSpeed = 5;
 var face;
-var fernCt=0;
+var timer=0;
 var j=1;
 var mapCt;
 var toolType = 0;
 var tools = 0;
-var menu;
 var pickedUpTool = false;
 var dialogue = false;
 
@@ -110,6 +110,8 @@ GamePlay.prototype = {
 		if(mapCt>=1){
 			player = game.add.sprite(650, 475, 'scientist');
 			player.anchor.setTo(.5);
+			pickedUpTool = true;
+			tutorialDone = true;
 		}
 		else
 		{
@@ -141,7 +143,7 @@ GamePlay.prototype = {
 		woods = game.add.group();
 		woods.enableBody = true;
 
-		driftwood = woods.create((j+ 200)*3,Math.random()*500,'driftwood');
+		driftwood = woods.create(250, Math.random()*500, 'driftwood');
 		driftwood.body.collideWorldBounds = true;
 		driftwood.body.setSize(250, 100, 20, 100);
 		driftwood.scale.setTo(0.3,0.3);
@@ -153,8 +155,10 @@ GamePlay.prototype = {
 		//ADD FERN COUNTER TO UNLOCK NEXT PART OF MAP AND SET WORLD BOUND TO COLLIDE WITH PATH
 		for (i = -1; i < 12; i++)
 		{
-			fern = ferns.create(700, i*50,'assets', 'obj');
+			fern = ferns.create(800, i*50,'assets', 'obj');
+			fern.anchor.setTo(.5);
 			fern.scale.setTo(0.5,0.5);
+			fern.angle = 180;
 			fern.body.setSize(100, 100, 100, 50);
 			fern.body.immovable = true;
 		}
@@ -202,25 +206,27 @@ GamePlay.prototype = {
 		if(pickedUpTool)
 		{
 			toolUI.body.y = -30;
+			handitool.kill();
 		}
+
+		if (tutorialStart && !tutorialDone)
+		{
+			timer += 1
+		}
+		if (timer > 200)
+			tutorialSecondPart();
+
+		if (tutorialDone)
+		{
+			note.body.x = 400;
+			note.body.y = 300;
+		}
+					
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
-
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool && !dialogue)
-		{
-			if (toolType < tools)
-				toolType += 1;
-			if (toolType >= tools)
-				toolType = 0;
-		}
-
-		if (toolType == 0)
-			toolUI.animations.play('scanner');
-		else if (toolType == 1)
-			toolUI.animations.play('cutter');
-		else if (toolType == 2)
-			toolUI.animations.play('bonder');
+		// If player presses SHIFT, change the current tool function.
+		toolToggle();
 
 		if(!dialogue)
 			movement();
@@ -235,7 +241,7 @@ GamePlay.prototype = {
 		game.physics.arcade.collide(player, ferns);
 		game.physics.arcade.collide(player, driftwood);
 		game.physics.arcade.collide(ferns, driftwood);
-		game.physics.arcade.overlap(player, handitool, toolTutorial, null, this);
+		game.physics.arcade.overlap(player, handitool, toolTutorialFirstPart, null, this);
 		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
 		game.physics.arcade.overlap(scanEffect, driftwood, driftwoodFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);

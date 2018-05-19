@@ -107,6 +107,24 @@ function activateTool()
 		}
 }
 
+function toolToggle()
+{
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool && !dialogue)
+	{
+		if (toolType < tools)
+			toolType += 1;
+		if (toolType >= tools)
+			toolType = 0;
+	}
+
+	if (toolType == 0)
+		toolUI.animations.play('scanner');
+	else if (toolType == 1)
+		toolUI.animations.play('cutter');
+	else if (toolType == 2)
+		toolUI.animations.play('bonder');
+}
+
 function movement()
 {
 	if(controls.right.isDown && !game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))

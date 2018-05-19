@@ -74,7 +74,6 @@ GamePlay1.prototype = {
 		}
 
 		//GUI status text
-		menuText = game.add.text(100,40,' Move to right edge to change states', {fontSize: '32px', fill: '#ffffff' });
 		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
 		toolUI = game.add.sprite(0, -30, 'assets', 'Scanner');
@@ -104,37 +103,28 @@ GamePlay1.prototype = {
 		game.physics.arcade.enable(bondEffect);
 		bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
 
+		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
+		game.physics.arcade.enable(dialogueBox);
+		dialogueBox.scale.setTo(.48, .4);
+
+		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
 	update: function() {
 		// GamePlay logic
+
 		// If the player presses SPACEBAR, activate current tool function.
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && pickedUpTool) 
-		{
-			activateTool();
-		}
+		activateTool();
+		// If player presses SHIFT, change the current tool function.
+		toolToggle();
+
+		if(!dialogue)
+			movement();
 		else
-		{
-			scanEffect.body.x = -48;
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;
-		}
+			player.animations.stop();
 
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool)
-		{
-			if (toolType < tools)
-				toolType += 1;
-			if (toolType >= tools)
-				toolType = 0;
-		}
+		advanceText();
 
-		if (toolType == 0)
-			toolUI.animations.play('scanner');
-		else if (toolType == 1)
-			toolUI.animations.play('cutter');
-		else if (toolType == 2)
-			toolUI.animations.play('bonder');
-
-		movement();
+		scannerBoxMovement();
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1){
