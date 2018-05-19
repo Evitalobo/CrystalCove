@@ -1,11 +1,8 @@
 var GamePlay1 = function(game) {};
 var woodText;
 var woodNumber = 0;
-var score =0;
-var i;
+var score = 0;
 var wood;
-var woodSpawnX;
-var woodSpawnY;
 
 GamePlay1.prototype = {
 
@@ -14,14 +11,6 @@ GamePlay1.prototype = {
 
 		// Outputting to console.
 		console.log('GamePlay1: preload');
-
-		// preloading assets
-		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene2', 'assets/img/scene2.png');
-		//wood pre chopping
-		game.load.image('wood', 'assets/img/obj5.png');
-		//wood post chopping
-		game.load.image('wood', 'assets/img/obj4.png');
 
 	},
 
@@ -33,24 +22,28 @@ GamePlay1.prototype = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// Adding a backgrofund.
-		map1 = game.add.sprite(0, 0, 'scene2');
+		map1 = game.add.sprite(0, 0, 'assets', 'scene2');
+		trail = game.add.sprite(0, 220, 'assets', 'path');
+		trail.scale.setTo(2, .5);
 
 		
 		//Adding the player sprite->Position depending on the bounds of map
-		if(mapCt>1){
-			player = game.add.sprite(690, 475, 'scientist');
+		if(map == 0)
+		{
+			player = game.add.sprite(25, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		else
 		{
-			player = game.add.sprite(25, 475, 'scientist');
+			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
+		map = 1;
 
 
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
-		player.body.setSize(24, 48, 12, 0);
+		player.body.setSize(30, 48, 9, 0);
 		player.body.collideWorldBounds = true;
 
 
@@ -67,9 +60,12 @@ GamePlay1.prototype = {
 
 		//spawning wood
 		for (i = 0; i < 12; i++){
-			wood = woods.create(i*50,Math.random()*400,'wood');
+			if (i%2 == 0)
+				wood = woods.create(i*65, Math.random()*150 - 120, 'assets', 'obj5');
+			else
+				wood = woods.create(i*50, Math.random()*200 + 225, 'assets', 'obj5');
 			wood.scale.setTo(0.3,0.3);
-			wood.body.setSize(110, 100, 140, 575);
+			wood.body.setSize(130, 100, 140, 575);
 			wood.body.immovable = true;
 		}
 
@@ -109,12 +105,15 @@ GamePlay1.prototype = {
 
 		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
-	update: function() {
+	update: function() 
+	{
 		// GamePlay logic
+		game.debug.physicsGroup(woods);
+		game.debug.body(player);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
-		// If player presses SHIFT, change the current tool function.
+		// If player presses E, change the current tool function.
 		toolToggle();
 
 		if(!dialogue)
@@ -127,12 +126,15 @@ GamePlay1.prototype = {
 		scannerBoxMovement();
 
 		//go to beach state of near left world bound
-		if(player.body.x < 1){
+		if(player.body.x < 1)
+		{
+			playerY = player.body.y;
 			game.state.start('GamePlay');
 		}
-		//go to river state if player is at lower right world bound
-		if(player.body.x > 699 ){
-			mapCt= mapCt +1;
+		//go to river state if player is at right world bound
+		if(player.body.x > 699 )
+		{
+			playerY = player.body.y;
 			game.state.start('GamePlay2');
 		}
 
@@ -144,7 +146,8 @@ GamePlay1.prototype = {
 
 }
 
-	function collectWood(cutEffect, wood){
+	function collectWood(cutEffect, wood)
+	{
 		//changes trees to stumps when certain conditions are met
 		stump = game.add.sprite(wood.body.x, wood.body.y, 'assets', 'stump');
 		stump.enableBody = true;

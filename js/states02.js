@@ -10,7 +10,6 @@ GamePlay2.prototype = {
 
 		// preloading assets
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene3', 'assets/img/scene3.png');
 		
 	},
 
@@ -24,7 +23,7 @@ GamePlay2.prototype = {
 
 
 		// Adding a backgrofund.
-		map2 = game.add.sprite(0, 0,'scene3');
+		map2 = game.add.sprite(0, 0, 'assets', 'scene3');
 		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');
 		game.physics.arcade.enable(riverTop);
 		riverTop.body.immovable = true;
@@ -38,13 +37,23 @@ GamePlay2.prototype = {
 		riverMid.body.immovable = true;
 
 		//Adding the player sprite
-		player = game.add.sprite(25, 475, 'scientist');
-		player.anchor.setTo(.5);
+		//Adding the player sprite->Position depending on the bounds of map
+		if(map == 1)
+		{
+			player = game.add.sprite(25, playerY, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		else
+		{
+			player = game.add.sprite(690, playerY, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		map = 2;
 
 		//Adding the player physics
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
-		player.body.setSize(24, 48, 12, 0);
+		player.body.setSize(30, 48, 9, 0);
 		player.body.collideWorldBounds = true;
 
 
@@ -123,10 +132,18 @@ GamePlay2.prototype = {
 		game.physics.arcade.collide(player, riverBot);
 		game.physics.arcade.collide(player, riverMid);
 
+		//go to beach state of near left world bound
 		if(player.body.x < 1)
 		{
+			playerY = player.body.y;
 			game.state.start('GamePlay1');
 		}
+		//go to river state if player is at right world bound
+		/*if(player.body.x > 750)
+		{
+			playerY = player.body.y;
+			game.state.start('GamePlay3');
+		}*/
 
 		//menustateswitch
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.M))

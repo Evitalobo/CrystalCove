@@ -11,8 +11,8 @@ var gameOverText;
 var playerSpeed = 5;
 var face;
 var timer=0;
-var j=1;
-var mapCt;
+var playerY;
+var map;
 var toolType = 0;
 var tools = 0;
 var pickedUpTool = false;
@@ -26,14 +26,15 @@ MainMenu.prototype =
 	preload: function() 
 	{
 		console.log('You are now in the Main menu state.');
+		//preload assets for entire game
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
+		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 
 		//MenuBG
 		game.load.image('menuBG', 'assets/img/MenuBG.png');
 
 		// load audio assets
-		game.load.path = 'assets/audio/';
-		game.load.audio('autumnVoyage', ['rs_autumnVoyage.mp3']);
+		game.load.audio('autumnVoyage', 'assets/audio/rs_autumnVoyage.mp3');
 
 	},
 	create: function() 
@@ -44,13 +45,23 @@ MainMenu.prototype =
 		// loop and play background music
 		this.autumnVoyage = game.add.audio('autumnVoyage');
 		this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+
+		//Adding the player controls
+		controls = {
+			right: game.input.keyboard.addKey(Phaser.Keyboard.D),
+			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+		};
+		map = 0;
+
 	},
 	update: function() 
 	{
 		// main menu logic
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
 		{
-			game.state.start('GamePlay');
+			game.state.start('GamePlay1');
 		}
 	}
 }
@@ -64,18 +75,6 @@ GamePlay.prototype = {
 
 		// Outputting to console.
 		console.log('GamePlay: preload');
-
-		// preloading assets
-		game.load.path = '';
-		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
-		game.load.image('scene1', 'assets/img/scene1.png');
-
-		//driftwood = 1 wood
-		game.load.image('driftwood', 'assets/img/obj3.png');
-		//fern = must clear to pass to next side of map
-		game.load.image('fern', 'assets/img/obj.png');
-		//boat = 2 wood
-		game.load.image('boat', 'assets/img/obj2.png');
 	
 	},
 
@@ -92,7 +91,7 @@ GamePlay.prototype = {
 
 
 		// Adding a background.
-		map = game.add.sprite(0, 0, 'scene1');
+		map = game.add.sprite(0, 0, 'assets', 'scene1');
 
 		boundary = game.add.sprite(0, 0, 'assets', 'OceanBound');
 		game.physics.arcade.enable(boundary);
@@ -107,8 +106,9 @@ GamePlay.prototype = {
 		note.scale.setTo(.5);
 
 		//Adding the player sprite
-		if(mapCt>=1){
-			player = game.add.sprite(650, 475, 'scientist');
+		if(map == 1)
+		{
+			player = game.add.sprite(650, playerY, 'scientist');
 			player.anchor.setTo(.5);
 			pickedUpTool = true;
 			tutorialDone = true;
@@ -123,7 +123,7 @@ GamePlay.prototype = {
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
 		player.body.collideWorldBounds = true;
-		player.body.setSize(24, 48, 12, 0);
+		player.body.setSize(30, 48, 9, 0);
 
 		// Adding the player animations, left and right.
 		player.animations.add('down', [0,1,2,1],10, true);
@@ -131,19 +131,11 @@ GamePlay.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-		//Adding the player controls
-		controls = {
-			right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-		};
-
 		//wood physics
 		woods = game.add.group();
 		woods.enableBody = true;
 
-		driftwood = woods.create(250, Math.random()*500, 'driftwood');
+		driftwood = woods.create(250, Math.random()*500, 'assets', 'obj3');
 		driftwood.body.collideWorldBounds = true;
 		driftwood.body.setSize(250, 100, 20, 100);
 		driftwood.scale.setTo(0.3,0.3);
@@ -155,7 +147,7 @@ GamePlay.prototype = {
 		//ADD FERN COUNTER TO UNLOCK NEXT PART OF MAP AND SET WORLD BOUND TO COLLIDE WITH PATH
 		for (i = -1; i < 12; i++)
 		{
-			fern = ferns.create(800, i*50,'assets', 'obj');
+			fern = ferns.create(800, i*50, 'assets', 'obj');
 			fern.anchor.setTo(.5);
 			fern.scale.setTo(0.5,0.5);
 			fern.angle = 180;
@@ -248,8 +240,9 @@ GamePlay.prototype = {
 		game.physics.arcade.overlap(scanEffect, boundary, oceanFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, note, noteFlavor, null, this);
 
-		if(player.body.x > 750){
-			mapCt=1;
+		if(player.body.x > 750)
+		{
+			playerY = player.body.y;
 			game.state.start('GamePlay1');
 		}
 	}
