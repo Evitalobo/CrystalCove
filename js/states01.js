@@ -127,5 +127,5 @@ function collectWood(cutEffect, wood)
 	stump.scale.setTo(0.1,0.08);
 	stump.body.immovable = true;
 	wood.destroy();
-	wood += 1;
+	woodCt += 1;
 }
