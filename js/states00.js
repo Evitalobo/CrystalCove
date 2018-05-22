@@ -12,11 +12,12 @@ var playerSpeed = 5;
 var face;
 var timer=0;
 var playerY;
-var map;
+var map = 0;
 var toolType = 0;
 var tools = 0;
 var pickedUpTool = false;
 var dialogue = false;
+var driftwoodTaken = false;
 
 
 // define MainMenu state and methods
@@ -43,18 +44,16 @@ MainMenu.prototype =
 		menu = game.add.sprite(0, 0, 'menuBG');
 
 		// loop and play background music
-		this.autumnVoyage = game.add.audio('autumnVoyage');
-		this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		autumnVoyage = game.add.audio('autumnVoyage');
+		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		//Adding the player controls
 		controls = {
-			right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+			right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT),
+			left: game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
+			up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
+			down: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
 		};
-		map = 0;
-
 	},
 	update: function() 
 	{
@@ -108,7 +107,7 @@ GamePlay.prototype = {
 		//Adding the player sprite
 		if(map == 1)
 		{
-			player = game.add.sprite(650, playerY, 'scientist');
+			player = game.add.sprite(600, playerY, 'scientist');
 			player.anchor.setTo(.5);
 			pickedUpTool = true;
 			tutorialDone = true;
@@ -119,6 +118,7 @@ GamePlay.prototype = {
 			player.frame = 1;
 			player.anchor.setTo(.5);
 		}
+		
 		//Adding the player physics
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
@@ -135,10 +135,13 @@ GamePlay.prototype = {
 		woods = game.add.group();
 		woods.enableBody = true;
 
-		driftwood = woods.create(250, Math.random()*500, 'assets', 'obj3');
-		driftwood.body.collideWorldBounds = true;
-		driftwood.body.setSize(250, 100, 20, 100);
-		driftwood.scale.setTo(0.3,0.3);
+		if (!driftwoodTaken)
+		{
+			driftwood = woods.create(250, Math.random()*500, 'assets', 'obj3');
+			driftwood.body.collideWorldBounds = true;
+			driftwood.body.setSize(250, 100, 20, 100);
+			driftwood.scale.setTo(0.3,0.3);			
+		}
 
 		//fern physics
 		ferns = game.add.group();
@@ -156,7 +159,7 @@ GamePlay.prototype = {
 		}
 
 
-		toolUI = game.add.sprite(0, game.height, 'assets', 'Scanner');
+		toolUI = game.add.sprite(-10, game.height, 'assets', 'Scanner');
 		game.physics.arcade.enable(toolUI);
 		toolUI.scale.setTo(.4);
 		toolUI.animations.add('scanner', ['Scanner'], true);
@@ -188,6 +191,9 @@ GamePlay.prototype = {
 		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
 		game.physics.arcade.enable(dialogueBox);
 		dialogueBox.scale.setTo(.48, .4);
+		dialogueBox.alpha = .8; 
+
+		createInventory();
 
 		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
@@ -205,7 +211,7 @@ GamePlay.prototype = {
 		{
 			timer += 1
 		}
-		if (timer > 200)
+		if (timer > 120)
 			tutorialSecondPart();
 
 		if (tutorialDone)
@@ -228,6 +234,7 @@ GamePlay.prototype = {
 		advanceText();
 
 		scannerBoxMovement();
+		showInventory();
 
 		game.physics.arcade.collide(player, boundary);
 		game.physics.arcade.collide(player, ferns);
@@ -235,6 +242,7 @@ GamePlay.prototype = {
 		game.physics.arcade.collide(ferns, driftwood);
 		game.physics.arcade.overlap(player, handitool, toolTutorialFirstPart, null, this);
 		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
+		game.physics.arcade.overlap(cutEffect, driftwood, collectDriftwood, null, this);
 		game.physics.arcade.overlap(scanEffect, driftwood, driftwoodFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, boundary, oceanFlavor, null, this);
@@ -242,13 +250,92 @@ GamePlay.prototype = {
 
 		if(player.body.x > 750)
 		{
+			map = 0;
 			playerY = player.body.y;
 			game.state.start('GamePlay1');
 		}
+
+		if(player.body.y <= 1 || player.body.y >= 550)
+			if(pickedUpTool)
+				boundDialogue();
 	}
 }
 
 function burnFern(cutEffect, fern)
 {
-	fern.kill();
+	if (tutorialDone)
+		fern.kill();
+	else
+	{
+		dialogue = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Hold it right there!";
+		if (line == 1)
+			menuText.text = "Who said you could do that?";
+		if (line == 2)
+			menuText.text = "Learn how the game works before trying progress, eager beaver!";
+		if (line == 3)
+			menuText.text = "I get it. You're smarter than most people. That's how I feel all the time.";
+		if (line == 4)
+			menuText.text = "But throw the devs a bone here!";
+		if (line == 5)
+			menuText.text = "They worked really hard to make this tutorial. The least you can do is go along \nwith it.";
+		if (line > 5)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			cutEffect.body.x = -48;
+		}
+	}
+}
+
+function collectDriftwood(cutEffect, driftwood)
+{
+	if(tutorialDone)
+	{
+		driftwood.kill();
+		driftwoodTaken = true;
+		woodCt += 1;
+	}
+	else
+	{
+		dialogue = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'Whoa whoa WHOA!';
+		if (line == 1)
+			menuText.text = "I didn't tell you to CUT it!";
+		if (line == 2)
+			menuText.text = "I told you to SCAN it!";
+		if (line == 3)
+			menuText.text = "Now turn off that laser cutter before you kill something!"
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			cutEffect.body.x = -48;
+		}
+	}
+
+}
+
+function boundDialogue()
+{
+	dialogue = true;
+	if (line == 0)
+		menuText.text = 'Nothing interesting that way.';
+	if (line == 1)
+		menuText.text = "Trust me. I know more than you do.";
+	if (line > 1)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			if (player.body.y <= 1)
+				player.body.y += 5;
+			else
+				player.body.y -= 5
+		}
+
 }

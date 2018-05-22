@@ -3,7 +3,7 @@ var woodText;
 var woodNumber = 0;
 var treesScanned = 0;
 var stumpsScanned = 0;
-var wood;
+var woodCt = 0;
 
 GamePlay1.prototype = {
 
@@ -29,7 +29,7 @@ GamePlay1.prototype = {
 
 		
 		//Adding the player sprite->Position depending on the bounds of map
-		if(map == 0)
+		if(map < 1)
 		{
 			player = game.add.sprite(25, playerY, 'scientist');
 			player.anchor.setTo(.5);
@@ -39,7 +39,6 @@ GamePlay1.prototype = {
 			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		map = 1;
 
 
 		game.physics.arcade.enable(player);
@@ -72,47 +71,14 @@ GamePlay1.prototype = {
 			wood.body.immovable = true;
 		}
 
-		//GUI status text
-		woodText = game.add.text(16,16,'Wood: ' +woodNumber, {fontSize: '32px', fill: '#111' });
 
-		toolUI = game.add.sprite(0, -30, 'assets', 'Scanner');
-		toolUI.scale.setTo(.4);
-		toolUI.animations.add('scanner', ['Scanner'], true);
-		toolUI.animations.add('cutter', ['Cutter'], true);
-		toolUI.animations.add('bonder', ['Bonder'], true);
+		createUI();
+		createInventory();
 
-		scanEffect = game.add.sprite(-48, 0, 'assets', 'Scan U 1');
-		scanEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(scanEffect);
-		scanEffect.animations.add('scanUp', ['Scan U 1', 'Scan U 2'], 18, true);
-		scanEffect.animations.add('scanDown', ['Scan D 1', 'Scan D 2'], 18, true);
-		scanEffect.animations.add('scanRight', ['Scan R 1', 'Scan R 2'], 18, true);
-		scanEffect.animations.add('scanLeft', ['Scan L 1', 'Scan L 2'], 18, true);
-
-		cutEffect = game.add.sprite(-48, 0, 'assets', 'Cut U 1');
-		cutEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(cutEffect);
-		cutEffect.animations.add('cutUp', ['Cut U 1', 'Cut U 2', 'Cut U 3'], 24, true);
-		cutEffect.animations.add('cutDown', ['Cut D 1', 'Cut D 2', 'Cut D 3'], 24, true);
-		cutEffect.animations.add('cutRight', ['Cut R 1', 'Cut R 2', 'Cut R 3'], 24, true);
-		cutEffect.animations.add('cutLeft', ['Cut L 1', 'Cut L 2', 'Cut L 3'], 24, true);
-
-		bondEffect = game.add.sprite(-48, 0, 'assets', 'Bond 1');
-		bondEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(bondEffect);
-		bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
-
-		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
-		game.physics.arcade.enable(dialogueBox);
-		dialogueBox.scale.setTo(.48, .4);
-
-		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},
 	update: function() 
 	{
 		// GamePlay logic
-		game.debug.physicsGroup(woods);
-		game.debug.body(player);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -127,16 +93,19 @@ GamePlay1.prototype = {
 		advanceText();
 
 		scannerBoxMovement();
+		showInventory();
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
 		{
+			map = 1;
 			playerY = player.body.y;
 			game.state.start('GamePlay');
 		}
 		//go to river state if player is at right world bound
-		if(player.body.x > 699 )
+		if(player.body.x > 750 )
 		{
+			map = 1
 			playerY = player.body.y;
 			game.state.start('GamePlay2');
 		}
@@ -154,10 +123,9 @@ GamePlay1.prototype = {
 function collectWood(cutEffect, wood)
 {
 	//changes trees to stumps when certain conditions are met
-	stump = stumps.create(wood.body.x, wood.body.y, 'assets', 'stump');
-	stump.scale.setTo(0.1,0.1);
+	stump = stumps.create(wood.body.x, wood.body.y - 5, 'assets', 'stump');
+	stump.scale.setTo(0.1,0.08);
 	stump.body.immovable = true;
 	wood.destroy();
-	woodNumber += 1;
-	woodText.text =  'Wood: ' + woodNumber;
+	wood += 1;
 }

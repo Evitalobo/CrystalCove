@@ -2,7 +2,7 @@
 
 function advanceText()
 {
-	if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && dialogue)
+	if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && dialogue)
 	{
 			line++;
 	}
@@ -13,7 +13,7 @@ function toolTutorialFirstPart()
 	dialogue = true;
 	if (dialogue)
 	{
-		if (line == 0)
+		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'OW! MASTER, DID YOU JUST STEP ON MY DISPLAY?! \n<Press ENTER to advance text>';
 		if (line == 1)
 			menuText.text = 'OH NO....MASTER!';
@@ -56,7 +56,7 @@ function tutorialSecondPart()
 	dialogue = true;
 	if (dialogue)
 	{
-		if (line == 0)
+		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'WAIT!!!!!!';
 		if (line == 1)
 			menuText.text = 'You DO know how to operate a handitool, right? RIGHT?!';
@@ -73,7 +73,7 @@ function tutorialSecondPart()
 			menuText.text = 'You see that icon in the top left part of the screen? The display on the tool (me) \nindicates what function you currently have selected.';
 		}
 		if (line == 6)
-			menuText.text = 'You can press the E button to change my current function and press SPACE \nto activate my current function.';
+			menuText.text = "You can press ENTER (the button you're pressing now) to change my current \nfunction and press SPACE to activate my current function.";
 		if (line == 7)
 			menuText.text = 'As you can probably tell, I am very useful. Indispensible even.';
 		if (line == 8)
@@ -105,11 +105,15 @@ function driftwoodFlavor()
 	dialogue = true;
 	if (dialogue && tutorialDone)
 	{
-		if(line == 0)
+		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'A piece of driftwood. What more did you expect?';
 		if (line == 1)
 			menuText.text = "Do you like looking at random pieces of wood or something?";
-		if (line > 1)
+		if (line == 2)
+			menuText.text = "I mean I guess you could CUT it up.";
+		if (line == 3)
+			menuText.text = "Who knows? A random piece of wood might come in handy...";
+		if (line > 3)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -119,7 +123,7 @@ function driftwoodFlavor()
 	}
 	else
 	{
-		if (line == 0)
+		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is driftwood.';
 		if (line == 1)
 			menuText.text = 'It is wood';
@@ -147,7 +151,7 @@ function fernFlavor(scanEffect, fern)
 	dialogue = true;
 	if (tutorialDone)
 	{
-		if(line == 0)
+		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'Really big ferns.';
 		if (line == 1)
 			menuText.text = 'They appear to be blocking the way inland, but there may be a way to CUT \nthem down...'
@@ -163,7 +167,7 @@ function fernFlavor(scanEffect, fern)
 	}
 	else
 	{
-		if(line == 0)
+		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'Really big ferns.';
 		if (line == 1)
 			menuText.text = "I didn't say you could look at ferns."
@@ -184,7 +188,7 @@ function oceanFlavor()
 	dialogue = true;
 	if (dialogue && tutorialDone)
 	{
-		if(line == 0)
+		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'That is the ocean.';
 		if (line == 1)
 			menuText.text = 'It is really big.';
@@ -204,7 +208,7 @@ function oceanFlavor()
 	}
 	else
 	{
-		if (line == 0)
+		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'What are you doing staring at the ocean?';
 		if (line == 1)
 			menuText.text = 'I told you to look at that piece of DRIFTWOOD!!';
@@ -223,12 +227,12 @@ function noteFlavor()
 	dialogue = true;
 	if (dialogue)
 	{
-		if(line == 0)
+		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is the note I printed for you.';
 		if (line == 1)
-			menuText.text = 'It says to switch functions by pressing the E button.';
+			menuText.text = 'It says to switch functions by pressing ENTER.';
 		if (line == 2)
-			menuText.text = 'And to use the currently selected function by pressing the SPACE button.';
+			menuText.text = 'And to use the currently selected function by pressing SPACE.';
 		if (line == 3)
 			menuText.text = 'Did you really need to read that?'
 		if (line == 4)
@@ -248,29 +252,29 @@ function treeFlavor()
 	dialogue = true;
 	if (dialogue)
 	{
-		if(line == 0 && treesScanned == 0)
+		if(line == 0 && treesScanned == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is a tree.';
-		if(line == 0 && treesScanned == 1)
-			menuText.text = "This is also a tree.";
-		if(line == 0 && treesScanned == 2)
+		if(line == 0 && treesScanned == 1 && dialogueBox.y <= game.height - 170)
+			menuText.text = "This is still a tree.";
+		if(line == 0 && treesScanned == 2 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Yet another tree.";
-		if(line == 0 && treesScanned == 3)
+		if(line == 0 && treesScanned == 3 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Tree.";
-		if(line == 0 && treesScanned == 4)
+		if(line == 0 && treesScanned == 4 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Aren't you getting bored at all?";
-		if(line == 0 && treesScanned == 5)
+		if(line == 0 && treesScanned == 5 && dialogueBox.y <= game.height - 170)
 			menuText.text = "What's so great about scanning trees?";
-		if(line == 0 && treesScanned == 6)
+		if(line == 0 && treesScanned == 6 && dialogueBox.y <= game.height - 170)
 			menuText.text = "This is your seventh tree. Congrats.";
-		if(line == 0 && treesScanned == 7)
+		if(line == 0 && treesScanned == 7 && dialogueBox.body.y <= game.height - 170)
 			menuText.text = "What are you expecting? An achievement?";
-		if(line == 0 && treesScanned == 8)
+		if(line == 0 && treesScanned == 8 && dialogueBox.y <= game.height - 170)
 			menuText.text = "You're just wasting both of our time.";
-		if(line == 0 && treesScanned == 9)
+		if(line == 0 && treesScanned == 9 && dialogueBox.y <= game.height - 170)
 			menuText.text = "It's a tree. MOVE ON.";
-		if(line == 0 && treesScanned == 10)
+		if(line == 0 && treesScanned == 10 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Don't you dare scan another one! You better not!";
-		if(line == 0 && treesScanned > 10)
+		if(line == 0 && treesScanned > 10 && dialogueBox.y <= game.height - 170)
 			menuText.text = "I hate you."
 		if (line > 0)
 		{
@@ -288,10 +292,10 @@ function stumpFlavor()
 	dialogue = true;
 	if (dialogue)
 	{
-		if(line == 0 && stumpsScanned == 0)
+		if(line == 0 && stumpsScanned == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is a stump.';
 		if(line == 0 && treesScanned == 1)
-			menuText.text = "This is also a stump.";
+			menuText.text = "This is still a stump.";
 		if(line == 0 && treesScanned == 2)
 			menuText.text = "Yet another stum- OH NO! WE'RE NOT DOING THIS!";
 		if(line == 0 && treesScanned > 2)

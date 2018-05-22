@@ -48,7 +48,6 @@ GamePlay2.prototype = {
 			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		map = 2;
 
 		//Adding the player physics
 		game.physics.arcade.enable(player);
@@ -76,38 +75,8 @@ GamePlay2.prototype = {
 		//GUI status text
 		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
 
-		toolUI = game.add.sprite(0, -30, 'assets', 'Scanner');
-		toolUI.scale.setTo(.4);
-		toolUI.animations.add('scanner', ['Scanner'], true);
-		toolUI.animations.add('cutter', ['Cutter'], true);
-		toolUI.animations.add('bonder', ['Bonder'], true);
-
-		scanEffect = game.add.sprite(-48, 0, 'assets', 'Scan U 1');
-		scanEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(scanEffect);
-		scanEffect.animations.add('scanUp', ['Scan U 1', 'Scan U 2'], 18, true);
-		scanEffect.animations.add('scanDown', ['Scan D 1', 'Scan D 2'], 18, true);
-		scanEffect.animations.add('scanRight', ['Scan R 1', 'Scan R 2'], 18, true);
-		scanEffect.animations.add('scanLeft', ['Scan L 1', 'Scan L 2'], 18, true);
-
-		cutEffect = game.add.sprite(-48, 0, 'assets', 'Cut U 1');
-		cutEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(cutEffect);
-		cutEffect.animations.add('cutUp', ['Cut U 1', 'Cut U 2', 'Cut U 3'], 24, true);
-		cutEffect.animations.add('cutDown', ['Cut D 1', 'Cut D 2', 'Cut D 3'], 24, true);
-		cutEffect.animations.add('cutRight', ['Cut R 1', 'Cut R 2', 'Cut R 3'], 24, true);
-		cutEffect.animations.add('cutLeft', ['Cut L 1', 'Cut L 2', 'Cut L 3'], 24, true);
-
-		bondEffect = game.add.sprite(-48, 0, 'assets', 'Bond 1');
-		bondEffect.anchor.setTo(.5);
-		game.physics.arcade.enable(bondEffect);
-		bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
-
-		dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
-		game.physics.arcade.enable(dialogueBox);
-		dialogueBox.scale.setTo(.48, .4);
-
-		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
+		createUI();
+		createInventory();
 	},
 	update: function() 
 	{
@@ -127,6 +96,7 @@ GamePlay2.prototype = {
 		advanceText();
 
 		scannerBoxMovement();
+		showInventory();
 
 		game.physics.arcade.collide(player, riverTop);
 		game.physics.arcade.collide(player, riverBot);
@@ -135,12 +105,14 @@ GamePlay2.prototype = {
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
 		{
+			map = 2;
 			playerY = player.body.y;
 			game.state.start('GamePlay1');
 		}
 		//go to river state if player is at right world bound
 		/*if(player.body.x > 750)
 		{
+			map = 2;
 			playerY = player.body.y;
 			game.state.start('GamePlay3');
 		}*/
@@ -148,7 +120,6 @@ GamePlay2.prototype = {
 		//menustateswitch
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.M))
 		{
-			this.autumnVoyage.stop();
 			game.state.start('MainMenu');
 
 		}

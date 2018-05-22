@@ -1,4 +1,40 @@
 // functions to be used all throughout the game
+function createUI()
+{
+	toolUI = game.add.sprite(-10, -30, 'assets', 'Scanner');
+	toolUI.scale.setTo(.4);
+	toolUI.animations.add('scanner', ['Scanner'], true);
+	toolUI.animations.add('cutter', ['Cutter'], true);
+	toolUI.animations.add('bonder', ['Bonder'], true);
+
+	scanEffect = game.add.sprite(-48, 0, 'assets', 'Scan U 1');
+	scanEffect.anchor.setTo(.5);
+	game.physics.arcade.enable(scanEffect);
+	scanEffect.animations.add('scanUp', ['Scan U 1', 'Scan U 2'], 18, true);
+	scanEffect.animations.add('scanDown', ['Scan D 1', 'Scan D 2'], 18, true);
+	scanEffect.animations.add('scanRight', ['Scan R 1', 'Scan R 2'], 18, true);
+	scanEffect.animations.add('scanLeft', ['Scan L 1', 'Scan L 2'], 18, true);
+
+	cutEffect = game.add.sprite(-48, 0, 'assets', 'Cut U 1');
+	cutEffect.anchor.setTo(.5);
+	game.physics.arcade.enable(cutEffect);
+	cutEffect.animations.add('cutUp', ['Cut U 1', 'Cut U 2', 'Cut U 3'], 24, true);
+	cutEffect.animations.add('cutDown', ['Cut D 1', 'Cut D 2', 'Cut D 3'], 24, true);
+	cutEffect.animations.add('cutRight', ['Cut R 1', 'Cut R 2', 'Cut R 3'], 24, true);
+	cutEffect.animations.add('cutLeft', ['Cut L 1', 'Cut L 2', 'Cut L 3'], 24, true);
+
+	bondEffect = game.add.sprite(-48, 0, 'assets', 'Bond 1');
+	bondEffect.anchor.setTo(.5);
+	game.physics.arcade.enable(bondEffect);
+	bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
+
+	dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
+	dialogueBox.scale.setTo(.48, .4);
+	dialogueBox.alpha = .7;
+
+	menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
+}
+
 function activateTool()
 {
 	if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && pickedUpTool && !dialogue && toolType > 0) 
@@ -96,7 +132,6 @@ function activateTool()
 		}
 		else if (dialogue)
 		{
-			cutEffect.body.x = -48;
 			bondEffect.body.x = -48;
 		}
 		else
@@ -109,7 +144,7 @@ function activateTool()
 
 function toolToggle()
 {
-	if(game.input.keyboard.justPressed(Phaser.Keyboard.E) && pickedUpTool && !dialogue)
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && pickedUpTool && !dialogue)
 	{
 		if (toolType < tools)
 			toolType += 1;
@@ -217,12 +252,41 @@ function movement()
 
 function scannerBoxMovement()
 {
-	if(dialogueBox.body.y > game.height - 170 && dialogue)
+	if(dialogueBox.y > game.height - 170 && dialogue)
 	{
-		dialogueBox.body.y -= 10;
+		dialogueBox.y -= 20;
 	}
-	else if (!dialogue && dialogueBox.body.y < game.height)
+	else if (!dialogue && dialogueBox.y < game.height)
 	{
-		dialogueBox.body.y += 10;
+		dialogueBox.y += 20;
+	}
+	if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && inventoryBox.y < 0 && pickedUpTool)
+		inventoryBox.y += 20;
+	else if (!game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && inventoryBox.y > -200)
+		inventoryBox.y -= 20;
+}
+
+function createInventory()
+{
+	inventoryBox = game.add.sprite(200, -200, 'assets', 'scannerDialogue');
+	inventoryBox.alpha = .8;
+	inventoryBox.scale.setTo(.35, .5);
+	game.physics.arcade.enable(inventoryBox);
+	woodIcon = game.add.sprite(210, 0, 'assets', 'obj3');
+	woodIcon.scale.setTo( .15, .2);
+	woodText = game.add.text(260, 15, 'x 0', {fontSize: '20px', fill: '#000' });
+}
+
+function showInventory()
+{
+	if (woodCt > 0 && inventoryBox.body.y >= 0)
+	{
+		woodIcon.alpha = 1;
+		woodText.text = 'x ' + woodCt;
+	}	
+	else
+	{
+		woodIcon.alpha = 0;
+		woodText.text = ' ';
 	}
 }
