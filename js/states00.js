@@ -58,7 +58,7 @@ MainMenu.prototype =
 	update: function() 
 	{
 		// main menu logic
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
 			game.state.start('GamePlay');
 		}
@@ -142,6 +142,11 @@ GamePlay.prototype = {
 			driftwood.body.setSize(250, 100, 20, 100);
 			driftwood.scale.setTo(0.3,0.3);			
 		}
+		debris = game.add.emitter(0, 0, 20);
+		debris.makeParticles('assets', 'obj3');
+		debris.maxParticleScale = .1;
+		debris.minParticleScale = .05;
+		debris.alpha = .7
 
 		//fern physics
 		ferns = game.add.group();
@@ -157,6 +162,12 @@ GamePlay.prototype = {
 			fern.body.setSize(100, 100, 100, 50);
 			fern.body.immovable = true;
 		}
+
+		foliage = game.add.emitter(0, 0, 200);
+		foliage.makeParticles('assets', 'obj');
+		foliage.maxParticleScale = .2;
+		foliage.minParticleScale = .1;
+		foliage.alpha = .7;
 
 
 		toolUI = game.add.sprite(-10, game.height, 'assets', 'Scanner');
@@ -264,7 +275,12 @@ GamePlay.prototype = {
 function burnFern(cutEffect, fern)
 {
 	if (tutorialDone)
+	{
+		foliage.x = fern.body.x + 30;
+		foliage.y = fern.body.y;
+		foliage.start(true, 1000, null, 15);
 		fern.kill();
+	}
 	else
 	{
 		dialogue = true;
@@ -294,6 +310,9 @@ function collectDriftwood(cutEffect, driftwood)
 {
 	if(tutorialDone)
 	{
+		debris.x = driftwood.body.x + 30;
+		debris.y = driftwood.body.y;
+		debris.start(true, 1000, null, 15);
 		driftwood.kill();
 		driftwoodTaken = true;
 		woodCt += 1;

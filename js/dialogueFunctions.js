@@ -294,18 +294,112 @@ function stumpFlavor()
 	{
 		if(line == 0 && stumpsScanned == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is a stump.';
-		if(line == 0 && treesScanned == 1)
+		if(line == 0 && stumpsScanned == 1)
 			menuText.text = "This is still a stump.";
-		if(line == 0 && treesScanned == 2)
+		if(line == 0 && stumpsScanned == 2)
 			menuText.text = "Yet another stum- OH NO! WE'RE NOT DOING THIS!";
-		if(line == 0 && treesScanned > 2)
-			menuText.text = "Stump. There was once a tree here. Who would've thought...";
+		if(line == 0 && stumpsScanned > 2)
+			menuText.text = "Stump. There was once a tree here. End of story.";
 		if (line > 0)
 		{
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
 			stumpsScanned += 1;
+			scanEffect.body.x = -48;
+		}		
+	}
+}
+
+function riverFlavor()
+{
+	dialogue = true;
+	if (!bridgeBuilt)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'A river with a deadly looking current,';
+		if(line == 1)
+			menuText.text = "and to add insult to injury, it also appears that flesh eating piranha live \nin this water...";
+		if(line == 2)
+			menuText.text = "You'd have to be an absolute idiot to jump into there...";
+		if(line == 3)
+			menuText.text = "Heh...";
+		if(line == 4)
+			menuText.text = "...";
+		if(line == 5)
+			menuText.text = "Please don't jump in there.";
+		if (line > 5)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+		}		
+	}
+	else
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'A river with a deadly looking current.';
+		if(line == 1)
+			menuText.text = "Good thing you built that bridge to get across.";
+		if(line == 2)
+			menuText.text = "...";
+		if(line == 3)
+			menuText.text = "......";
+		if(line == 4)
+			menuText.text = "Use the bridge, please.";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+		}		
+	}
+}
+
+function bridgeFlavor()
+{
+	dialogue = true;
+	if (!bridgeBuilt)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'The river looks pretty deadly..';
+		if(line == 1)
+			menuText.text = "Carnivorous fish will strip the flesh right off your bones..";
+		if(line == 2)
+			menuText.text = "And if that doesn't kill you, you'll probably drown.";
+		if(line == 3)
+			menuText.text = "Looks like there once was a bridge here...";
+		if(line == 4)
+			menuText.text = "You could probably make a new one using stuff that's just laying around...";
+		if(line == 5)
+			menuText.text = "Wood. I think that five pieces should suffice.";
+		if (line > 5)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+		}		
+	}
+	else
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'This is a bridge.';
+		if(line == 1)
+			menuText.text = "I'd say you did a good job, but you didn't.";
+		if(line == 2)
+			menuText.text = "I mean it looks so out of place...";
+		if(line == 3)
+			menuText.text = "The wood isn't even the same color!";
+		if(line == 4)
+			menuText.text = "Just keep moving so I don't have to look at it anymore.";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
 			scanEffect.body.x = -48;
 		}		
 	}

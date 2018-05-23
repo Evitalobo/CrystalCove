@@ -71,6 +71,11 @@ GamePlay1.prototype = {
 			wood.body.immovable = true;
 		}
 
+		debris = game.add.emitter(0, 0, 200);
+		debris.makeParticles('assets', 'obj3');
+		debris.maxParticleScale = .2;
+		debris.minParticleScale = .1;
+		debris.alpha = .7;
 
 		createUI();
 		createInventory();
@@ -123,6 +128,9 @@ GamePlay1.prototype = {
 function collectWood(cutEffect, wood)
 {
 	//changes trees to stumps when certain conditions are met
+	debris.x = wood.body.x + 20;
+	debris.y = wood.body.y;
+	debris.start(true, 1000, null, 15);
 	stump = stumps.create(wood.body.x, wood.body.y - 5, 'assets', 'stump');
 	stump.scale.setTo(0.1,0.08);
 	stump.body.immovable = true;

@@ -1,3 +1,5 @@
+var bridgeBuilt = false;
+
 // define GamePlay state and methods
 var GamePlay2 = function(game) {};
 GamePlay2.prototype = {
@@ -22,7 +24,7 @@ GamePlay2.prototype = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
-		// Adding a backgrofund.
+		// Adding a background.
 		map2 = game.add.sprite(0, 0, 'assets', 'scene3');
 		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');
 		game.physics.arcade.enable(riverTop);
@@ -32,9 +34,17 @@ GamePlay2.prototype = {
 		game.physics.arcade.enable(riverBot);
 		riverBot.body.immovable = true;
 
+		bridge = game.add.sprite(360, 330, 'assets', 'obj1');
+		bridge.anchor.setTo(.5);
+		game.physics.arcade.enable(bridge);
+		bridge.angle = 180;
+		bridge.scale.setTo(.5, .4);
+		bridge.alpha = 0;
+
 		riverMid = game.add.sprite(253, 289, 'assets', 'RiverMid');
 		game.physics.arcade.enable(riverMid);
 		riverMid.body.immovable = true;
+		riverMid.alpha = 1;
 
 		//Adding the player sprite
 		//Adding the player sprite->Position depending on the bounds of map
@@ -47,6 +57,7 @@ GamePlay2.prototype = {
 		{
 			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
+			bridgeBuilt = true;
 		}
 
 		//Adding the player physics
@@ -62,13 +73,6 @@ GamePlay2.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-		//Adding the player controls
-		controls = {
-			right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-			down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-		};
 
 		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
@@ -81,7 +85,7 @@ GamePlay2.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
-		//game.debug.body(riverMid);
+		game.debug.body(bridge);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -98,9 +102,20 @@ GamePlay2.prototype = {
 		scannerBoxMovement();
 		showInventory();
 
+		if (bridgeBuilt)
+		{
+			bridge.alpha = 1;
+			riverMid.kill();
+		}
+
 		game.physics.arcade.collide(player, riverTop);
 		game.physics.arcade.collide(player, riverBot);
 		game.physics.arcade.collide(player, riverMid);
+		game.physics.arcade.overlap(scanEffect, riverTop, riverFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, riverBot, riverFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, bridge, bridgeFlavor, null, this);
+		//game.physics.arcade.overlap(bondEffect, riverMid, buildBridge, null, this);
+
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
