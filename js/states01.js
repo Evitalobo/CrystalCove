@@ -23,7 +23,7 @@ GamePlay1.prototype = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// Adding a backgrofund.
-		map1 = game.add.sprite(0, 0, 'assets', 'scene2');
+		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 		trail = game.add.sprite(0, 220, 'assets', 'path');
 		trail.scale.setTo(2, .5);
 

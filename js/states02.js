@@ -25,14 +25,17 @@ GamePlay2.prototype = {
 
 
 		// Adding a background.
-		map2 = game.add.sprite(0, 0, 'assets', 'scene3');
+		backdrop = game.add.sprite(0, 0, 'assets', 'scene3');
+
 		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');
 		game.physics.arcade.enable(riverTop);
+		riverTop.body.setSize(357, 260, 0, 0);
 		riverTop.body.immovable = true;
 
 		riverBot = game.add.sprite(170, 389, 'assets', 'RiverBot');
 		game.physics.arcade.enable(riverBot);
 		riverBot.body.immovable = true;
+		riverBot.body.setSize(290, 211, 26, 0);
 
 		bridge = game.add.sprite(360, 330, 'assets', 'obj1');
 		bridge.anchor.setTo(.5);
@@ -44,7 +47,6 @@ GamePlay2.prototype = {
 		riverMid = game.add.sprite(253, 289, 'assets', 'RiverMid');
 		game.physics.arcade.enable(riverMid);
 		riverMid.body.immovable = true;
-		riverMid.alpha = 1;
 
 		//Adding the player sprite
 		//Adding the player sprite->Position depending on the bounds of map
@@ -76,6 +78,11 @@ GamePlay2.prototype = {
 
 		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
+		crystal = game.add.sprite(78, 375, 'assets', 'Crystal02');
+		game.physics.arcade.enable(crystal);
+		crystal.body.setSize(69, 110, 20, 66);
+		crystal.body.immovable = true;
+
 		//GUI status text
 		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
 
@@ -85,7 +92,7 @@ GamePlay2.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
-		game.debug.body(bridge);
+		//game.debug.body(crystal);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -111,6 +118,7 @@ GamePlay2.prototype = {
 		game.physics.arcade.collide(player, riverTop);
 		game.physics.arcade.collide(player, riverBot);
 		game.physics.arcade.collide(player, riverMid);
+		game.physics.arcade.collide(player, crystal);
 		game.physics.arcade.overlap(scanEffect, riverTop, riverFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, riverBot, riverFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, bridge, bridgeFlavor, null, this);

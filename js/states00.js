@@ -60,6 +60,7 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
+			//map = 1;
 			game.state.start('GamePlay');
 		}
 	}
@@ -90,7 +91,7 @@ GamePlay.prototype = {
 
 
 		// Adding a background.
-		map = game.add.sprite(0, 0, 'assets', 'scene1');
+		backdrop = game.add.sprite(0, 0, 'assets', 'scene1');
 
 		boundary = game.add.sprite(0, 0, 'assets', 'OceanBound');
 		game.physics.arcade.enable(boundary);
@@ -107,7 +108,7 @@ GamePlay.prototype = {
 		//Adding the player sprite
 		if(map == 1)
 		{
-			player = game.add.sprite(600, playerY, 'scientist');
+			player = game.add.sprite(650, playerY, 'scientist');
 			player.anchor.setTo(.5);
 			pickedUpTool = true;
 			tutorialDone = true;
