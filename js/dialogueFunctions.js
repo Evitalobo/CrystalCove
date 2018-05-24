@@ -5,6 +5,7 @@ function advanceText()
 	if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && dialogue)
 	{
 			line++;
+			advance.play('', 0, 1, false);
 	}
 }
 
@@ -14,7 +15,9 @@ function toolTutorialFirstPart()
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'OW! MASTER, DID YOU JUST STEP ON MY DISPLAY?! \n<Press ENTER to advance text>';
+		}
 		if (line == 1)
 			menuText.text = 'OH NO....MASTER!';
 		if (line == 2)
@@ -57,7 +60,9 @@ function tutorialSecondPart()
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'WAIT!!!!!!';
+		}
 		if (line == 1)
 			menuText.text = 'You DO know how to operate a handitool, right? RIGHT?!';
 		if (line == 2)
@@ -71,11 +76,18 @@ function tutorialSecondPart()
 			pickedUpTool = true;
 			tools = 2;
 			menuText.text = 'You see that icon in the top left part of the screen? The display on the tool (me) \nindicates what function you currently have selected.';
+			toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, true, 0, 250, true);
 		}
 		if (line == 6)
+		{
+			game.tweens.removeAll();
+			toolUI.alpha = 1;
 			menuText.text = "You can press ENTER (the button you're pressing now) to change my current \nfunction and press SPACE to activate my current function.";
+		}
 		if (line == 7)
+		{
 			menuText.text = 'As you can probably tell, I am very useful. Indispensible even.';
+		}
 		if (line == 8)
 			menuText.text = 'Unfortunately, in my present manufacturers settings, I only have two functional...\ner...functions. SCANner and, a personal favorite of mine: laser CUTter';
 		if (line == 9)
@@ -106,7 +118,9 @@ function driftwoodFlavor()
 	if (dialogue && tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'A piece of driftwood. What more did you expect?';
+		}
 		if (line == 1)
 			menuText.text = "Do you like looking at random pieces of wood or something?";
 		if (line == 2)
@@ -124,7 +138,9 @@ function driftwoodFlavor()
 	else
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'This is driftwood.';
+		}
 		if (line == 1)
 			menuText.text = 'It is wood';
 		if (line == 2)
@@ -152,7 +168,9 @@ function fernFlavor(scanEffect, fern)
 	if (tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'Really big ferns.';
+		}
 		if (line == 1)
 			menuText.text = 'They appear to be blocking the way inland, but there may be a way to CUT \nthem down...'
 		if (line == 2)
@@ -168,7 +186,9 @@ function fernFlavor(scanEffect, fern)
 	else
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'Really big ferns.';
+		}
 		if (line == 1)
 			menuText.text = "I didn't say you could look at ferns."
 		if (line == 2)
@@ -189,7 +209,10 @@ function oceanFlavor()
 	if (dialogue && tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			scanSuccess.play('', 0, 1, false);
 			menuText.text = 'That is the ocean.';
+		}
 		if (line == 1)
 			menuText.text = 'It is really big.';
 		if (line == 2)
@@ -209,7 +232,10 @@ function oceanFlavor()
 	else
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			scanSuccess.play('', 0, 1, false);
 			menuText.text = 'What are you doing staring at the ocean?';
+		}
 		if (line == 1)
 			menuText.text = 'I told you to look at that piece of DRIFTWOOD!!';
 		if (line > 1)
@@ -228,7 +254,9 @@ function noteFlavor()
 	if (dialogue)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'This is the note I printed for you.';
+		}
 		if (line == 1)
 			menuText.text = 'It says to switch functions by pressing ENTER.';
 		if (line == 2)
@@ -274,7 +302,11 @@ function treeFlavor()
 			menuText.text = "It's a tree. MOVE ON.";
 		if(line == 0 && treesScanned == 10 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Don't you dare scan another one! You better not!";
-		if(line == 0 && treesScanned > 10 && dialogueBox.y <= game.height - 170)
+		if(line == 0 && treesScanned == 11 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Damn this stupid happy scan success sound!!";
+		if(line == 0 && treesScanned == 12 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Why can't I make any other sounds!!!!";
+		if(line == 0 && treesScanned > 12 && dialogueBox.y <= game.height - 170)
 			menuText.text = "I hate you."
 		if (line > 0)
 		{
@@ -317,7 +349,9 @@ function riverFlavor()
 	if (!bridgeBuilt)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'A river with a deadly looking current,';
+		}
 		if(line == 1)
 			menuText.text = "and to add insult to injury, it also appears that flesh eating piranha live \nin this water...";
 		if(line == 2)
@@ -339,7 +373,9 @@ function riverFlavor()
 	else
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'A river with a deadly looking current.';
+		}
 		if(line == 1)
 			menuText.text = "Good thing you built that bridge to get across.";
 		if(line == 2)
@@ -364,7 +400,9 @@ function bridgeFlavor()
 	if (!bridgeBuilt)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'The river looks pretty deadly..';
+		}
 		if(line == 1)
 			menuText.text = "Carnivorous fish will strip the flesh right off your bones..";
 		if(line == 2)
@@ -386,7 +424,9 @@ function bridgeFlavor()
 	else
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = 'This is a bridge.';
+		}
 		if(line == 1)
 			menuText.text = "I'd say you did a good job, but you didn't.";
 		if(line == 2)
@@ -402,5 +442,98 @@ function bridgeFlavor()
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
+	}
+}
+
+function bondCrystalFlavor()
+{
+	dialogue = true;
+	if (tools < 3)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'Oh? What might this be? Some kind of crystal?';
+		}
+		if(line == 1)
+		{
+			menuText.text = "What the-?!";
+			//play resonating sound
+			crystalAlpha.start();
+			crystalScale.start();
+			UIalpha.start();
+		}
+		if(line == 2)
+			menuText.text = "It feels like something within me is resonating with this crystal...";
+		if(line == 3)
+			menuText.text = "What is this?";
+		if(line == 4)
+			menuText.text = "Why does this feel so familiar?";
+		if(line == 5)
+			menuText.text = "DOWNLOADING....";
+		if(line == 6)
+			menuText.text = "DOWNLOADING.......";
+		if(line == 7)
+			menuText.text = "DOWNLOAD COMPLETE";
+		if(line == 8)
+		{
+			menuText.text = "NEW FUNCTION HAS BEEN INSTALLED";
+			//stop resonating sound
+			//electronic chime
+			crystalAlpha.stop();
+			crystalScale.stop();
+			UIalpha.stop();
+			toolUI.alpha = 1;
+		}
+		if(line == 9)
+			menuText.text = "MOLECULAR BONDING OBTAINED";
+		if(line == 10)
+			menuText.text = "WHOA! Molecular bonding, huh?";
+		if(line == 11)
+			menuText.text = "I guess I'll read the instructions for you, since, you know.";
+		if(line == 12)
+			menuText.text = "You won't read them yourself anyway.";
+		if(line == 13)
+			menuText.text = "Just simply have the function selected and point the tool in the direction of \nwhere something needs to be synthesized.";
+		if(line == 14)
+			menuText.text = "Hold down SPACE to begin the bonding process.";
+		if(line == 15)
+			menuText.text = "WARNINGS: (These are for you.)";
+		if(line == 16)
+			menuText.text = "As a wise man once said, matter cannot be created nor destroyed.";
+		if(line == 17)
+			menuText.text = "Same rules apply here. You have to have enough stuff in order to make\n other stuff.";
+		if(line == 18)
+			menuText.text = "In other words, it's like crafting. You need to have the necessary\n items to build something.";
+		if (line == 19)
+		menuText.text = "Now go and get to it! Try it out!"			
+		if (line > 19)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+			tools = 3;
+		}
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.heigt - 170)
+		{
+			menuText.text = "This crystal gave me the ability to bond things together on a moleculr level.";
+		}
+		if (line == 1)
+			menuText.text = "I can detect vibrations coming from the crystal..";
+		if (line == 2)
+			menuText.text = "It seems as if it's resounding.";
+		if (line == 3)
+			menuText.text = "I tell you these things because I'm afraid you're too stupid to feel.";
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+		}
+
 	}
 }

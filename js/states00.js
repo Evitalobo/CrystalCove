@@ -36,6 +36,12 @@ MainMenu.prototype =
 
 		// load audio assets
 		game.load.audio('autumnVoyage', 'assets/audio/rs_autumnVoyage.mp3');
+		game.load.audio('advance', 'assets/audio/AdvanceText.mp3');
+		game.load.audio('bondSound', 'assets/audio/BondSound.mp3');
+		game.load.audio('cutSound', 'assets/audio/CutSound.mp3');
+		game.load.audio('scanSound', 'assets/audio/ScanSound.mp3');
+		game.load.audio('scanSuccess', 'assets/audio/ScanSuccess.mp3');
+		game.load.audio('toggle', 'assets/audio/Toggle.mp3');
 
 	},
 	create: function() 
@@ -47,6 +53,15 @@ MainMenu.prototype =
 		autumnVoyage = game.add.audio('autumnVoyage');
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
+		advance = game.add.audio('advance');
+		bondSound = game.add.audio('bondSound');
+		cutSound = game.add.audio('cutSound');
+		scanSound = game.add.audio('scanSound');
+		scanSuccess = game.add.audio('scanSuccess');
+		toggleFunction = game.add.audio('toggle');
+
+		//game.sound.setDecodedCallback([autumnVoyage, advanceText, bondSound, cutSound, scanSound, scanSuccess, toggleFunction ], start, this);
+
 		//Adding the player controls
 		controls = {
 			right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT),
@@ -54,14 +69,17 @@ MainMenu.prototype =
 			up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
 			down: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
 		};
+
 	},
 	update: function() 
 	{
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
-			//map = 1;
-			game.state.start('GamePlay');
+			map = 1;
+			pickedUpTool = true;
+			tools = 2;
+			game.state.start('GamePlay2');
 		}
 	}
 }

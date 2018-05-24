@@ -41,8 +41,11 @@ function activateTool()
 		{
 			if (toolType == 1)
 			{
+				cutSound.play('', 0, 1, true);
 				scanEffect.body.x = -48;
-				cutEffect.body.x = -48;
+				bondEffect.body.x = -48;
+				bondSound.stop();
+				scanSound.stop();
 
 				if (face == 'U')
 				{
@@ -71,8 +74,11 @@ function activateTool()
 			}
 			if (toolType == 2)
 			{
+				bondSound.play('', 0, 1, true);
 				scanEffect.body.x = -48;
 				cutEffect.body.x = -48;
+				cutSound.stop();
+				scanSound.stop();
 
 				if (face == 'U')
 				{
@@ -102,8 +108,11 @@ function activateTool()
 		}
 		else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && toolType == 0 && pickedUpTool && !dialogue)
 		{
+			scanSound.play('', 0, 1, false);
 			cutEffect.body.x = -48;
 			bondEffect.body.x = -48;
+			cutSound.stop();
+			bondSound.stop();
 
 			if (face == 'U')
 			{
@@ -130,22 +139,50 @@ function activateTool()
 				scanEffect.animations.play('scanRight');
 			}
 		}
-		else if (dialogue)
+		else if (dialogue && toolType == 0)
 		{
+			cutEffect.body.x = -48;
 			bondEffect.body.x = -48;
+		
+		}
+		else if (dialogue && toolType == 1)
+		{
+			scanEffect.body.x = -48;
+			bondEffect.body.x = -48;
+		
+		}
+		else if (dialogue && toolType == 2)
+		{
+			scanEffect.body.x = -48;
+			cutEffect.body.x = -48;	
+	
 		}
 		else
 		{
 			scanEffect.body.x = -48;
 			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;			
+			bondEffect.body.x = -48;		
 		}
+
+		if (cutEffect.body.x != -48 && !dialogue)
+			cutSound.play('', 0, 1, true)
+		else
+			cutSound.stop();
+
+		if (scanEffect.body.x != -48 && !dialogue)
+			scanSound.play('', 0, 1, false)
+
+		if (bondEffect.body.x != -48 && !dialogue)
+			bondSound.play('', 0, 1, true)
+		else
+			bondSound.stop();
 }
 
 function toolToggle()
 {
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && pickedUpTool && !dialogue)
 	{
+		toggleFunction.play('', 0, 1, false);
 		if (toolType < tools)
 			toolType += 1;
 		if (toolType >= tools)
@@ -153,11 +190,17 @@ function toolToggle()
 	}
 
 	if (toolType == 0)
+	{
 		toolUI.animations.play('scanner');
+	}
 	else if (toolType == 1)
+	{
 		toolUI.animations.play('cutter');
+	}
 	else if (toolType == 2)
+	{
 		toolUI.animations.play('bonder');
+	}
 }
 
 function movement()

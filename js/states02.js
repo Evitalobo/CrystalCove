@@ -20,6 +20,7 @@ GamePlay2.prototype = {
 	{
 		console.log('GamePlay: create');
 
+
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -78,8 +79,9 @@ GamePlay2.prototype = {
 
 		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
-		crystal = game.add.sprite(78, 375, 'assets', 'Crystal02');
+		crystal = game.add.sprite(133, 465, 'assets', 'Crystal02');
 		game.physics.arcade.enable(crystal);
+		crystal.anchor.setTo(.5);
 		crystal.body.setSize(69, 110, 20, 66);
 		crystal.body.immovable = true;
 
@@ -88,6 +90,10 @@ GamePlay2.prototype = {
 
 		createUI();
 		createInventory();
+
+		crystalAlpha = game.add.tween(crystal).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
+		crystalScale = game.add.tween(crystal.scale).to( { x : 2, y : 2 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
+		UIalpha = game.add.tween(toolUI).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
 	},
 	update: function() 
 	{
@@ -122,6 +128,7 @@ GamePlay2.prototype = {
 		game.physics.arcade.overlap(scanEffect, riverTop, riverFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, riverBot, riverFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, bridge, bridgeFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, crystal, bondCrystalFlavor, null, this);
 		//game.physics.arcade.overlap(bondEffect, riverMid, buildBridge, null, this);
 
 
