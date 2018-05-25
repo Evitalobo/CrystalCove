@@ -38,16 +38,16 @@ GamePlay2.prototype = {
 		riverBot.body.immovable = true;
 		riverBot.body.setSize(290, 211, 26, 0);
 
+		riverMid = game.add.sprite(253, 289, 'assets', 'RiverMid');
+		game.physics.arcade.enable(riverMid);
+		riverMid.body.immovable = true;
+
 		bridge = game.add.sprite(360, 330, 'assets', 'obj1');
 		bridge.anchor.setTo(.5);
 		game.physics.arcade.enable(bridge);
 		bridge.angle = 180;
 		bridge.scale.setTo(.5, .4);
 		bridge.alpha = 0;
-
-		riverMid = game.add.sprite(253, 289, 'assets', 'RiverMid');
-		game.physics.arcade.enable(riverMid);
-		riverMid.body.immovable = true;
 
 		//Adding the player sprite
 		//Adding the player sprite->Position depending on the bounds of map
@@ -79,11 +79,12 @@ GamePlay2.prototype = {
 
 		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
-		crystal = game.add.sprite(133, 465, 'assets', 'Crystal02');
+		crystal = game.add.sprite(133, 553, 'assets', 'Crystal02');
 		game.physics.arcade.enable(crystal);
-		crystal.anchor.setTo(.5);
+		crystal.anchor.setTo(.5, 1);
 		crystal.body.setSize(69, 110, 20, 66);
 		crystal.body.immovable = true;
+		crystal.alpha = .9;
 
 		//GUI status text
 		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
@@ -91,9 +92,8 @@ GamePlay2.prototype = {
 		createUI();
 		createInventory();
 
-		crystalAlpha = game.add.tween(crystal).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
-		crystalScale = game.add.tween(crystal.scale).to( { x : 2, y : 2 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
-		UIalpha = game.add.tween(toolUI).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
+		crystalScale = game.add.tween(crystal.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, false, 0, 500, true);
+		crystalAlpha = game.add.tween(crystal).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
 	},
 	update: function() 
 	{
@@ -129,7 +129,7 @@ GamePlay2.prototype = {
 		game.physics.arcade.overlap(scanEffect, riverBot, riverFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, bridge, bridgeFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, crystal, bondCrystalFlavor, null, this);
-		//game.physics.arcade.overlap(bondEffect, riverMid, buildBridge, null, this);
+		game.physics.arcade.overlap(bondEffect, riverMid, buildBridge, null, this);
 
 
 		//go to beach state of near left world bound

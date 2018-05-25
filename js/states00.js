@@ -76,10 +76,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
-			map = 1;
-			pickedUpTool = true;
-			tools = 2;
-			game.state.start('GamePlay2');
+			//map = 1;
+			//pickedUpTool = true;
+			//tools = 2;
+			game.state.start('GamePlay');
 		}
 	}
 }
@@ -293,16 +293,17 @@ GamePlay.prototype = {
 
 function burnFern(cutEffect, fern)
 {
-	if (tutorialDone)
+	if (tutorialDone && driftwoodTaken)
 	{
 		foliage.x = fern.body.x + 30;
 		foliage.y = fern.body.y;
 		foliage.start(true, 1000, null, 15);
 		fern.kill();
 	}
-	else
+	else if (!tutorialDone)
 	{
 		dialogue = true;
+		scanSuccessful = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Hold it right there!";
 		if (line == 1)
@@ -321,7 +322,30 @@ function burnFern(cutEffect, fern)
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
+			timer = 0;
+			scanSuccessful = false;
 		}
+	}
+	else if (!driftwoodTaken)
+	{
+		dialogue = true;
+		scanSuccessful = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "You know what would be cool?";
+		if (line == 1)
+			menuText.text = "If you were to collect that piece of driftwood.";
+		if (line == 2)
+			menuText.text = "If you CUT it into a more manageable piece, you might be able to pick \nit up...";
+		if (line > 2)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			cutEffect.body.x = -48;
+			timer = 0;
+			scanSuccessful = false;
+		}
+
 	}
 }
 
@@ -335,10 +359,31 @@ function collectDriftwood(cutEffect, driftwood)
 		driftwood.kill();
 		driftwoodTaken = true;
 		woodCt += 1;
+		dialogue = true;
+		scanSuccessful = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'Nice going.';
+		if (line == 1)
+			menuText.text = "Now that you've picked an item up, you can see what I'm storing \ninside me.";
+		if (line == 2)
+			menuText.text = "If you want to view the inventory, hold down SHIFT.";
+		if (line == 3)
+			menuText.text = "Now turn off that laser cutter before you kill something!"
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			cutEffect.body.x = -48;
+			timer = 0;
+			scanSuccessful = false;
+		}
+
 	}
 	else
 	{
 		dialogue = true;
+		scanSuccessful = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'Whoa whoa WHOA!';
 		if (line == 1)
@@ -353,6 +398,8 @@ function collectDriftwood(cutEffect, driftwood)
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
+			timer = 0;
+			scanSuccessful = false;
 		}
 	}
 

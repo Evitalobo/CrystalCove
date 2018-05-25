@@ -1,4 +1,6 @@
 // functions to be used all throughout the game
+var progress
+
 function createUI()
 {
 	toolUI = game.add.sprite(-10, -30, 'assets', 'Scanner');
@@ -49,13 +51,13 @@ function activateTool()
 
 				if (face == 'U')
 				{
-					cutEffect.body.x = player.body.x - 12;
+					cutEffect.body.x = player.body.x - 16;
 					cutEffect.body.y = player.body.y - 45;
 					cutEffect.animations.play('cutUp');
 				}
 				else if (face == 'D')
 				{
-					cutEffect.body.x = player.body.x - 12;
+					cutEffect.body.x = player.body.x - 16;
 					cutEffect.body.y = player.body.y + 36;
 					cutEffect.animations.play('cutDown');
 				}
@@ -335,5 +337,47 @@ function showInventory()
 	{
 		woodIcon.alpha = 0;
 		woodText.text = ' ';
+	}
+}
+
+function buildBridge()
+{
+	if (!bridgeBuilt && woodCt >= 5)
+	{
+		bridge.alpha += .01;
+		riverMid.alpha -= .01;
+	}
+	else if (woodCt < 5)
+	{
+		dialogue = true;
+		scanSuccessful = true;
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'Hmm....';
+		if(line == 1)
+			menuText.text = "Doesn't seem to be working...";
+		if(line == 2)
+			menuText.text = "You sure you can make a bridge yet?";
+		if(line == 3)
+			menuText.text = "You don't seem to have enough wood to make it.";
+		if(line == 4)
+			menuText.text = "Remember, you can hold SHIFT to check what's in your inventory.";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			bondEffect.body.x = -48;
+		}		
+	}
+	if (bridge.alpha > 1)
+	{
+		bridge.alpha = 1;
+	}
+	if (bridge.alpha == 1 && !bridgeBuilt)
+	{
+		woodCt -= 5;
+		bridgeBuilt = true;
 	}
 }

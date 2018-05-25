@@ -1,7 +1,14 @@
-//functions for displaying all dialogue in the game
+scanSuccessful = false; //functions for displaying all dialogue in the game
 
 function advanceText()
 {
+	if (scanSuccessful && line == 0 && timer < 1)
+	{
+		scanSuccess.play('', 0, 1, false);
+		scanSuccessful = false;
+		timer += 1;
+	}
+
 	if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && dialogue)
 	{
 			line++;
@@ -12,6 +19,7 @@ function advanceText()
 function toolTutorialFirstPart()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
@@ -47,6 +55,8 @@ function toolTutorialFirstPart()
 			menuText.text = ' ';
 			handitool.body.x = -48;
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			tutorialStart = true;
 		}
@@ -57,6 +67,7 @@ function toolTutorialFirstPart()
 function tutorialSecondPart()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
@@ -104,6 +115,7 @@ function tutorialSecondPart()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
 			line = 0;
 			tutorialStart = false;
 			timer = 0;
@@ -115,6 +127,7 @@ function tutorialSecondPart()
 function driftwoodFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue && tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -131,6 +144,8 @@ function driftwoodFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}
@@ -156,6 +171,8 @@ function driftwoodFlavor()
 			menuText.text = ' ';
 			tutorialDone = true;
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}
@@ -165,6 +182,7 @@ function driftwoodFlavor()
 function fernFlavor(scanEffect, fern)
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -179,6 +197,8 @@ function fernFlavor(scanEffect, fern)
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}
@@ -197,6 +217,8 @@ function fernFlavor(scanEffect, fern)
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}
@@ -206,6 +228,7 @@ function fernFlavor(scanEffect, fern)
 function oceanFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue && tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -225,6 +248,8 @@ function oceanFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -242,6 +267,8 @@ function oceanFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}	
@@ -251,6 +278,7 @@ function oceanFlavor()
 function noteFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -269,6 +297,8 @@ function noteFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -278,6 +308,7 @@ function noteFlavor()
 function treeFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue)
 	{
 		if(line == 0 && treesScanned == 0 && dialogueBox.y <= game.height - 170)
@@ -294,7 +325,7 @@ function treeFlavor()
 			menuText.text = "What's so great about scanning trees?";
 		if(line == 0 && treesScanned == 6 && dialogueBox.y <= game.height - 170)
 			menuText.text = "This is your seventh tree. Congrats.";
-		if(line == 0 && treesScanned == 7 && dialogueBox.body.y <= game.height - 170)
+		if(line == 0 && treesScanned == 7 && dialogueBox.y <= game.height - 170)
 			menuText.text = "What are you expecting? An achievement?";
 		if(line == 0 && treesScanned == 8 && dialogueBox.y <= game.height - 170)
 			menuText.text = "You're just wasting both of our time.";
@@ -313,6 +344,8 @@ function treeFlavor()
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
+			scanSuccessful = false;
+			timer = 0;
 			treesScanned += 1;
 			scanEffect.body.x = -48;
 		}		
@@ -322,6 +355,7 @@ function treeFlavor()
 function stumpFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (dialogue)
 	{
 		if(line == 0 && stumpsScanned == 0 && dialogueBox.y <= game.height - 170)
@@ -337,6 +371,8 @@ function stumpFlavor()
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
+			scanSuccessful = false;
+			timer = 0;
 			stumpsScanned += 1;
 			scanEffect.body.x = -48;
 		}		
@@ -346,6 +382,7 @@ function stumpFlavor()
 function riverFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (!bridgeBuilt)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -366,6 +403,8 @@ function riverFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -388,6 +427,8 @@ function riverFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -397,6 +438,7 @@ function riverFlavor()
 function bridgeFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (!bridgeBuilt)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -417,6 +459,8 @@ function bridgeFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -439,6 +483,8 @@ function bridgeFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}		
@@ -448,6 +494,7 @@ function bridgeFlavor()
 function bondCrystalFlavor()
 {
 	dialogue = true;
+	scanSuccessful = true;
 	if (tools < 3)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
@@ -458,9 +505,8 @@ function bondCrystalFlavor()
 		{
 			menuText.text = "What the-?!";
 			//play resonating sound
-			crystalAlpha.start();
 			crystalScale.start();
-			UIalpha.start();
+			crystalAlpha.start();
 		}
 		if(line == 2)
 			menuText.text = "It feels like something within me is resonating with this crystal...";
@@ -479,10 +525,11 @@ function bondCrystalFlavor()
 			menuText.text = "NEW FUNCTION HAS BEEN INSTALLED";
 			//stop resonating sound
 			//electronic chime
-			crystalAlpha.stop();
 			crystalScale.stop();
-			UIalpha.stop();
-			toolUI.alpha = 1;
+			crystalAlpha.stop();
+			crystal.alpha = .9;
+			crystal.scale.setTo(1);
+			toolUI.tint = 0xFFFFFF;
 		}
 		if(line == 9)
 			menuText.text = "MOLECULAR BONDING OBTAINED";
@@ -503,13 +550,15 @@ function bondCrystalFlavor()
 		if(line == 17)
 			menuText.text = "Same rules apply here. You have to have enough stuff in order to make\n other stuff.";
 		if(line == 18)
-			menuText.text = "In other words, it's like crafting. You need to have the necessary\n items to build something.";
+			menuText.text = "In other words, it's like crafting. You need to have enough of the necessary\nitems to build something.";
 		if (line == 19)
 		menuText.text = "Now go and get to it! Try it out!"			
 		if (line > 19)
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 			tools = 3;
@@ -517,9 +566,9 @@ function bondCrystalFlavor()
 	}
 	else
 	{
-		if (line == 0 && dialogueBox.y <= game.heigt - 170)
+		if (line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = "This crystal gave me the ability to bond things together on a moleculr level.";
+			menuText.text = "This crystal gave me the ability to bond things together on a molecular level.";
 		}
 		if (line == 1)
 			menuText.text = "I can detect vibrations coming from the crystal..";
@@ -531,6 +580,8 @@ function bondCrystalFlavor()
 		{
 			menuText.text = ' ';
 			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
 			line = 0;
 			scanEffect.body.x = -48;
 		}
