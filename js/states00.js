@@ -353,12 +353,6 @@ function collectDriftwood(cutEffect, driftwood)
 {
 	if(tutorialDone)
 	{
-		debris.x = driftwood.body.x + 30;
-		debris.y = driftwood.body.y;
-		debris.start(true, 1000, null, 15);
-		driftwood.kill();
-		driftwoodTaken = true;
-		woodCt += 1;
 		dialogue = true;
 		scanSuccessful = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
@@ -377,6 +371,12 @@ function collectDriftwood(cutEffect, driftwood)
 			cutEffect.body.x = -48;
 			timer = 0;
 			scanSuccessful = false;
+			debris.x = driftwood.body.x + 30;
+			debris.y = driftwood.body.y;
+			debris.start(true, 1000, null, 15);
+			driftwood.kill();
+			driftwoodTaken = true;
+			woodCt += 1;
 		}
 
 	}
