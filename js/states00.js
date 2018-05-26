@@ -224,6 +224,7 @@ GamePlay.prototype = {
 		dialogueBox.alpha = .8; 
 
 		createInventory();
+		toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
 		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
 	},

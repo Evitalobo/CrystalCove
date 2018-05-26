@@ -27,7 +27,7 @@ GamePlay3.prototype = {
 		barrier = game.add.sprite(300, 300, 'assets', 'barricade.png');
 		
 		//Adding the player sprite->Position depending on the bounds of map
-		if(map < 1)
+		if(map == 2)
 		{
 			player = game.add.sprite(25, playerY, 'scientist');
 			player.anchor.setTo(.5);
@@ -101,14 +101,14 @@ GamePlay3.prototype = {
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
 		{
-			map = 1;
+			map = 3;
 			playerY = player.body.y;
 			game.state.start('GamePlay2');
 		}
 		//go to river state if player is at right world bound
 		if(player.body.x > 750 )
 		{
-			map = 1
+			map = 3;
 			playerY = player.body.y;
 			game.state.start('GamePlay4');
 		}
@@ -132,13 +132,13 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 1)
 			menuText.text = "Who said you could do that?";
 		if (line == 2)
-			menuText.text = "Do you know what breaking and entering is? Who do you think you are?";
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you PERV?";
 		if (line == 3)
 			menuText.text = "I get it. You think you own this whole place.";
 		if (line == 4)
-			menuText.text = "I haven't seen anyone here but this still seems illegal.";
+			menuText.text = "I haven't seen anyone here but this still doesn't seem legal.";
 		if (line == 5)
-			menuText.text = "Well...I guess I you could take a peak.";
+			menuText.text = "Well...I guess we could take a peek...";
 		if (line > 5)
 		{
 			menuText.text = ' ';

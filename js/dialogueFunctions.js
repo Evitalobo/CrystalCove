@@ -87,11 +87,11 @@ function tutorialSecondPart()
 			pickedUpTool = true;
 			tools = 2;
 			menuText.text = 'You see that icon in the top left part of the screen? The display on the tool (me) \nindicates what function you currently have selected.';
-			toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, true, 0, 250, true);
+			toolIndicator.start();
 		}
 		if (line == 6)
 		{
-			game.tweens.removeAll();
+			toolIndicator.stop();
 			toolUI.alpha = 1;
 			menuText.text = "You can press ENTER (the button you're pressing now) to change my current \nfunction and press SPACE to activate my current function.";
 		}

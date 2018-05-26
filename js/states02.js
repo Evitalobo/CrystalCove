@@ -86,9 +86,6 @@ GamePlay2.prototype = {
 		crystal.body.immovable = true;
 		crystal.alpha = .9;
 
-		//GUI status text
-		menuText = game.add.text(300,60,' Press M to go to menu', {fontSize: '32px', fill: '#999' });
-
 		createUI();
 		createInventory();
 
@@ -139,13 +136,12 @@ GamePlay2.prototype = {
 			playerY = player.body.y;
 			game.state.start('GamePlay1');
 		}
-		//go to river state if player is at right world bound
-		/*if(player.body.x > 750)
+		if(player.body.x > 750)
 		{
 			map = 2;
 			playerY = player.body.y;
 			game.state.start('GamePlay3');
-		}*/
+		}
 
 		//menustateswitch
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.M))
