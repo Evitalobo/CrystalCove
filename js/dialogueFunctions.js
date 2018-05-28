@@ -229,11 +229,10 @@ function oceanFlavor()
 {
 	dialogue = true;
 	scanSuccessful = true;
-	if (dialogue && tutorialDone)
+	if (tutorialDone)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			scanSuccess.play('', 0, 1, false);
 			menuText.text = 'That is the ocean.';
 		}
 		if (line == 1)
@@ -258,7 +257,6 @@ function oceanFlavor()
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			scanSuccess.play('', 0, 1, false);
 			menuText.text = 'What are you doing staring at the ocean?';
 		}
 		if (line == 1)

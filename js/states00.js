@@ -76,10 +76,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
-			//map = 1;
-			//pickedUpTool = true;
-			//tools = 2;
-			game.state.start('GamePlay');
+			map = 2;
+			pickedUpTool = true;
+			tools = 3;
+			game.state.start('GamePlay3');
 		}
 	}
 }
@@ -357,7 +357,7 @@ function collectDriftwood(cutEffect, driftwood)
 		dialogue = true;
 		scanSuccessful = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = 'Nice going.';
+			menuText.text = "Nice going. I guess you're not TOTALLY useless after all.";
 		if (line == 1)
 			menuText.text = "Now that you've picked an item up, you can see what I'm storing \ninside me.";
 		if (line == 2)

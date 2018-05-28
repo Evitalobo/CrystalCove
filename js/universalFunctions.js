@@ -43,21 +43,18 @@ function activateTool()
 		{
 			if (toolType == 1)
 			{
-				cutSound.play('', 0, 1, true);
 				scanEffect.body.x = -48;
 				bondEffect.body.x = -48;
-				bondSound.stop();
-				scanSound.stop();
 
 				if (face == 'U')
 				{
-					cutEffect.body.x = player.body.x - 16;
+					cutEffect.body.x = player.body.x - 8;
 					cutEffect.body.y = player.body.y - 45;
 					cutEffect.animations.play('cutUp');
 				}
 				else if (face == 'D')
 				{
-					cutEffect.body.x = player.body.x - 16;
+					cutEffect.body.x = player.body.x - 8;
 					cutEffect.body.y = player.body.y + 36;
 					cutEffect.animations.play('cutDown');
 				}
@@ -76,11 +73,8 @@ function activateTool()
 			}
 			if (toolType == 2)
 			{
-				bondSound.play('', 0, 1, true);
 				scanEffect.body.x = -48;
 				cutEffect.body.x = -48;
-				cutSound.stop();
-				scanSound.stop();
 
 				if (face == 'U')
 				{
@@ -110,11 +104,8 @@ function activateTool()
 		}
 		else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && toolType == 0 && pickedUpTool && !dialogue)
 		{
-			scanSound.play('', 0, 1, false);
 			cutEffect.body.x = -48;
 			bondEffect.body.x = -48;
-			cutSound.stop();
-			bondSound.stop();
 
 			if (face == 'U')
 			{
@@ -166,18 +157,18 @@ function activateTool()
 			bondEffect.body.x = -48;		
 		}
 
-		if (cutEffect.body.x != -48 && !dialogue)
+		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && toolType == 1 && !dialogue)
 			cutSound.play('', 0, 1, true)
-		else
-			cutSound.stop();
-
-		if (scanEffect.body.x != -48 && !dialogue)
-			scanSound.play('', 0, 1, false)
-
-		if (bondEffect.body.x != -48 && !dialogue)
+		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && toolType == 2 && !dialogue)
 			bondSound.play('', 0, 1, true)
 		else
+		{
+			cutSound.stop();
 			bondSound.stop();
+		}
+
+		if ( game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && toolType == 0 && !dialogue)
+			scanSound.play('', 0, 1, false)
 }
 
 function toolToggle()
@@ -344,6 +335,7 @@ function buildBridge()
 {
 	if (!bridgeBuilt && woodCt >= 5)
 	{
+		bondSound.play('', 0, 1, true);
 		bridge.alpha += .01;
 		riverMid.alpha -= .01;
 	}

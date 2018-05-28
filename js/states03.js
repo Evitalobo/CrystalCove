@@ -1,7 +1,7 @@
-var GamePlay3 = function(game) {};
 var hutsScanned = 0;
 var hutCt = 0;
 
+var GamePlay3 = function(game) {};
 GamePlay3.prototype = {
 
 	// preloading assets.
@@ -15,6 +15,7 @@ GamePlay3.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay3: create');
+		autumnVoyage.stop();
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -23,8 +24,6 @@ GamePlay3.prototype = {
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
-		house = game.add.sprite(300, 500, 'assets', 'bigHouse.png');
-		barrier = game.add.sprite(300, 300, 'assets', 'barricade.png');
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 2)
@@ -54,20 +53,36 @@ GamePlay3.prototype = {
 		// Creating the hut group and house group
 		huts = game.add.group();
 		huts.enableBody = true;
-		house = game.add.group();
-		house.enableBody = true;
 
 
 		//spawning huts
-		for (i = 0; i < 3; i++){
-			if (i%2 == 0)
-				hut = huts.create(i*65, Math.random()*150 - 120, 'assets', 'smallHouse.png');
-			else
-				hut = huts.create(i*50, Math.random()*200 + 225, 'assets', 'smallHouse.png');
-			hut.scale.setTo(0.3,0.3);
-			//hut.body.setSize(130, 100, 140,300 );
-			hut.body.immovable = true;
-		}
+		hut = huts.create(50, 25, 'assets', 'smallHouse');
+		hut.scale.setTo(0.4);
+		hut.body.setSize(310, 260, 60, 154);
+		hut.body.immovable = true;
+
+		hut1 = huts.create(600, 100, 'assets', 'smallHouse');
+		hut1.scale.setTo(0.4);
+		hut1.body.setSize(310, 260, 60, 154);
+		hut1.body.immovable = true;
+
+		hut2 = huts.create(475, 390, 'assets', 'smallHouse');
+		hut2.scale.setTo(0.4);
+		hut2.body.setSize(310, 230, 60, 184);
+		hut2.body.immovable = true;
+
+		house = game.add.sprite(400, 220, 'assets', 'bigHouse');
+		house.anchor.set(.5, .5);
+		house.scale.setTo(.5);
+		game.physics.arcade.enable(house);
+		house.body.setSize(420, 470, 50, 240);
+		house.body.immovable = true;
+
+		barrier = game.add.sprite(370, 285, 'assets', 'barricade');
+		barrier.scale.setTo(.25);
+		game.physics.arcade.enable(barrier);
+		barrier.body.setSize(320, 450, 10, 0);
+		barrier.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
@@ -82,6 +97,7 @@ GamePlay3.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
+		game.debug.body(barrier);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -106,18 +122,20 @@ GamePlay3.prototype = {
 			game.state.start('GamePlay2');
 		}
 		//go to river state if player is at right world bound
-		if(player.body.x > 750 )
+		/*if(player.body.x > 750 )
 		{
 			map = 3;
 			playerY = player.body.y;
 			game.state.start('GamePlay4');
-		}
+		}*/
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
-		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
-		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
+		//game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
+		//game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
 		game.physics.arcade.collide(player, huts);
+		game.physics.arcade.collide(player, house);
+		game.physics.arcade.collide(player, barrier);
 		
 	},
 
@@ -134,12 +152,14 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 2)
 			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you PERV?";
 		if (line == 3)
-			menuText.text = "I get it. You think you own this whole place.";
+			menuText.text = "I get it. Just because no one's around, you think you own the whole place.";
 		if (line == 4)
-			menuText.text = "I haven't seen anyone here but this still doesn't seem legal.";
+			menuText.text = "I don't detect a single living thing near us but still. This doesn't seem legal.";
 		if (line == 5)
 			menuText.text = "Well...I guess we could take a peek...";
-		if (line > 5)
+		if (line == 6)
+			menuText.text = "But don't come crying to me if the cops come after you...";
+		if (line > 6)
 		{
 			menuText.text = ' ';
 			dialogue = false;
