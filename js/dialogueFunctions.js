@@ -596,9 +596,9 @@ function hutFlavor()
 		if(line == 0 && hutsScanned == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is a hut. Made for dwarves.';
 		if(line == 0 && hutsScanned == 1)
-			menuText.text = "You can't enter this hut- it's too small.";
+			menuText.text = "You can't enter this hut. It's too small.";
 		if(line == 0 && hutsScanned == 2)
-			menuText.text = "Do you think you're going to shrink just to enter this hut?";
+			menuText.text = "Do you think you can just shrink down to enter this hut?";
 		if(line == 0 && hutsScanned > 2)
 			menuText.text = "My dude, you are TOO big to enter this hut.";
 		if (line > 0)
@@ -607,6 +607,8 @@ function hutFlavor()
 			dialogue = false;
 			line = 0;
 			hutsScanned += 1;
+			scanSuccessful = false;
+			timer = 0;
 			scanEffect.body.x = -48;
 		}		
 	}
@@ -620,22 +622,28 @@ function houseFlavor()
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "This the only building that resembles a house.";
+			menuText.text = "This the only building that actually resembles a house for people.";
 		if (line == 1)
-			menuText.text = "Compared to the huts, it seems like I can enter this.";
+			menuText.text = "Unlike the huts, I think you're JUUUST slim enough to enter this.";
 		if (line == 2)
-			menuText.text = "At the same time, someone could live here.";
+			menuText.text = "HOWEVER....someone could be inside...";
 		if (line == 3)
-			menuText.text = "The only thing stopping me is the barrier. I could CUT it.";
+			menuText.text = "The only thing stopping us is that wooden barrier. You know what to do \nwith wooden stuff...";
 		if (line == 4)
-			menuText.text = "It seems like its the most recent building intact. I wonder why it seems so much more...alive?";
+			menuText.text = "Otherwise, how did you get this far?";
 		if (line == 5)
-			menuText.text = "Well...If I CUT it accidentally *wink* then it shouldn't be a problem.";
-		if (line > 5){
+			menuText.text = "Anyway this seems a bit more recent than the other buildings.... I wonder \nwhy it seems so much more...alive?"
+		if (line == 6)
+			menuText.text = "Well...If you CUT it accidentally *wink* then it shouldn't be a problem.";
+		if (line == 7)
+			menuText.text = "Yeah that's right. I can wink."
+		if (line > 7){
 
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
+			scanSuccessful = false;
+			timer = 0;
 			scanEffect.body.x = -48;
 		}		
 	}

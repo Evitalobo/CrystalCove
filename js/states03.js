@@ -152,7 +152,7 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 1)
 			menuText.text = "Who said you could do that?";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you \nPERV?";
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, \nyou PERV?";
 		if (line == 3)
 			menuText.text = "I get it. Just because no one's around, you think you own the whole place.";
 		if (line == 4)
