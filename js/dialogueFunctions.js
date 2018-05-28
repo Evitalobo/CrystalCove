@@ -586,3 +586,57 @@ function bondCrystalFlavor()
 
 	}
 }
+
+function hutFlavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && hutsScanned == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'This is a hut. Made for dwarves.';
+		if(line == 0 && hutsScanned == 1)
+			menuText.text = "You can't enter this hut- it's too small.";
+		if(line == 0 && hutsScanned == 2)
+			menuText.text = "Do you think you're going to shrink just to enter this hut?";
+		if(line == 0 && hutsScanned > 2)
+			menuText.text = "My dude, you are TOO big to enter this hut.";
+		if (line > 0)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			hutsScanned += 1;
+			scanEffect.body.x = -48;
+		}		
+	}
+
+}
+
+function houseFlavor()
+{
+	dialogue = true;
+	scanSuccessful=true;
+	if (dialogue)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "This the only building that resembles a house.";
+		if (line == 1)
+			menuText.text = "Compared to the huts, it seems like I can enter this.";
+		if (line == 2)
+			menuText.text = "At the same time, someone could live here.";
+		if (line == 3)
+			menuText.text = "The only thing stopping me is the barrier. I could CUT it.";
+		if (line == 4)
+			menuText.text = "It seems like its the most recent building intact. I wonder why it seems so much more...alive?";
+		if (line == 5)
+			menuText.text = "Well...If I CUT it accidentally *wink* then it shouldn't be a problem.";
+		if (line > 5){
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanEffect.body.x = -48;
+		}		
+	}
+}

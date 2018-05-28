@@ -1,7 +1,9 @@
+
+
 var hutsScanned = 0;
 var hutCt = 0;
 
-var GamePlay3 = function(game) {};
+var GamePlay3=function(game){};
 GamePlay3.prototype = {
 
 	// preloading assets.
@@ -57,7 +59,7 @@ GamePlay3.prototype = {
 
 		//spawning huts
 		hut = huts.create(50, 25, 'assets', 'smallHouse');
-		hut.scale.setTo(0.4);
+		hut.scale.setTo(0.3);
 		hut.body.setSize(310, 260, 60, 154);
 		hut.body.immovable = true;
 
@@ -67,8 +69,8 @@ GamePlay3.prototype = {
 		hut1.body.immovable = true;
 
 		hut2 = huts.create(475, 390, 'assets', 'smallHouse');
-		hut2.scale.setTo(0.4);
-		hut2.body.setSize(310, 230, 60, 184);
+		hut2.scale.setTo(0.3);
+		hut2.body.setSize(410, 230, 60, 184);
 		hut2.body.immovable = true;
 
 		house = game.add.sprite(400, 220, 'assets', 'bigHouse');
@@ -131,8 +133,8 @@ GamePlay3.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
-		//game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
-		//game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
 		game.physics.arcade.collide(player, huts);
 		game.physics.arcade.collide(player, house);
 		game.physics.arcade.collide(player, barrier);
@@ -150,7 +152,7 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 1)
 			menuText.text = "Who said you could do that?";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you PERV?";
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you \nPERV?";
 		if (line == 3)
 			menuText.text = "I get it. Just because no one's around, you think you own the whole place.";
 		if (line == 4)
@@ -165,9 +167,9 @@ function cutBarrier(cutEffect, barrier){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = wood.body.x + 20;
-			debris.y = wood.body.y;
+			debris.x = barrier.body.x + 20;
+			debris.y = barrier.body.y;
 			debris.start(true, 1000, null, 15);
-			wood.destroy();
+			barrier.destroy();
 		}
 }
