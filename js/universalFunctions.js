@@ -34,7 +34,7 @@ function createUI()
 	dialogueBox.scale.setTo(.48, .4);
 	dialogueBox.alpha = .7;
 
-	menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
+	menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 20);
 }
 
 function activateTool()

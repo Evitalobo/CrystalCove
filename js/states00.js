@@ -43,10 +43,15 @@ MainMenu.prototype =
 		game.load.audio('scanSuccess', 'assets/audio/ScanSuccess.mp3');
 		game.load.audio('toggle', 'assets/audio/Toggle.mp3');
 
+		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
+
 	},
 	create: function() 
 	{
 		console.log('MainMenu: create');
+		this.game.scale.pageAlignHorizontally = true;
+		this.game.scale.pageAlignVertically = true;
+		this.game.scale.refresh();	
 		menu = game.add.sprite(0, 0, 'menuBG');
 
 		// loop and play background music
@@ -226,7 +231,7 @@ GamePlay.prototype = {
 		createInventory();
 		toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
-		menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
+		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 20);
 	},
 	update: function() 
 	{
