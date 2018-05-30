@@ -42,6 +42,15 @@ MainMenu.prototype =
 		game.load.audio('scanSound', 'assets/audio/ScanSound.mp3');
 		game.load.audio('scanSuccess', 'assets/audio/ScanSuccess.mp3');
 		game.load.audio('toggle', 'assets/audio/Toggle.mp3');
+		game.load.audio('resonate', 'assets/audio/Resonate.mp3');
+		game.load.audio('wind', 'assets/audio/Wind.mp3');
+		game.load.audio('woodCut', 'assets/audio/WoodCut.mp3');
+		game.load.audio('newFunction', 'assets/audio/NewFunction.mp3');
+		game.load.audio('download', 'assets/audio/Downloading.mp3');
+
+
+
+
 
 		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
 
@@ -57,14 +66,6 @@ MainMenu.prototype =
 		// loop and play background music
 		autumnVoyage = game.add.audio('autumnVoyage');
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
-
-		advance = game.add.audio('advance');
-		bondSound = game.add.audio('bondSound');
-		cutSound = game.add.audio('cutSound');
-		scanSound = game.add.audio('scanSound');
-		scanSuccess = game.add.audio('scanSuccess');
-		toggleFunction = game.add.audio('toggle');
-
 		//game.sound.setDecodedCallback([autumnVoyage, advanceText, bondSound, cutSound, scanSound, scanSuccess, toggleFunction ], start, this);
 
 		//Adding the player controls
@@ -81,10 +82,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
 		{
-			map = 2;
+			/*map = 2;
 			pickedUpTool = true;
-			tools = 3;
-			game.state.start('GamePlay3');
+			tools = 3;*/
+			game.state.start('GamePlay');
 		}
 	}
 }
@@ -111,6 +112,8 @@ GamePlay.prototype = {
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		addSounds();
 
 
 		// Adding a background.
@@ -231,7 +234,7 @@ GamePlay.prototype = {
 		createInventory();
 		toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
-		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 20);
+		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
 	},
 	update: function() 
 	{
@@ -317,11 +320,11 @@ function burnFern(cutEffect, fern)
 		if (line == 2)
 			menuText.text = "Learn how the game works before trying progress, eager beaver!";
 		if (line == 3)
-			menuText.text = "I get it. You're smarter than most people. That's how I feel all the time.";
+			menuText.text = "I get it. You're smarter than most people. That's how I feel\nall the time.";
 		if (line == 4)
 			menuText.text = "But throw the devs a bone here!";
 		if (line == 5)
-			menuText.text = "They worked really hard to make this tutorial. The least you can do is go along \nwith it.";
+			menuText.text = "They worked really hard to make this tutorial. The least you \ncan do is go along with it.";
 		if (line > 5)
 		{
 			menuText.text = ' ';
@@ -341,7 +344,7 @@ function burnFern(cutEffect, fern)
 		if (line == 1)
 			menuText.text = "If you were to collect that piece of driftwood.";
 		if (line == 2)
-			menuText.text = "If you CUT it into a more manageable piece, you might be able to pick \nit up...";
+			menuText.text = "If you CUT it into a more manageable piece, you might be able to \npick it up...";
 		if (line > 2)
 		{
 			menuText.text = ' ';
@@ -381,6 +384,7 @@ function collectDriftwood(cutEffect, driftwood)
 			debris.y = driftwood.body.y;
 			debris.start(true, 1000, null, 15);
 			driftwood.kill();
+			woodCut.play('', 0, 1, false);
 			driftwoodTaken = true;
 			woodCt += 1;
 		}

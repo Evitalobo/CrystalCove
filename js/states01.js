@@ -130,6 +130,7 @@ function collectWood(cutEffect, wood)
 	//changes trees to stumps when certain conditions are met
 	debris.x = wood.body.x + 20;
 	debris.y = wood.body.y;
+	woodCut.play('', 0, 1, false);
 	debris.start(true, 1000, null, 15);
 	stump = stumps.create(wood.body.x, wood.body.y - 5, 'assets', 'stump');
 	stump.scale.setTo(0.1,0.08);

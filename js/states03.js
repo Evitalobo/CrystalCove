@@ -18,6 +18,8 @@ GamePlay3.prototype = {
 	create: function() {
 		console.log('GamePlay3: create');
 		autumnVoyage.stop();
+		wind = game.add.audio('wind');
+		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -171,5 +173,6 @@ function cutBarrier(cutEffect, barrier){
 			debris.y = barrier.body.y;
 			debris.start(true, 1000, null, 15);
 			barrier.destroy();
+			woodCut.play('', 0, 1, true);
 		}
 }
