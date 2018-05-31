@@ -24,7 +24,7 @@ function toolTutorialFirstPart()
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = 'OW! MASTER, DID YOU JUST STEP ON MY DISPLAY?! \n<Press ENTER to advance text>';
+			menuText.text = 'OW! MASTER, DID YOU JUST STEP ON MY DISPLAY?! \n \n<Press ENTER to advance text>';
 		}
 		if (line == 1)
 			menuText.text = 'OH NO....MASTER!';
@@ -43,7 +43,7 @@ function toolTutorialFirstPart()
 		if (line == 8)
 			menuText.text = 'What? What the-? Are you my owner? I was hoping for someone a \nlittle uh....nicer looking?';
 		if (line == 9)
-			menuText.text = 'But I guess tattered clothes, eyes like a dead fish, and unkempt hair is attractive \nin its own way... (If you like gross people...)';
+			menuText.text = 'But I guess tattered clothes, eyes like a dead fish, and unkempt\n hair is attractive in its own way... \n(If you like gross people...)';
 		if (line == 10)
 			menuText.text = 'Anyway. I guess I should introduce myself to you.';
 		if (line == 11)
@@ -77,38 +77,38 @@ function tutorialSecondPart()
 		if (line == 1)
 			menuText.text = 'You DO know how to operate a handitool, right? RIGHT?!';
 		if (line == 2)
-			menuText.text = "Of course you don't...Why else would you be just dawdling around aimlessly \nlike that?"
+			menuText.text = "Of course you don't...Why else would you be just dawdling around \naimlessly like that?"
 		if (line == 3)
-			menuText.text = "-sigh- It's a surprise you haven't gotten yourself killed yet, but I guess I can \ntell you."
+			menuText.text = "-sigh- It's a surprise you haven't gotten yourself killed yet, but I \nguess I can tell you."
 		if (line == 4)
 			menuText.text = "(Of all the possible owners, I just had to have this one...)";
 		if (line == 5)
 		{
 			pickedUpTool = true;
 			tools = 2;
-			menuText.text = 'You see that icon in the top left part of the screen? The display on the tool (me) \nindicates what function you currently have selected.';
+			menuText.text = 'You see that icon in the top left part of the screen? The display on the \ntool (me) indicates what function you currently have selected.';
 			toolIndicator.start();
 		}
 		if (line == 6)
 		{
 			toolIndicator.stop();
 			toolUI.alpha = 1;
-			menuText.text = "You can press ENTER (the button you're pressing now) to change my current \nfunction and press SPACE to activate my current function.";
+			menuText.text = "You can press ENTER (the button you're pressing now) to change \nmy current function and press SPACE to activate my \ncurrent function.";
 		}
 		if (line == 7)
 		{
 			menuText.text = 'As you can probably tell, I am very useful. Indispensible even.';
 		}
 		if (line == 8)
-			menuText.text = 'Unfortunately, in my present manufacturers settings, I only have two functional...\ner...functions. SCANner and, a personal favorite of mine: laser CUTter';
+			menuText.text = 'Unfortunately, in my present manufacturers settings, I only have \ntwo functional...er...functions. SCANner and, a personal favorite of \nmine: laser CUTter';
 		if (line == 9)
 			menuText.text = 'For three easy payments of $9.99 per month, however....';
 		if (line == 10)
-			menuText.text = 'You can get all currently existing handitool functions!!! (Yay....DLC...)';
+			menuText.text = 'You can get all currently existing handitool functions!!! \n(Yay....DLC...)';
 		if (line == 11)
-			menuText.text = 'Whew! That was a mouthful. I am not going to repeat that ever again.';
+			menuText.text = 'Whew! That was a mouthful. I am not going to repeat that\never again.';
 		if (line == 12)
-			menuText.text = 'I detect a piece of driftwood nearby. Try and SCAN it to learn more about it.';
+			menuText.text = 'I detect a piece of driftwood nearby. Try and SCAN it to learn \nmore about it.';
 		if (line == 13)
 			menuText.text = 'You do know what wood is, right?';
 		if (line > 13)
@@ -163,9 +163,9 @@ function driftwoodFlavor()
 		if (line == 3)
 			menuText.text = "Nice job. I guess you're not totally worthless after all."
 		if (line == 4)
-			menuText.text = "But just in case you forget, (I would not be surprised) I can print out an \nowner's manual for you.";
+			menuText.text = "But just in case you forget, (I would not be surprised) I can print \nout an owner's manual for you.";
 		if (line == 5)
-			menuText.text = "Just in case I'm wrong and you turn out to be complete idiot, it'll be somewhere \naround here for you to read. Just scan it and I'll tell you what it says.";
+			menuText.text = "Just in case I'm wrong and you turn out to be complete idiot, it'll be \nsomewhere around here for you to read. Just scan it and I'll tell \nyou what it says.";
 		if (line > 5)
 		{
 			menuText.text = ' ';
@@ -190,9 +190,9 @@ function fernFlavor(scanEffect, fern)
 			menuText.text = 'Really big ferns.';
 		}
 		if (line == 1)
-			menuText.text = 'They appear to be blocking the way inland, but there may be a way to CUT \nthem down...'
+			menuText.text = 'They appear to be blocking the way inland, but there may be a \nway to CUT them down...'
 		if (line == 2)
-			menuText.text = 'Fun fact: These ferns are known to grow quite quickly. They might just regrow \nthe moment you turn your back on them...'
+			menuText.text = 'Fun fact: These ferns are known to grow quite quickly. They might \njust grow back the moment you turn your back on them...'
 		if (line > 2)
 		{
 			menuText.text = ' ';
@@ -288,10 +288,16 @@ function noteFlavor()
 		if (line == 2)
 			menuText.text = 'And to use the currently selected function by pressing SPACE.';
 		if (line == 3)
-			menuText.text = 'Did you really need to read that?'
+			menuText.text = "Factory settings give me access only to two functions.";
 		if (line == 4)
+			menuText.text = "SCAN to examine objects that are laying around.";
+		if (line == 5)
+			menuText.text = "And CUT to..erm..cut certain things with.";
+		if (line == 6)
+			menuText.text = 'Did you really need to read that?';
+		if (line == 7)
 			menuText.text = '-sigh- You really are an idiot.'
-		if (line > 4)
+		if (line > 7)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -388,7 +394,7 @@ function riverFlavor()
 			menuText.text = 'A river with a deadly looking current,';
 		}
 		if(line == 1)
-			menuText.text = "and to add insult to injury, it also appears that flesh eating piranha live \nin this water...";
+			menuText.text = "and to add insult to injury, it also appears that flesh eating piranha \nlive in this water...";
 		if(line == 2)
 			menuText.text = "You'd have to be an absolute idiot to jump into there...";
 		if(line == 3)
@@ -450,7 +456,7 @@ function bridgeFlavor()
 		if(line == 3)
 			menuText.text = "Looks like there once was a bridge here...";
 		if(line == 4)
-			menuText.text = "You could probably make a new one using stuff that's just laying around...";
+			menuText.text = "You could probably make a new one using stuff that's just \nlaying around...";
 		if(line == 5)
 			menuText.text = "Wood. I think that five pieces should suffice.";
 		if (line > 5)
@@ -505,26 +511,44 @@ function bondCrystalFlavor()
 			//play resonating sound
 			crystalScale.start();
 			crystalAlpha.start();
+			resonate.play('', 0, 1, true);
 		}
 		if(line == 2)
 			menuText.text = "It feels like something within me is resonating with this crystal...";
 		if(line == 3)
 			menuText.text = "What is this?";
 		if(line == 4)
+		{
 			menuText.text = "Why does this feel so familiar?";
+		}
 		if(line == 5)
+		{
 			menuText.text = "DOWNLOADING....";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
 		if(line == 6)
+		{
 			menuText.text = "DOWNLOADING.......";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
 		if(line == 7)
+		{
 			menuText.text = "DOWNLOAD COMPLETE";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
 		if(line == 8)
 		{
 			menuText.text = "NEW FUNCTION HAS BEEN INSTALLED";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				newFunction.play('', 0, 1, false);
 			//stop resonating sound
 			//electronic chime
 			crystalScale.stop();
 			crystalAlpha.stop();
+			resonate.stop();
 			crystal.alpha = .9;
 			crystal.scale.setTo(1);
 			toolUI.tint = 0xFFFFFF;
@@ -538,7 +562,7 @@ function bondCrystalFlavor()
 		if(line == 12)
 			menuText.text = "You won't read them yourself anyway.";
 		if(line == 13)
-			menuText.text = "Just simply have the function selected and point the tool in the direction of \nwhere something needs to be synthesized.";
+			menuText.text = "Just simply have the function selected and point the tool in the \ndirection of where something needs to be synthesized.";
 		if(line == 14)
 			menuText.text = "Hold down SPACE to begin the bonding process.";
 		if(line == 15)
@@ -546,11 +570,11 @@ function bondCrystalFlavor()
 		if(line == 16)
 			menuText.text = "As a wise man once said, matter cannot be created nor destroyed.";
 		if(line == 17)
-			menuText.text = "Same rules apply here. You have to have enough stuff in order to make\n other stuff.";
+			menuText.text = "Same rules apply here. You have to have enough stuff in order to \nmake other stuff.";
 		if(line == 18)
-			menuText.text = "In other words, it's like crafting. You need to have enough of the necessary\nitems to build something.";
+			menuText.text = "In other words, it's like crafting. You need to have enough of \nthe necessary items to build something.";
 		if (line == 19)
-		menuText.text = "Now go and get to it! Try it out!"			
+			menuText.text = "Now go and get to it! Try it out!"			
 		if (line > 19)
 		{
 			menuText.text = ' ';
@@ -566,14 +590,14 @@ function bondCrystalFlavor()
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = "This crystal gave me the ability to bond things together on a molecular level.";
+			menuText.text = "This crystal gave me the ability to bond things together on a \nmolecular level.";
 		}
 		if (line == 1)
 			menuText.text = "I can detect vibrations coming from the crystal..";
 		if (line == 2)
 			menuText.text = "It seems as if it's resounding.";
 		if (line == 3)
-			menuText.text = "I tell you these things because I'm afraid you're too stupid to feel.";
+			menuText.text = "I tell you these things because I'm afraid you're too stupid \nto feel.";
 		if (line > 3)
 		{
 			menuText.text = ' ';
@@ -596,9 +620,9 @@ function hutFlavor()
 		if(line == 0 && hutsScanned == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = 'This is a hut. Made for dwarves.';
 		if(line == 0 && hutsScanned == 1)
-			menuText.text = "You can't enter this hut- it's too small.";
+			menuText.text = "You can't enter this hut. It's too small.";
 		if(line == 0 && hutsScanned == 2)
-			menuText.text = "Do you think you're going to shrink just to enter this hut?";
+			menuText.text = "Do you think you can just shrink down to enter this hut?";
 		if(line == 0 && hutsScanned > 2)
 			menuText.text = "My dude, you are TOO big to enter this hut.";
 		if (line > 0)
@@ -607,6 +631,8 @@ function hutFlavor()
 			dialogue = false;
 			line = 0;
 			hutsScanned += 1;
+			scanSuccessful = false;
+			timer = 0;
 			scanEffect.body.x = -48;
 		}		
 	}
@@ -620,22 +646,28 @@ function houseFlavor()
 	if (dialogue)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "This the only building that resembles a house.";
+			menuText.text = "This the only building that actually resembles a house for people.";
 		if (line == 1)
-			menuText.text = "Compared to the huts, it seems like I can enter this.";
+			menuText.text = "Unlike the huts, I think you're JUUUST slim enough to enter this.";
 		if (line == 2)
-			menuText.text = "At the same time, someone could live here.";
+			menuText.text = "HOWEVER....someone could be inside...";
 		if (line == 3)
-			menuText.text = "The only thing stopping me is the barrier. I could CUT it.";
+			menuText.text = "The only thing stopping us is that wooden barrier. You know what \nto do with wooden stuff...";
 		if (line == 4)
-			menuText.text = "It seems like its the most recent building intact. I wonder why it seems so much more...alive?";
+			menuText.text = "Otherwise, how did you get this far?";
 		if (line == 5)
-			menuText.text = "Well...If I CUT it accidentally *wink* then it shouldn't be a problem.";
-		if (line > 5){
+			menuText.text = "Anyway this seems a bit more recent than the other buildings.... \nI wonder why it seems so much more...alive?"
+		if (line == 6)
+			menuText.text = "Well...If you CUT it accidentally *wink* then it shouldn't be \na problem.";
+		if (line == 7)
+			menuText.text = "Yeah that's right. I can wink."
+		if (line > 7){
 
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
+			scanSuccessful = false;
+			timer = 0;
 			scanEffect.body.x = -48;
 		}		
 	}

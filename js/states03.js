@@ -18,6 +18,8 @@ GamePlay3.prototype = {
 	create: function() {
 		console.log('GamePlay3: create');
 		autumnVoyage.stop();
+		wind = game.add.audio('wind');
+		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -152,7 +154,7 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 1)
 			menuText.text = "Who said you could do that?";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, you \nPERV?";
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, \nyou PERV?";
 		if (line == 3)
 			menuText.text = "I get it. Just because no one's around, you think you own the whole place.";
 		if (line == 4)
@@ -171,5 +173,6 @@ function cutBarrier(cutEffect, barrier){
 			debris.y = barrier.body.y;
 			debris.start(true, 1000, null, 15);
 			barrier.destroy();
+			woodCut.play('', 0, 1, true);
 		}
 }

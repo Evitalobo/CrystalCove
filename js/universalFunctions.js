@@ -1,6 +1,19 @@
 // functions to be used all throughout the game
 var progress
 
+function addSounds()
+{
+		advance = game.add.audio('advance');
+		bondSound = game.add.audio('bondSound');
+		cutSound = game.add.audio('cutSound');
+		scanSound = game.add.audio('scanSound');
+		scanSuccess = game.add.audio('scanSuccess');
+		toggleFunction = game.add.audio('toggle');
+		woodCut = game.add.audio('woodCut');
+		download = game.add.audio('download');
+		newFunction = game.add.audio('newFunction');
+		resonate = game.add.audio('resonate');
+}
 function createUI()
 {
 	toolUI = game.add.sprite(-10, -30, 'assets', 'Scanner');
@@ -34,7 +47,7 @@ function createUI()
 	dialogueBox.scale.setTo(.48, .4);
 	dialogueBox.alpha = .7;
 
-	menuText = game.add.text(15, game.height - 150,' ', {fontSize: '20px', fill: '#000' });
+	menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
 }
 
 function activateTool()
@@ -310,7 +323,7 @@ function createInventory()
 	game.physics.arcade.enable(inventoryBox);
 	woodIcon = game.add.sprite(210, 0, 'assets', 'obj3');
 	woodIcon.scale.setTo( .15, .2);
-	woodText = game.add.text(260, 15, 'x 0', {fontSize: '20px', fill: '#000' });
+	woodText = game.add.bitmapText(260, 15, 'pixel', 'x 0', 20);
 }
 
 function showInventory()
