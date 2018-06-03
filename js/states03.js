@@ -2,6 +2,7 @@
 
 var hutsScanned = 0;
 var hutCt = 0;
+var barrierBroken = false;
 
 var GamePlay3=function(game){};
 GamePlay3.prototype = {
@@ -39,6 +40,7 @@ GamePlay3.prototype = {
 		{
 			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
+			barrierBroken = true;
 		}
 
 
@@ -62,17 +64,17 @@ GamePlay3.prototype = {
 		//spawning huts
 		hut = huts.create(50, 25, 'assets', 'smallHouse');
 		hut.scale.setTo(0.3);
-		hut.body.setSize(310, 260, 60, 154);
+		hut.body.setSize(270, 200, 60, 154);
 		hut.body.immovable = true;
 
 		hut1 = huts.create(600, 100, 'assets', 'smallHouse');
-		hut1.scale.setTo(0.4);
-		hut1.body.setSize(310, 260, 60, 154);
+		hut1.scale.setTo(0.3);
+		hut1.body.setSize(270, 200, 60, 154);
 		hut1.body.immovable = true;
 
 		hut2 = huts.create(475, 390, 'assets', 'smallHouse');
 		hut2.scale.setTo(0.3);
-		hut2.body.setSize(410, 230, 60, 184);
+		hut2.body.setSize(270, 200, 60, 154);
 		hut2.body.immovable = true;
 
 		house = game.add.sprite(400, 220, 'assets', 'bigHouse');
@@ -82,10 +84,10 @@ GamePlay3.prototype = {
 		house.body.setSize(420, 470, 50, 240);
 		house.body.immovable = true;
 
-		barrier = game.add.sprite(370, 285, 'assets', 'barricade');
-		barrier.scale.setTo(.25);
+		barrier = game.add.sprite(370, 270, 'assets', 'barricade');
+		barrier.scale.setTo(.4);
 		game.physics.arcade.enable(barrier);
-		barrier.body.setSize(320, 450, 10, 0);
+		barrier.body.setSize(200, 300, 20, 0);
 		barrier.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
@@ -101,8 +103,7 @@ GamePlay3.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
-		game.debug.body(barrier);
-
+		
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
 		// If player presses E, change the current tool function.
@@ -154,11 +155,11 @@ function cutBarrier(cutEffect, barrier){
 		if (line == 1)
 			menuText.text = "Who said you could do that?";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think you are, \nyou PERV?";
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
 		if (line == 3)
-			menuText.text = "I get it. Just because no one's around, you think you own the whole place.";
+			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
 		if (line == 4)
-			menuText.text = "I don't detect a single living thing near us but still. This doesn't seem legal.";
+			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
 		if (line == 5)
 			menuText.text = "Well...I guess we could take a peek...";
 		if (line == 6)
@@ -173,6 +174,7 @@ function cutBarrier(cutEffect, barrier){
 			debris.y = barrier.body.y;
 			debris.start(true, 1000, null, 15);
 			barrier.destroy();
-			woodCut.play('', 0, 1, true);
+			woodCut.play('', 0, 1, false);
+			barrierBroken = true;
 		}
 }

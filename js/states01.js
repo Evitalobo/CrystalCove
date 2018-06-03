@@ -31,7 +31,7 @@ GamePlay1.prototype = {
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map < 1)
 		{
-			player = game.add.sprite(25, playerY, 'scientist');
+			player = game.add.sprite(48, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		else
@@ -53,11 +53,31 @@ GamePlay1.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-		// Creating the stars group.
+		// Creating the wood and stump groups.
 		woods = game.add.group();
 		woods.enableBody = true;
 		stumps = game.add.group();
 		stumps.enableBody = true;
+
+		//fern physics
+		ferns = game.add.group();
+		ferns.enableBody = true;
+
+		//ADD FERN COUNTER TO UNLOCK NEXT PART OF MAP AND SET WORLD BOUND TO COLLIDE WITH PATH
+		for (i = -1; i < 12; i++)
+		{
+			fern = ferns.create(0, i*50, 'assets', 'obj');
+			fern.anchor.setTo(.5);
+			fern.scale.setTo(0.3,0.3);
+			fern.body.setSize(100, 100, 200, 50);
+			fern.body.immovable = true;
+		}
+
+		foliage = game.add.emitter(0, 0, 200);
+		foliage.makeParticles('assets', 'obj');
+		foliage.maxParticleScale = .2;
+		foliage.minParticleScale = .1;
+		foliage.alpha = .7;
 
 
 		//spawning wood
@@ -67,7 +87,7 @@ GamePlay1.prototype = {
 			else
 				wood = woods.create(i*50, Math.random()*200 + 225, 'assets', 'obj5');
 			wood.scale.setTo(0.3,0.3);
-			wood.body.setSize(130, 100, 140, 575);
+			wood.body.setSize(130, 100, 130, 565);
 			wood.body.immovable = true;
 		}
 
@@ -84,6 +104,7 @@ GamePlay1.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
+		//game.debug.physicsGroup(woods);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -119,6 +140,9 @@ GamePlay1.prototype = {
 		game.physics.arcade.overlap(cutEffect, woods, collectWood, null, this);
 		game.physics.arcade.overlap(scanEffect, woods, treeFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, stumps, stumpFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
+		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
+		game.physics.arcade.collide(player, ferns);
 		game.physics.arcade.collide(player, woods);
 		game.physics.arcade.collide(player, stumps);
 	},
@@ -128,12 +152,12 @@ GamePlay1.prototype = {
 function collectWood(cutEffect, wood)
 {
 	//changes trees to stumps when certain conditions are met
-	debris.x = wood.body.x + 20;
+	debris.x = wood.body.x + 10;
 	debris.y = wood.body.y;
 	woodCut.play('', 0, 1, false);
 	debris.start(true, 1000, null, 15);
-	stump = stumps.create(wood.body.x, wood.body.y - 5, 'assets', 'stump');
-	stump.scale.setTo(0.1,0.08);
+	stump = stumps.create(wood.body.x - 10, wood.body.y - 10, 'assets', 'stump');
+	stump.scale.setTo(0.15,0.12);
 	stump.body.immovable = true;
 	wood.destroy();
 	woodCt += 1;

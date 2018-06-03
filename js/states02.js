@@ -26,8 +26,6 @@ GamePlay2.prototype = {
 
 
 		// Adding a background.
-		backdrop = game.add.sprite(0, 0, 'assets', 'scene3');
-
 		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');
 		game.physics.arcade.enable(riverTop);
 		riverTop.body.setSize(357, 260, 0, 0);
@@ -42,11 +40,12 @@ GamePlay2.prototype = {
 		game.physics.arcade.enable(riverMid);
 		riverMid.body.immovable = true;
 
-		bridge = game.add.sprite(360, 330, 'assets', 'obj1');
+		backdrop = game.add.sprite(0, 0, 'assets', 'scene3');
+
+		bridge = game.add.sprite(390, 340, 'assets', 'bridge');
 		bridge.anchor.setTo(.5);
 		game.physics.arcade.enable(bridge);
-		bridge.angle = 180;
-		bridge.scale.setTo(.5, .4);
+		bridge.scale.setTo(.7, .8);
 		bridge.alpha = 0;
 
 		//Adding the player sprite
@@ -58,7 +57,7 @@ GamePlay2.prototype = {
 		}
 		else
 		{
-			player = game.add.sprite(690, playerY, 'scientist');
+			player = game.add.sprite(750, playerY, 'scientist');
 			player.anchor.setTo(.5);
 			bridgeBuilt = true;
 		}
@@ -79,12 +78,12 @@ GamePlay2.prototype = {
 
 		post = game.add.sprite(0, 0, 'assets', 'bridgePost');
 
-		crystal = game.add.sprite(133, 553, 'assets', 'Crystal02');
+		crystal = game.add.sprite(150, 472, 'assets', 'bondCrystal');
 		game.physics.arcade.enable(crystal);
-		crystal.anchor.setTo(.5, 1);
+		crystal.anchor.setTo(.5);
 		crystal.body.setSize(69, 110, 20, 66);
 		crystal.body.immovable = true;
-		crystal.alpha = .9;
+		crystal.alpha = .8;
 
 		createUI();
 		createInventory();
@@ -95,7 +94,6 @@ GamePlay2.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
-		//game.debug.body(crystal);
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -167,7 +165,7 @@ GameOver.prototype = {
 	},
 	update: function() {
 		// GameOver logic
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.M)) 
 		{
 			game.state.start('MainMenu');
 		}

@@ -31,9 +31,6 @@ MainMenu.prototype =
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 
-		//MenuBG
-		game.load.image('menuBG', 'assets/img/MenuBG.png');
-
 		// load audio assets
 		game.load.audio('autumnVoyage', 'assets/audio/rs_autumnVoyage.mp3');
 		game.load.audio('advance', 'assets/audio/AdvanceText.mp3');
@@ -61,12 +58,14 @@ MainMenu.prototype =
 		this.game.scale.pageAlignHorizontally = true;
 		this.game.scale.pageAlignVertically = true;
 		this.game.scale.refresh();	
-		menu = game.add.sprite(0, 0, 'menuBG');
+		menu = game.add.sprite(0, 0, 'assets', 'Title');
 
 		// loop and play background music
 		autumnVoyage = game.add.audio('autumnVoyage');
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		//game.sound.setDecodedCallback([autumnVoyage, advanceText, bondSound, cutSound, scanSound, scanSuccess, toggleFunction ], start, this);
+
+		addSounds();
 
 		//Adding the player controls
 		controls = {
@@ -80,12 +79,12 @@ MainMenu.prototype =
 	update: function() 
 	{
 		// main menu logic
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) 
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			/*map = 2;
+			map = 2;
 			pickedUpTool = true;
-			tools = 3;*/
-			game.state.start('GamePlay');
+			tools = 3;
+			game.state.start('GamePlay3');
 		}
 	}
 }
@@ -112,8 +111,6 @@ GamePlay.prototype = {
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-
-		addSounds();
 
 
 		// Adding a background.
@@ -166,7 +163,7 @@ GamePlay.prototype = {
 		{
 			driftwood = woods.create(250, Math.random()*500, 'assets', 'obj3');
 			driftwood.body.collideWorldBounds = true;
-			driftwood.body.setSize(250, 100, 20, 100);
+			driftwood.body.setSize(220, 100, 60, 100);
 			driftwood.scale.setTo(0.3,0.3);			
 		}
 		debris = game.add.emitter(0, 0, 20);

@@ -43,7 +43,7 @@ function toolTutorialFirstPart()
 		if (line == 8)
 			menuText.text = 'What? What the-? Are you my owner? I was hoping for someone a \nlittle uh....nicer looking?';
 		if (line == 9)
-			menuText.text = 'But I guess tattered clothes, eyes like a dead fish, and unkempt\n hair is attractive in its own way... \n(If you like gross people...)';
+			menuText.text = 'But I guess tattered clothes, eyes like a dead fish, and unkempt\nhair is attractive in its own way... \n(If you like gross people...)';
 		if (line == 10)
 			menuText.text = 'Anyway. I guess I should introduce myself to you.';
 		if (line == 11)
@@ -53,7 +53,7 @@ function toolTutorialFirstPart()
 		if (line > 12)
 		{
 			menuText.text = ' ';
-			handitool.body.x = -48;
+			handitool.body.x = -250;
 			dialogue = false;
 			scanSuccessful = false;
 			timer = 0;
@@ -147,7 +147,7 @@ function driftwoodFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}
 	}
 	else
@@ -174,7 +174,7 @@ function driftwoodFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}
 	}
 }
@@ -200,7 +200,7 @@ function fernFlavor(scanEffect, fern)
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}
 	}
 	else
@@ -220,7 +220,7 @@ function fernFlavor(scanEffect, fern)
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}
 	}
 }
@@ -250,7 +250,7 @@ function oceanFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 	else
@@ -268,7 +268,7 @@ function oceanFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}	
 	}
 }
@@ -304,7 +304,7 @@ function noteFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 }
@@ -351,7 +351,7 @@ function treeFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			treesScanned += 1;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 }
@@ -378,7 +378,7 @@ function stumpFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			stumpsScanned += 1;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 }
@@ -410,7 +410,7 @@ function riverFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 	else
@@ -434,7 +434,7 @@ function riverFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 }
@@ -466,7 +466,7 @@ function bridgeFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 	else
@@ -490,7 +490,7 @@ function bridgeFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 }
@@ -582,7 +582,7 @@ function bondCrystalFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 			tools = 3;
 		}
 	}
@@ -605,7 +605,7 @@ function bondCrystalFlavor()
 			scanSuccessful = false;
 			timer = 0;
 			line = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}
 
 	}
@@ -633,7 +633,7 @@ function hutFlavor()
 			hutsScanned += 1;
 			scanSuccessful = false;
 			timer = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
 	}
 
@@ -643,7 +643,7 @@ function houseFlavor()
 {
 	dialogue = true;
 	scanSuccessful=true;
-	if (dialogue)
+	if (!barrierBroken)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = "This the only building that actually resembles a house for people.";
@@ -668,7 +668,32 @@ function houseFlavor()
 			line = 0;
 			scanSuccessful = false;
 			timer = 0;
-			scanEffect.body.x = -48;
+			scanEffect.body.x = -250;
 		}		
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "This the only building that actually resembles a house for people.";
+		if (line == 1)
+			menuText.text = "Unlike the huts, I think you're JUUUST slim enough to enter this.";
+		if (line == 2)
+			menuText.text = "But it would be considered trespassing...";
+		if (line == 3)
+			menuText.text = "But you don't care do you. I know I don't. ";
+		if (line == 4)
+			menuText.text = "Plus you've already blown up the door..";
+		if (line == 5)
+			menuText.text = "No use turning back now, right?"
+		if (line > 5){
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+
 	}
 }

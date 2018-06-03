@@ -22,7 +22,7 @@ function createUI()
 	toolUI.animations.add('cutter', ['Cutter'], true);
 	toolUI.animations.add('bonder', ['Bonder'], true);
 
-	scanEffect = game.add.sprite(-48, 0, 'assets', 'Scan U 1');
+	scanEffect = game.add.sprite(-250, 0, 'assets', 'Scan U 1');
 	scanEffect.anchor.setTo(.5);
 	game.physics.arcade.enable(scanEffect);
 	scanEffect.animations.add('scanUp', ['Scan U 1', 'Scan U 2'], 18, true);
@@ -30,7 +30,7 @@ function createUI()
 	scanEffect.animations.add('scanRight', ['Scan R 1', 'Scan R 2'], 18, true);
 	scanEffect.animations.add('scanLeft', ['Scan L 1', 'Scan L 2'], 18, true);
 
-	cutEffect = game.add.sprite(-48, 0, 'assets', 'Cut U 1');
+	cutEffect = game.add.sprite(-250, 0, 'assets', 'Cut U 1');
 	cutEffect.anchor.setTo(.5);
 	game.physics.arcade.enable(cutEffect);
 	cutEffect.animations.add('cutUp', ['Cut U 1', 'Cut U 2', 'Cut U 3'], 24, true);
@@ -38,7 +38,7 @@ function createUI()
 	cutEffect.animations.add('cutRight', ['Cut R 1', 'Cut R 2', 'Cut R 3'], 24, true);
 	cutEffect.animations.add('cutLeft', ['Cut L 1', 'Cut L 2', 'Cut L 3'], 24, true);
 
-	bondEffect = game.add.sprite(-48, 0, 'assets', 'Bond 1');
+	bondEffect = game.add.sprite(-250, 0, 'assets', 'Bond 1');
 	bondEffect.anchor.setTo(.5);
 	game.physics.arcade.enable(bondEffect);
 	bondEffect.animations.add('bond', ['Bond 1', 'Bond 2', 'Bond 3', 'Bond 4'], 24, true);
@@ -56,8 +56,8 @@ function activateTool()
 		{
 			if (toolType == 1)
 			{
-				scanEffect.body.x = -48;
-				bondEffect.body.x = -48;
+				scanEffect.body.x = -250;
+				bondEffect.body.x = -250;
 
 				if (face == 'U')
 				{
@@ -86,8 +86,8 @@ function activateTool()
 			}
 			if (toolType == 2)
 			{
-				scanEffect.body.x = -48;
-				cutEffect.body.x = -48;
+				scanEffect.body.x = -250;
+				cutEffect.body.x = -250;
 
 				if (face == 'U')
 				{
@@ -117,8 +117,8 @@ function activateTool()
 		}
 		else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && toolType == 0 && pickedUpTool && !dialogue)
 		{
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;
+			cutEffect.body.x = -250;
+			bondEffect.body.x = -250;
 
 			if (face == 'U')
 			{
@@ -147,27 +147,27 @@ function activateTool()
 		}
 		else if (dialogue && toolType == 0)
 		{
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;
+			cutEffect.body.x = -250;
+			bondEffect.body.x = -250;
 		
 		}
 		else if (dialogue && toolType == 1)
 		{
-			scanEffect.body.x = -48;
-			bondEffect.body.x = -48;
+			scanEffect.body.x = -250;
+			bondEffect.body.x = -250;
 		
 		}
 		else if (dialogue && toolType == 2)
 		{
-			scanEffect.body.x = -48;
-			cutEffect.body.x = -48;	
+			scanEffect.body.x = -250;
+			cutEffect.body.x = -250;	
 	
 		}
 		else
 		{
-			scanEffect.body.x = -48;
-			cutEffect.body.x = -48;
-			bondEffect.body.x = -48;		
+			scanEffect.body.x = -250;
+			cutEffect.body.x = -250;
+			bondEffect.body.x = -250;		
 		}
 
 		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && toolType == 1 && !dialogue)
