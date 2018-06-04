@@ -1,23 +1,20 @@
 
+var labOpen = false;
 
-var hutsScanned = 0;
-var hutCt = 0;
-var barrierBroken = false;
-
-var GamePlay3=function(game){};
-GamePlay3.prototype = {
+var GamePlay4=function(game){};
+GamePlay4.prototype = {
 
 	// preloading assets.
 	preload: function() {
 
 		// Outputting to console.
-		console.log('GamePlay3: preload');
+		console.log('GamePlay4: preload');
 
 	},
 
 	// Creating assets into game world.
 	create: function() {
-		console.log('GamePlay3: create');
+		console.log('GamePlay4: create');
 		autumnVoyage.stop();
 		wind = game.add.audio('wind');
 		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
@@ -26,21 +23,21 @@ GamePlay3.prototype = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// Adding a backgrofund.
-		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
+		map4 = game.add.sprite(0, 0, 'assets', 'scene2');
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
 		
 		//Adding the player sprite->Position depending on the bounds of map
-		if(map == 2)
+		if(map == 3)
 		{
-			player = game.add.sprite(25, playerY, 'scientist');
+			player = game.add.sprite(playerX, 30, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		else
 		{
-			player = game.add.sprite(690, playerY, 'scientist');
+			player = game.add.sprite(50, 30, 'scientist');
 			player.anchor.setTo(.5);
-			barrierBroken = true;
+			labOpen = true;
 		}
 
 
@@ -57,38 +54,21 @@ GamePlay3.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
-		huts = game.add.group();
-		huts.enableBody = true;
+		labs = game.add.group();
+		labs.enableBody = true;
 
 
-		//spawning huts
-		hut = huts.create(50, 25, 'assets', 'smallHouse');
-		hut.scale.setTo(0.3);
-		hut.body.setSize(270, 200, 60, 154);
-		hut.body.immovable = true;
+		//create lab
+		lab = labs.create(50, 25, 'assets', 'lab');
+		lab.scale.setTo(0.3);
+		//lab.body.setSize(270, 200, 60, 154);
+		lab.body.immovable = true;
 
-		hut1 = huts.create(600, 100, 'assets', 'smallHouse');
-		hut1.scale.setTo(0.3);
-		hut1.body.setSize(270, 200, 60, 154);
-		hut1.body.immovable = true;
-
-		hut2 = huts.create(475, 390, 'assets', 'smallHouse');
-		hut2.scale.setTo(0.3);
-		hut2.body.setSize(270, 200, 60, 154);
-		hut2.body.immovable = true;
-
-		house = game.add.sprite(400, 220, 'assets', 'bigHouse');
-		house.anchor.set(.5, .5);
-		house.scale.setTo(.5);
-		game.physics.arcade.enable(house);
-		house.body.setSize(420, 470, 50, 240);
-		house.body.immovable = true;
-
-		barrier = game.add.sprite(370, 270, 'assets', 'barricade');
-		barrier.scale.setTo(.4);
-		game.physics.arcade.enable(barrier);
-		barrier.body.setSize(200, 300, 20, 0);
-		barrier.body.immovable = true;
+		labDoor = game.add.sprite(370, 270, 'assets', 'crystalcluster');
+		labDoor.scale.setTo(.4);
+		game.physics.arcade.enable(labDoor);
+		//labDoor.body.setSize(200, 300, 20, 0);
+		labDoor.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
@@ -119,34 +99,33 @@ GamePlay3.prototype = {
 		scannerBoxMovement();
 		showInventory();
 
-		//go to beach state of near left world bound
-		if(player.body.x < 1)
+		//go to beach state of near top world bound
+		if(player.body.y < 1)
+		{
+			map = 4;
+			playerX = player.body.x;
+			game.state.start('GamePlay3');
+		}
+		//go to river state if player is at right world bound
+		/*if(player.body.x > 750 )
 		{
 			map = 3;
 			playerY = player.body.y;
-			game.state.start('GamePlay2');
-		}
-		//go to river state if player is at right world bound
-		if(player.body.y > 550 )
-		{
-			map = 3;
-			playerX = player.body.x;
 			game.state.start('GamePlay4');
-		}
+		}*/
 
 		// Checking for an overlap and collisions
-		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
-		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
-		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
-		game.physics.arcade.collide(player, huts);
-		game.physics.arcade.collide(player, house);
-		game.physics.arcade.collide(player, barrier);
+		game.physics.arcade.overlap(cutEffect, labDoor, cutDoor, null, this);
+		game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
+		//NEED TO ADD LAB FLAVOR
+		game.physics.arcade.collide(player, labDoor);
+		game.physics.arcade.collide(player, lab);
 		
 	},
 
 }
 
-function cutBarrier(cutEffect, barrier){
+function cutlabDoor(cutEffect, labDoor){
 
 	
 		dialogue = true;
@@ -170,11 +149,11 @@ function cutBarrier(cutEffect, barrier){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = barrier.body.x + 20;
-			debris.y = barrier.body.y;
+			debris.x = labDoor.body.x + 20;
+			debris.y = labDoor.body.y;
 			debris.start(true, 1000, null, 15);
-			barrier.destroy();
+			labDoor.destroy();
 			woodCut.play('', 0, 1, false);
-			barrierBroken = true;
+			labOpen = true;
 		}
 }
