@@ -71,7 +71,7 @@ GamePlay4.prototype = {
 		labDoor.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
-		debris.makeParticles('assets', 'obj3');
+		debris.makeParticles('assets', 'crystalcluster');
 		debris.maxParticleScale = .2;
 		debris.minParticleScale = .1;
 		debris.alpha = .7;
