@@ -1,20 +1,25 @@
-var caveOpen = false;
+//INSIDE OF THE BIG HOUSE
 
-var GamePlay5=function(game){};
-GamePlay5.prototype = {
+var crystal2Cut = false;
+var crystal2Ct=0;
+
+var GamePlay6=function(game){};
+GamePlay6.prototype = {
 
 	// preloading assets.
 	preload: function() {
 
 		// Outputting to console.
-		console.log('GamePlay5: preload');
+		console.log('GamePlay6: preload');
 
 	},
 
 	// Creating assets into game world.
 	create: function() {
-		console.log('GamePlay5: create');
+		console.log('GamePlay6: create');
 		autumnVoyage.stop();
+		dialogue=false;
+		//FIND ECHO-Y MUSIC FOR THE INSIDE OF THE HOUSE 
 		wind = game.add.audio('wind');
 		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
@@ -22,14 +27,14 @@ GamePlay5.prototype = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// Adding a backgrofund.
-		map5 = game.add.sprite(0, 0, 'assets', 'scene2');
+		map6 = game.add.sprite(0, 0, 'assets', 'map8');
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 3)
 		{
-			player = game.add.sprite(30, playerY, 'scientist');
+			player = game.add.sprite(300, 550, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		/*else
@@ -53,24 +58,19 @@ GamePlay5.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
-		caves = game.add.group();
-		caves.enableBody = true;
+		crystals = game.add.group();
+		crystals.enableBody = true;
 
 
-		//create cave
-		cave = caves.create(325, 20, 'assets', 'cave');
-		cave.scale.setTo(0.9);
+		//create lab
+		crystal2 = crystals.create(650, 500, 'assets', 'crystal2');
+		crystal2.scale.setTo(0.3);
 		//lab.body.setSize(270, 200, 60, 154);
-		cave.body.immovable = true;
+		crystal2.body.immovable = true;
 
-		caveDoor = game.add.sprite(460, 280, 'assets', 'crystalcluster');
-		caveDoor.scale.setTo(.5);
-		game.physics.arcade.enable(caveDoor);
-		//labDoor.body.setSize(200, 300, 20, 0);
-		caveDoor.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
-		debris.makeParticles('assets', 'crystalcluster');
+		debris.makeParticles('assets', 'crystal2');
 		debris.maxParticleScale = .2;
 		debris.minParticleScale = .1;
 		debris.alpha = .7;
@@ -99,13 +99,13 @@ GamePlay5.prototype = {
 		showInventory();
 
 		//go to beach state of near top world bound
-		if(player.body.x < 3)
+		if(player.body.y > 590)
 		{
-			map = 5;
-			playerY = player.body.y;
+			map = 4;
+			playerX = player.body.x;
 			game.state.start('GamePlay3');
 		}
-		//go into cave
+		//go to river state if player is at right world bound
 		/*if(player.body.x > 750 )
 		{
 			map = 3;
@@ -114,17 +114,18 @@ GamePlay5.prototype = {
 		}*/
 
 		// Checking for an overlap and collisions
-		game.physics.arcade.overlap(cutEffect, caveDoor, cutCaveDoor, null, this);
+		game.physics.arcade.overlap(cutEffect, crystal2, cutCrystal, null, this);
 		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
-		game.physics.arcade.collide(player, caveDoor);
-		game.physics.arcade.collide(player, cave);
+		game.physics.arcade.collide(player, crystal2);
+		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
+		//game.physics.arcade.collide(player, lab);
 		
 	},
 
 }
 
-function cutCaveDoor(cutEffect, caveDoor){
+function cutCrystal(cutEffect, crystals){
 
 	
 		dialogue = true;
@@ -148,12 +149,12 @@ function cutCaveDoor(cutEffect, caveDoor){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = caveDoor.body.x + 20;
-			debris.y = caveDoor.body.y;
+			debris.x = crystal2.body.x + 20;
+			debris.y = crystal2.body.y;
 			debris.start(true, 1000, null, 15);
-			caveDoor.destroy();
+			crystal2.destroy();
 			woodCut.play('', 0, 1, false);
-			caveOpen = true;
+			crystal2Cut = true;
+			crystal2Ct =1;
 		}
 }
-

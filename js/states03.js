@@ -169,9 +169,12 @@ GamePlay3.prototype = {
 			playerX = player.body.x;
 			game.state.start('GamePlay4');
 		}
+		
+
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
+		game.physics.arcade.overlap(scanEffect, entrance, enterHouse, null, this);
 		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, barrier, houseFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
@@ -181,6 +184,12 @@ GamePlay3.prototype = {
 		
 	},
 
+}
+
+function enterHouse(player, entrance) {
+ 	map=3;
+	this.game.state.start('GamePlay6');
+    dialogue=false;
 }
 
 function cutBarrier(cutEffect, barrier){
