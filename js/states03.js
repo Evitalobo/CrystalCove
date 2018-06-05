@@ -25,10 +25,21 @@ GamePlay3.prototype = {
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
-		// Adding a backgrofund.
+		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
-		//trail = game.add.sprite(0, 220, 'assets', 'path');
-		//trail.scale.setTo(2, .5);
+
+		trail = game.add.sprite(420, 500, 'assets', 'path');
+		trail.angle = 90;
+		trail.anchor.setTo(.5);
+		trail.scale.setTo(1, .3);
+		trail.alpha = .9;
+
+		entrance = game.add.sprite(418, 398, 'assets', 'bigHouseEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.51, .5);		
+		game.physics.arcade.enable(entrance);
+		entrance.body.setSize(114, 140, 0, 0);
+		entrance.body.immovable = true;
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 2)
@@ -36,7 +47,7 @@ GamePlay3.prototype = {
 			player = game.add.sprite(25, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		else if(map ==4)
+		else if(map == 4)
 		{
 			player = game.add.sprite(playerX, 560, 'scientist');
 			player.anchor.setTo(.5);
@@ -65,6 +76,9 @@ GamePlay3.prototype = {
 		huts = game.add.group();
 		huts.enableBody = true;
 
+		house = game.add.group();
+		house.enableBody = true;
+
 
 		//spawning huts
 		hut = huts.create(50, 25, 'assets', 'smallHouse');
@@ -77,19 +91,30 @@ GamePlay3.prototype = {
 		hut1.body.setSize(270, 200, 60, 154);
 		hut1.body.immovable = true;
 
-		hut2 = huts.create(475, 390, 'assets', 'smallHouse');
+		hut2 = huts.create(500, 400, 'assets', 'smallHouse');
 		hut2.scale.setTo(0.3);
 		hut2.body.setSize(270, 200, 60, 154);
 		hut2.body.immovable = true;
 
-		house = game.add.sprite(400, 220, 'assets', 'bigHouse');
-		house.anchor.set(.5, .5);
-		house.scale.setTo(.5);
-		game.physics.arcade.enable(house);
-		house.body.setSize(420, 470, 50, 240);
-		house.body.immovable = true;
+		roof = house.create(400, 220, 'assets', 'houseRoof');
+		roof.anchor.set(.5, .5);
+		roof.scale.setTo(.5);
+		roof.body.setSize(420, 300, 50, 240);
+		roof.body.immovable = true;
 
-		barrier = game.add.sprite(370, 270, 'assets', 'barricade');
+		leftWall = house.create(332, 398, 'assets', 'houseLeftWall');
+		leftWall.anchor.set(.5, .5);
+		leftWall.scale.setTo(.5);
+		leftWall.body.setSize(170, 221, 51, 0);
+		leftWall.body.immovable = true;
+
+		rightWall = house.create(486, 398, 'assets', 'houseRightWall');
+		rightWall.anchor.set(.5, .5);
+		rightWall.scale.setTo(.5);
+		rightWall.body.setSize(126, 221, 0, 0);
+		rightWall.body.immovable = true;
+
+		barrier = game.add.sprite(368, 330, 'assets', 'barricade');
 		barrier.scale.setTo(.4);
 		game.physics.arcade.enable(barrier);
 		barrier.body.setSize(200, 300, 20, 0);
@@ -107,8 +132,7 @@ GamePlay3.prototype = {
 	},
 	update: function() 
 	{
-		// GamePlay logic
-		
+		// GamePlay logic		
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
 		// If player presses E, change the current tool function.
@@ -142,6 +166,7 @@ GamePlay3.prototype = {
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
 		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, barrier, houseFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
 		game.physics.arcade.collide(player, huts);
 		game.physics.arcade.collide(player, house);
