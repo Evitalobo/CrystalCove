@@ -33,12 +33,12 @@ GamePlay4.prototype = {
 			player = game.add.sprite(playerX, 30, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		else
+		/*else
 		{
 			player = game.add.sprite(50, 30, 'scientist');
 			player.anchor.setTo(.5);
 			labOpen = true;
-		}
+		}*/
 
 
 		game.physics.arcade.enable(player);
@@ -59,13 +59,13 @@ GamePlay4.prototype = {
 
 
 		//create lab
-		lab = labs.create(50, 25, 'assets', 'lab');
-		lab.scale.setTo(0.3);
+		lab = labs.create(100, 50, 'assets', 'lab');
+		lab.scale.setTo(0.65);
 		//lab.body.setSize(270, 200, 60, 154);
 		lab.body.immovable = true;
 
-		labDoor = game.add.sprite(370, 270, 'assets', 'crystalcluster');
-		labDoor.scale.setTo(.4);
+		labDoor = game.add.sprite(200, 405, 'assets', 'crystalcluster');
+		labDoor.scale.setTo(.5);
 		game.physics.arcade.enable(labDoor);
 		//labDoor.body.setSize(200, 300, 20, 0);
 		labDoor.body.immovable = true;
@@ -115,8 +115,8 @@ GamePlay4.prototype = {
 		}*/
 
 		// Checking for an overlap and collisions
-		game.physics.arcade.overlap(cutEffect, labDoor, cutDoor, null, this);
-		game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
+		game.physics.arcade.overlap(cutEffect, labDoor, cutLabDoor, null, this);
+		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, labDoor);
 		game.physics.arcade.collide(player, lab);
@@ -125,7 +125,7 @@ GamePlay4.prototype = {
 
 }
 
-function cutlabDoor(cutEffect, labDoor){
+function cutLabDoor(cutEffect, labDoor){
 
 	
 		dialogue = true;

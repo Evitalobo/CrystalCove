@@ -36,6 +36,11 @@ GamePlay3.prototype = {
 			player = game.add.sprite(25, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
+		else if(map ==4)
+		{
+			player = game.add.sprite(playerX, 560, 'scientist');
+			player.anchor.setTo(.5);
+		}
 		else
 		{
 			player = game.add.sprite(690, playerY, 'scientist');
