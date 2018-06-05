@@ -155,6 +155,13 @@ GamePlay3.prototype = {
 			playerY = player.body.y;
 			game.state.start('GamePlay2');
 		}
+
+		if(player.body.x > 770)
+		{
+			map = 3;
+			playerY = player.body.y;
+			game.state.start('GamePlay5');
+		}
 		//go to river state if player is at right world bound
 		if(player.body.y > 550 )
 		{
