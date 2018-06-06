@@ -3,6 +3,7 @@
 var crystal2Cut = false;
 var crystal2Ct=0;
 
+
 var GamePlay6=function(game){};
 GamePlay6.prototype = {
 
@@ -34,7 +35,7 @@ GamePlay6.prototype = {
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 3)
 		{
-			player = game.add.sprite(300, 550, 'scientist');
+			player = game.add.sprite(300, 530, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		/*else
@@ -63,7 +64,7 @@ GamePlay6.prototype = {
 
 
 		//create lab
-		crystal2 = crystals.create(650, 500, 'assets', 'crystal2');
+		crystal2 = crystals.create(639, 405, 'assets', 'crystal2');
 		crystal2.scale.setTo(0.3);
 		//lab.body.setSize(270, 200, 60, 154);
 		crystal2.body.immovable = true;
@@ -99,10 +100,10 @@ GamePlay6.prototype = {
 		showInventory();
 
 		//go to beach state of near top world bound
-		if(player.body.y > 590)
+		if(player.body.y > 550)
 		{
-			map = 4;
-			playerX = player.body.x;
+			map = 6;
+			barrierBroken=true;
 			game.state.start('GamePlay3');
 		}
 		//go to river state if player is at right world bound
@@ -130,20 +131,15 @@ function cutCrystal(cutEffect, crystals){
 	
 		dialogue = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Hold it right there!";
+			menuText.text = "Now you're damaging property. Great.";
 		if (line == 1)
-			menuText.text = "Who said you could do that?";
+			menuText.text = "I'll just turn my eye the other way... Not that I have eyes \nanyways";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
+			menuText.text = "So you want to get charged with vandalism too???";
 		if (line == 3)
-			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
-		if (line == 4)
-			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
-		if (line == 5)
-			menuText.text = "Well...I guess we could take a peek...";
-		if (line == 6)
-			menuText.text = "But don't come crying to me if the cops come after you...";
-		if (line > 6)
+			menuText.text = "Well, lets hope it comes in HANDY later.";
+		
+		if (line > 3)
 		{
 			menuText.text = ' ';
 			dialogue = false;

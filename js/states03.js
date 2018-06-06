@@ -52,11 +52,17 @@ GamePlay3.prototype = {
 			player = game.add.sprite(playerX, 560, 'scientist');
 			player.anchor.setTo(.5);
 		}
+		else if(map == 6)
+		{
+			player = game.add.sprite(418, 398, 'scientist');
+			player.anchor.setTo(.5);
+			barrierBroken = true;
+		}
 		else
 		{
 			player = game.add.sprite(690, playerY, 'scientist');
 			player.anchor.setTo(.5);
-			barrierBroken = true;
+			
 		}
 
 
@@ -119,6 +125,10 @@ GamePlay3.prototype = {
 		game.physics.arcade.enable(barrier);
 		barrier.body.setSize(200, 300, 20, 0);
 		barrier.body.immovable = true;
+
+		if(barrierBroken!=false){
+			barrier.kill();
+		}
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
@@ -188,7 +198,7 @@ GamePlay3.prototype = {
 
 function enterHouse(player, entrance) {
  	map=3;
-	this.game.state.start('GamePlay6');
+ 	this.game.state.start('GamePlay6');
     dialogue=false;
 }
 

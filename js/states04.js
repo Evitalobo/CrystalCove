@@ -53,18 +53,34 @@ GamePlay4.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
+
+
+
+
 		// Creating the hut group and house group
 		labs = game.add.group();
 		labs.enableBody = true;
 
 
 		//create lab
-		lab = labs.create(100, 50, 'assets', 'lab');
+		lab = game.add.sprite(400, 10, 'assets', 'lab');
 		lab.scale.setTo(0.65);
+		labL = labs.create(400, 10, 'assets', 'labL');
+		labR = labs.create(400, 10, 'assets', 'labR');
+		labTop = labs.create(650, 380, 'assets', 'labTop');
+		labs.scale.setTo(0.65);
 		//lab.body.setSize(270, 200, 60, 154);
-		lab.body.immovable = true;
+		//lab.body.immovable = true;
 
-		labDoor = game.add.sprite(200, 405, 'assets', 'crystalcluster');
+
+		entrance = game.add.sprite(560, 430, 'assets', 'bigHouseEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.51, .5);		
+		game.physics.arcade.enable(entrance);
+		entrance.body.setSize(114, 140, 0, 0);
+		entrance.body.immovable = true;
+
+		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
 		labDoor.scale.setTo(.5);
 		game.physics.arcade.enable(labDoor);
 		//labDoor.body.setSize(200, 300, 20, 0);
@@ -119,7 +135,7 @@ GamePlay4.prototype = {
 		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, labDoor);
-		game.physics.arcade.collide(player, lab);
+		game.physics.arcade.collide(player, labs);
 		
 	},
 
