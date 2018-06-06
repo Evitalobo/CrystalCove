@@ -26,12 +26,65 @@ GamePlay4.prototype = {
 		map4 = game.add.sprite(0, 0, 'assets', 'scene2');
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
+
+
+		// Creating the hut group and house group
+		labs = game.add.group();
+		labs.enableBody = true;
+
+
+		//create lab
+		lab = game.add.sprite(400, 10, 'assets', 'lab');
+		lab.scale.setTo(0.65);
+
+		entrance = game.add.sprite(560, 430, 'assets', 'bigHouseEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.51, .5);		
+		game.physics.arcade.enable(entrance);
+		entrance.body.setSize(114, 140, 0, 0);
+		entrance.body.immovable = true;
 		
+
+		//bounds for lab
+		labL = labs.create(680, 600, 'assets', 'labL');
+		labL.body.setSize(87, 87, 0, 0);
+
+		labR = labs.create(900, 600, 'assets', 'labR');
+		//labR.scale.setTo(0.65);
+		labR.body.setSize(79, 79, 0, 0);
+
+		labTop = labs.create(665, 400, 'assets', 'labTop');
+		//labs.scale.setTo(0.65);
+		labTop.body.setSize(265, 134, 0, 0);
+		
+		//lab.body.setSize(270, 200, 60, 154);
+		labs.scale.setTo(0.65);
+		labs.setAll('body.immovable' ,true);
+
+
+
+		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
+		labDoor.scale.setTo(.5);
+		game.physics.arcade.enable(labDoor);
+		//labDoor.body.setSize(200, 300, 20, 0);
+		labDoor.body.immovable = true;
+
+
+		if(labOpen!=false){
+			labDoor.kill();
+		}
+
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 3)
 		{
 			player = game.add.sprite(playerX, 30, 'scientist');
 			player.anchor.setTo(.5);
+		}
+		else if(map == 7)
+		{
+			player = game.add.sprite(548, 500, 'scientist');
+			player.anchor.setTo(.5);
+			labOpen = true;
 		}
 		/*else
 		{
@@ -39,6 +92,7 @@ GamePlay4.prototype = {
 			player.anchor.setTo(.5);
 			labOpen = true;
 		}*/
+
 
 
 		game.physics.arcade.enable(player);
@@ -53,38 +107,6 @@ GamePlay4.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-
-
-
-
-		// Creating the hut group and house group
-		labs = game.add.group();
-		labs.enableBody = true;
-
-
-		//create lab
-		lab = game.add.sprite(400, 10, 'assets', 'lab');
-		lab.scale.setTo(0.65);
-		labL = labs.create(400, 10, 'assets', 'labL');
-		labR = labs.create(400, 10, 'assets', 'labR');
-		labTop = labs.create(650, 380, 'assets', 'labTop');
-		labs.scale.setTo(0.65);
-		//lab.body.setSize(270, 200, 60, 154);
-		//lab.body.immovable = true;
-
-
-		entrance = game.add.sprite(560, 430, 'assets', 'bigHouseEntrance');
-		entrance.anchor.set(.5, .5);
-		entrance.scale.setTo(.51, .5);		
-		game.physics.arcade.enable(entrance);
-		entrance.body.setSize(114, 140, 0, 0);
-		entrance.body.immovable = true;
-
-		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
-		labDoor.scale.setTo(.5);
-		game.physics.arcade.enable(labDoor);
-		//labDoor.body.setSize(200, 300, 20, 0);
-		labDoor.body.immovable = true;
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'crystalcluster');
@@ -134,11 +156,20 @@ GamePlay4.prototype = {
 		game.physics.arcade.overlap(cutEffect, labDoor, cutLabDoor, null, this);
 		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
+		game.physics.arcade.overlap(scanEffect, entrance, enterLab, null, this);
 		game.physics.arcade.collide(player, labDoor);
 		game.physics.arcade.collide(player, labs);
 		
 	},
 
+}
+
+function enterLab(player, entrance) {
+	if(labOpen=true){
+	 	map=4;
+	 	this.game.state.start('GamePlay7');
+	    dialogue=false;
+	}
 }
 
 function cutLabDoor(cutEffect, labDoor){

@@ -120,7 +120,7 @@ GamePlay3.prototype = {
 		rightWall.body.setSize(126, 221, 0, 0);
 		rightWall.body.immovable = true;
 
-		barrier = game.add.sprite(368, 330, 'assets', 'barricade');
+		barrier = game.add.sprite(368, 328, 'assets', 'barricade');
 		barrier.scale.setTo(.4);
 		game.physics.arcade.enable(barrier);
 		barrier.body.setSize(200, 300, 20, 0);
