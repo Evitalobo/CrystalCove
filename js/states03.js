@@ -30,52 +30,10 @@ GamePlay3.prototype = {
 		trail = game.add.sprite(420, 500, 'assets', 'path');
 		trail.angle = 90;
 		trail.anchor.setTo(.5);
-		trail.scale.setTo(1, .3);
+		trail.scale.setTo(1, .27);
 		trail.alpha = .9;
 
-		entrance = game.add.sprite(418, 398, '2', 'bigHouseEntrance');
-		entrance.anchor.set(.5, .5);
-		entrance.scale.setTo(.51, .5);		
-		game.physics.arcade.enable(entrance);
-		entrance.body.setSize(114, 100, 0, 0);
-		entrance.body.immovable = true;
 		
-		//Adding the player sprite->Position depending on the bounds of map
-		if(map == 2)
-		{
-			player = game.add.sprite(25, playerY, 'scientist');
-			player.anchor.setTo(.5);
-		}
-		else if(map == 4)
-		{
-			player = game.add.sprite(playerX, 560, 'scientist');
-			player.anchor.setTo(.5);
-		}
-		else if(map == 6)
-		{
-			player = game.add.sprite(418, 430, 'scientist');
-			player.anchor.setTo(.5);
-			barrierBroken = true;
-		}
-		else
-		{
-			player = game.add.sprite(690, playerY, 'scientist');
-			player.anchor.setTo(.5);
-			
-		}
-
-
-		game.physics.arcade.enable(player);
-		//game.camera.follow(player);
-		player.body.setSize(30, 48, 9, 0);
-		player.body.collideWorldBounds = true;
-
-
-		// Adding the player animations, left and right.
-		player.animations.add('down', [0,1,2,1],10, true);
-		player.animations.add('left', [3,4,5,4],10,true);
-		player.animations.add('right',[6,7,8,7],10,true);
-		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
 		huts = game.add.group();
@@ -119,6 +77,13 @@ GamePlay3.prototype = {
 		rightWall.body.setSize(126, 221, 0, 0);
 		rightWall.body.immovable = true;
 
+		entrance = game.add.sprite(418, 398, 'assets', 'bigHouseEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.51, .5);		
+		game.physics.arcade.enable(entrance);
+		entrance.body.setSize(114, 100, 0, 0);
+		entrance.body.immovable = true;
+
 		barrier = game.add.sprite(368, 328, 'assets', 'barricade');
 		barrier.scale.setTo(.4);
 		game.physics.arcade.enable(barrier);
@@ -128,6 +93,45 @@ GamePlay3.prototype = {
 		if(barrierBroken!=false){
 			barrier.kill();
 		}
+		
+		//Adding the player sprite->Position depending on the bounds of map
+		if(map == 2)
+		{
+			player = game.add.sprite(25, playerY, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		else if(map == 4)
+		{
+			player = game.add.sprite(playerX, 560, 'scientist');
+			player.anchor.setTo(.5);
+		}
+		else if(map == 6)
+		{
+			player = game.add.sprite(418, 430, 'scientist');
+			player.anchor.setTo(.5);
+			barrierBroken = true;
+		}
+		else
+		{
+			player = game.add.sprite(690, playerY, 'scientist');
+			player.anchor.setTo(.5);
+			
+		}
+
+
+		game.physics.arcade.enable(player);
+		//game.camera.follow(player);
+		player.body.setSize(30, 48, 9, 0);
+		player.body.collideWorldBounds = true;
+
+
+		// Adding the player animations, left and right.
+		player.animations.add('down', [0,1,2,1],10, true);
+		player.animations.add('left', [3,4,5,4],10,true);
+		player.animations.add('right',[6,7,8,7],10,true);
+		player.animations.add('up', [9,10,11,10],10,true);
+
+		
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');

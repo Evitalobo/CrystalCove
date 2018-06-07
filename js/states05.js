@@ -75,7 +75,7 @@ GamePlay5.prototype = {
 			player = game.add.sprite(30, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		if(map == 8)
+		else if(map == 8)
 		{
 			player = game.add.sprite(499, 428, 'scientist');
 			player.anchor.setTo(.5);

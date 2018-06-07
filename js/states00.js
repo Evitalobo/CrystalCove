@@ -30,7 +30,6 @@ MainMenu.prototype =
 		console.log('You are now in the Main menu state.');
 		//preload assets for entire game
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
-		game.load.atlas('2', 'assets/img/2.png', 'assets/img/2.json');
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 
 		// load audio assets
