@@ -18,11 +18,10 @@ GamePlay6.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay6: create');
-		autumnVoyage.stop();
+		wind.stop();
 		dialogue=false;
-		//FIND ECHO-Y MUSIC FOR THE INSIDE OF THE HOUSE 
-		wind = game.add.audio('wind');
-		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		crystalSong = game.add.audio('crystalSong');
+		crystalSong.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -32,18 +31,9 @@ GamePlay6.prototype = {
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
 		
-		//Adding the player sprite->Position depending on the bounds of map
-		if(map == 3)
-		{
-			player = game.add.sprite(300, 530, 'scientist');
-			player.anchor.setTo(.5);
-		}
-		/*else
-		{
-			player = game.add.sprite(50, 30, 'scientist');
-			player.anchor.setTo(.5);
-			labOpen = true;
-		}*/
+		//Adding the player sprite
+		player = game.add.sprite(400, 530, 'scientist');
+		player.anchor.setTo(.5);
 
 
 		game.physics.arcade.enable(player);
@@ -59,12 +49,11 @@ GamePlay6.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
-		crystals = game.add.group();
-		crystals.enableBody = true;
 
 
 		//create lab
-		crystal2 = crystals.create(639, 405, 'assets', 'crystal2');
+		crystal2 = game.add.sprite(639, 405, 'assets', 'crystal2');
+		game.physics.arcade.enable(crystal2);
 		crystal2.scale.setTo(0.3);
 		//lab.body.setSize(270, 200, 60, 154);
 		crystal2.body.immovable = true;
@@ -115,7 +104,7 @@ GamePlay6.prototype = {
 		}*/
 
 		// Checking for an overlap and collisions
-		game.physics.arcade.overlap(cutEffect, crystal2, cutCrystal, null, this);
+		game.physics.arcade.overlap(cutEffect, crystal2, cutCrystal2, null, this);
 		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, crystal2);
@@ -126,14 +115,14 @@ GamePlay6.prototype = {
 
 }
 
-function cutCrystal(cutEffect, crystals){
+function cutCrystal2(cutEffect, crystal2){
 
 	
 		dialogue = true;
 		if (line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = "Now you're damaging property. Great.";
 		if (line == 1)
-			menuText.text = "I'll just turn my eye the other way... Not that I have eyes \nanyways";
+			menuText.text = "I'll just turn the other way... if i could \nanyway.";
 		if (line == 2)
 			menuText.text = "So you want to get charged with vandalism too???";
 		if (line == 3)

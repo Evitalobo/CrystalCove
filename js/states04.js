@@ -24,8 +24,11 @@ GamePlay4.prototype = {
 
 		// Adding a backgrofund.
 		map4 = game.add.sprite(0, 0, 'assets', 'scene2');
-		//trail = game.add.sprite(0, 220, 'assets', 'path');
-		//trail.scale.setTo(2, .5);
+		trail = game.add.sprite(420, 200, 'assets', 'path');
+		trail.angle = 90;
+		trail.anchor.setTo(.5);
+		trail.scale.setTo(1, .3);
+		trail.alpha = .9;
 
 
 		// Creating the hut group and house group
@@ -70,7 +73,8 @@ GamePlay4.prototype = {
 		labDoor.body.immovable = true;
 
 
-		if(labOpen!=false){
+		if(labOpen)
+		{
 			labDoor.kill();
 		}
 
@@ -137,11 +141,11 @@ GamePlay4.prototype = {
 		scannerBoxMovement();
 		showInventory();
 
-		//go to beach state of near top world bound
+		//go to houses state near top world bound
 		if(player.body.y < 1)
 		{
 			map = 4;
-			playerX = player.body.x;
+			playerX = player.x;
 			game.state.start('GamePlay3');
 		}
 		//go to river state if player is at right world bound
@@ -156,7 +160,7 @@ GamePlay4.prototype = {
 		game.physics.arcade.overlap(cutEffect, labDoor, cutLabDoor, null, this);
 		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
-		game.physics.arcade.overlap(scanEffect, entrance, enterLab, null, this);
+		game.physics.arcade.overlap(player, entrance, enterLab, null, this);
 		game.physics.arcade.collide(player, labDoor);
 		game.physics.arcade.collide(player, labs);
 		
@@ -172,35 +176,34 @@ function enterLab(player, entrance) {
 	}
 }
 
-function cutLabDoor(cutEffect, labDoor){
-
-	
-		dialogue = true;
-		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Hold it right there!";
-		if (line == 1)
-			menuText.text = "Who said you could do that?";
-		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
-		if (line == 3)
-			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
-		if (line == 4)
-			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
-		if (line == 5)
-			menuText.text = "Well...I guess we could take a peek...";
-		if (line == 6)
-			menuText.text = "But don't come crying to me if the cops come after you...";
-		if (line > 6)
-		{
-			menuText.text = ' ';
-			dialogue = false;
-			line = 0;
-			cutEffect.body.x = -48;
-			debris.x = labDoor.body.x + 20;
-			debris.y = labDoor.body.y;
-			debris.start(true, 1000, null, 15);
-			labDoor.destroy();
-			woodCut.play('', 0, 1, false);
-			labOpen = true;
-		}
+function cutLabDoor(cutEffect, labDoor)
+{	
+	dialogue = true;
+	if (line == 0 && dialogueBox.y <= game.height - 170)
+		menuText.text = "Hold it right there!";
+	if (line == 1)
+		menuText.text = "Who said you could do that?";
+	if (line == 2)
+		menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
+	if (line == 3)
+		menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
+	if (line == 4)
+		menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
+	if (line == 5)
+		menuText.text = "Well...I guess we could take a peek...";
+	if (line == 6)
+		menuText.text = "But don't come crying to me if the cops come after you...";
+	if (line > 6)
+	{
+		menuText.text = ' ';
+		dialogue = false;
+		line = 0;
+		cutEffect.body.x = -48;
+		debris.x = labDoor.body.x + 20;
+		debris.y = labDoor.body.y;
+		debris.start(true, 1000, null, 15);
+		labDoor.destroy();
+		woodCut.play('', 0, 1, false);
+		labOpen = true;
+	}
 }
