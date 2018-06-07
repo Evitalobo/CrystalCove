@@ -25,19 +25,70 @@ GamePlay5.prototype = {
 		map5 = game.add.sprite(0, 0, 'assets', 'scene2');
 		//trail = game.add.sprite(0, 220, 'assets', 'path');
 		//trail.scale.setTo(2, .5);
-		
+
+		//create cave
+		cave = game.add.sprite(325, 20, 'assets', 'cave');
+		cave.scale.setTo(0.92);
+
+		trail = game.add.sprite(210, 520, 'assets', 'path');
+		trail.anchor.setTo(.5);
+		trail.scale.setTo(1, .3);
+		trail.alpha = .9;
+
+
+	
+
+		// Creating the hut group and house group
+		caves = game.add.group();
+		caves.enableBody = true;
+
+		//bounds for cave
+		caveL = caves.create(406, 326, 'assets', 'caveL');
+		caveL.body.setSize(118, 134, 0, 0);
+
+		caveR = caves.create(639, 298, 'assets', 'caveR');
+		caveR.body.setSize(196, 275, 0, 0);
+
+		caveMid = caves.create(374, 184, 'assets', 'cavemid');
+		caveMid.body.setSize(455, 163, 0, 0);
+
+		caveTop = caves.create(495, 77, 'assets', 'caveTop');
+		caveTop.body.setSize(332, 110, 0, 0);
+
+		caves.scale.setTo(0.92);
+		caves.setAll('body.immovable' , true);
+
+		caveEntrance = game.add.sprite(543, 350, 'assets', 'caveEntrance');
+		caveEntrance.anchor.set(.5, .5);
+		caveEntrance.scale.setTo(.92);		
+		game.physics.arcade.enable(caveEntrance);
+		caveEntrance.body.setSize(92, 77, 0, 0);
+		caveEntrance.body.immovable = true;
+
+		caveDoor = game.add.sprite(470, 285, 'assets', 'crystalcluster');
+		caveDoor.scale.setTo(.5);
+		game.physics.arcade.enable(caveDoor);
+		//labDoor.body.setSize(200, 300, 20, 0);
+		caveDoor.body.immovable = true;
+
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 3)
 		{
 			player = game.add.sprite(30, playerY, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		/*else
+		if(map == 8)
 		{
-			player = game.add.sprite(50, 30, 'scientist');
+			player = game.add.sprite(499, 428, 'scientist');
 			player.anchor.setTo(.5);
-			labOpen = true;
-		}*/
+		}
+
+		else
+		{
+			player = game.add.sprite(50, 500, 'scientist');
+			player.anchor.setTo(.5);
+			//caveOpen = true;
+		}
 
 
 		game.physics.arcade.enable(player);
@@ -52,22 +103,9 @@ GamePlay5.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-		// Creating the hut group and house group
-		caves = game.add.group();
-		caves.enableBody = true;
-
-
-		//create cave
-		cave = caves.create(325, 20, 'assets', 'cave');
-		cave.scale.setTo(0.9);
-		//lab.body.setSize(270, 200, 60, 154);
-		cave.body.immovable = true;
-
-		caveDoor = game.add.sprite(460, 280, 'assets', 'crystalcluster');
-		caveDoor.scale.setTo(.5);
-		game.physics.arcade.enable(caveDoor);
-		//labDoor.body.setSize(200, 300, 20, 0);
-		caveDoor.body.immovable = true;
+		if(caveOpen!=false){
+			caveDoor.kill();
+		}
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'crystalcluster');
@@ -98,7 +136,7 @@ GamePlay5.prototype = {
 		scannerBoxMovement();
 		showInventory();
 
-		//go to beach state of near top world bound
+		//go to housemap
 		if(player.body.x < 3)
 		{
 			map = 5;
@@ -115,13 +153,21 @@ GamePlay5.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, caveDoor, cutCaveDoor, null, this);
-		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, caveEntrance, enterCave, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, caveDoor);
-		game.physics.arcade.collide(player, cave);
+		game.physics.arcade.collide(player, caves);
 		
 	},
 
+}
+
+function enterCave(player, caveEntrance) {
+	if(caveOpen=true){
+	 	map=5;
+	 	this.game.state.start('GamePlay8');
+	    dialogue=false;
+	}
 }
 
 function cutCaveDoor(cutEffect, caveDoor){

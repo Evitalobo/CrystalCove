@@ -82,10 +82,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			map = 3;
+			map = 5;
 			pickedUpTool = true;
 			tools = 3;
-			game.state.start('GamePlay4');
+			game.state.start('GamePlay5');
 		}
 	}
 }
