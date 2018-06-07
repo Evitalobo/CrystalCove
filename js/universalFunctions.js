@@ -339,7 +339,7 @@ function showInventory()
 		woodIcon.alpha = 1;
 		woodText.text = 'x ' + woodCt;
 	}	
-	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2ct == 0)
+	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2Ct == 0)
 	{
 		woodText.text = 'INVENTORY IS EMPTY';
 	}

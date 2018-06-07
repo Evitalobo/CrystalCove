@@ -80,10 +80,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			map = 3;
+			/*map = 3;
 			pickedUpTool = true;
-			tools = 3;
-			game.state.start('GamePlay4');
+			tools = 3;*/
+			game.state.start('GamePlay');
 		}
 	}
 }
@@ -121,7 +121,7 @@ GamePlay.prototype = {
 
 		handitool = game.add.sprite(305, 250, 'assets', 'Handitool');
 		game.physics.arcade.enable(handitool);
-		handitool.scale.setTo(.5);
+		handitool.scale.setTo(.7);
 
 		note = game.add.sprite(0, game.height, 'assets', 'Note')
 		game.physics.arcade.enable(note);
@@ -240,6 +240,10 @@ GamePlay.prototype = {
 		{
 			toolUI.body.y = -30;
 			handitool.kill();
+		}
+		else
+		{
+			
 		}
 
 		if (tutorialStart && !tutorialDone)

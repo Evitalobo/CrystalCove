@@ -64,7 +64,7 @@ GamePlay7.prototype = {
 		{
 			crystal1 = game.add.sprite(330, 170, 'assets', 'crystal1');
 			crystal1.scale.setTo(0.3);
-			game.physcis.arcade.enable(crystal1);
+			game.physics.arcade.enable(crystal1);
 			crystal1.body.immovable = true;
 		}
 
