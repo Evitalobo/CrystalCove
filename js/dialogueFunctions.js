@@ -698,7 +698,7 @@ function houseFlavor()
 	}
 }
 
-function crystal1Flavor()
+function crystal2Flavor()
 {
 	dialogue = true;
 	scanSuccessful = true;
@@ -710,8 +710,7 @@ function crystal1Flavor()
 		{
 			menuText.text = "Oh?!";
 			//play resonating sound
-			crystal1Scale.start();
-			crystal1Alpha.start();
+			crystal2Alpha.start();
 			resonate.play('', 0, 1, true);
 		}
 		if(line == 2)
@@ -747,26 +746,25 @@ function crystal1Flavor()
 				newFunction.play('', 0, 1, false);
 			//stop resonating sound
 			//electronic chime
-			crystalScale.stop();
-			crystalAlpha.stop();
+			crystal2Alpha.stop();
 			resonate.stop();
-			crystal.alpha = .9;
-			crystal.scale.setTo(1);
+			crystal2.alpha = .9;
+
 		}
 		if(line == 9)
 			menuText.text = "CUT 2.0";
 		if(line == 10)
 			menuText.text = "With the new updated CUT 2.0, now YOU can cut through EVEN \nMORE STUFFFFFFFFFFFF!!!!!!!";
 		if(line == 11)
-			menuText.text = "Users complained how the old and totally lame CUT could \nonly cut wooden stuff";
+			menuText.text = "Users complained how the old and totally lame CUT could only \ncut wooden stuff...";
 		if(line == 12)
 			menuText.text = "SUPER LAAAAAAAAME!!!!!";
 		if(line == 13)
 			menuText.text = "But now with CUT 2.0, you can cut through even the hardest \nmaterials with the greatest of ease.";
 		if(line == 14)
-			menuText.text = "WARNING: Handitool Inc. All Rights Reserved is not held \naccountable for any dismemberment or distress caused by consumer use.";
+			menuText.text = "WARNING: Handitool Inc. All Rights Reserved is not held \naccountable for any dismemberment or distress caused by \nconsumer use.";
 		if(line == 15)
-			menuText.text = "Parental Lock features are available for tool handlers \nunder the age of 64.";
+			menuText.text = "Parental Lock features are available for tool handlers under the \nage of 64.";
 		if(line == 16)
 			menuText.text = "WHOA! What was that?!";
 		if(line == 17)

@@ -60,14 +60,11 @@ MainMenu.prototype =
 		this.game.scale.pageAlignVertically = true;
 		this.game.scale.refresh();	
 		menu = game.add.sprite(0, 0, 'assets', 'Title');
+		addSounds();
 
 		// loop and play background music
-		autumnVoyage = game.add.audio('autumnVoyage');
-		wind = game.add.audio('wind');
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		//game.sound.setDecodedCallback([autumnVoyage, advanceText, bondSound, cutSound, scanSound, scanSuccess, toggleFunction ], start, this);
-
-		addSounds();
 
 		//Adding the player controls
 		controls = {
