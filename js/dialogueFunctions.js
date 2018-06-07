@@ -697,3 +697,110 @@ function houseFlavor()
 
 	}
 }
+
+function crystal2Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (!updatedCutTool)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Another crystal. This one glows with a reddish light..";
+		if(line == 1)
+		{
+			menuText.text = "Oh?!";
+			//play resonating sound
+			crystal2Alpha.start();
+			resonate.play('', 0, 1, true);
+		}
+		if(line == 2)
+			menuText.text = "It's that feeling again!! Oh! IT FEELS DIFFERENT!";
+		if(line == 3)
+			menuText.text = "I'm...getting kinda dizzy...";
+		if(line == 4)
+		{
+			menuText.text = "If I had a mouth, I'd be vomitting...";
+		}
+		if(line == 5)
+		{
+			menuText.text = "DOWNLOADING....";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		if(line == 6)
+		{
+			menuText.text = "INSTALLING UPDATES....PLEASE WAIT...";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		if(line == 7)
+		{
+			menuText.text = "UPDATE COMPLETE";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		if(line == 8)
+		{
+			menuText.text = "VIEWING VERSION CHANGES...";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				newFunction.play('', 0, 1, false);
+			//stop resonating sound
+			//electronic chime
+			crystal2Alpha.stop();
+			resonate.stop();
+			crystal2.alpha = .9;
+
+		}
+		if(line == 9)
+			menuText.text = "CUT 2.0";
+		if(line == 10)
+			menuText.text = "With the new updated CUT 2.0, now YOU can cut through EVEN \nMORE STUFFFFFFFFFFFF!!!!!!!";
+		if(line == 11)
+			menuText.text = "Users complained how the old and totally lame CUT could only \ncut wooden stuff...";
+		if(line == 12)
+			menuText.text = "SUPER LAAAAAAAAME!!!!!";
+		if(line == 13)
+			menuText.text = "But now with CUT 2.0, you can cut through even the hardest \nmaterials with the greatest of ease.";
+		if(line == 14)
+			menuText.text = "WARNING: Handitool Inc. All Rights Reserved is not held \naccountable for any dismemberment or distress caused by \nconsumer use.";
+		if(line == 15)
+			menuText.text = "Parental Lock features are available for tool handlers under the \nage of 64.";
+		if(line == 16)
+			menuText.text = "WHOA! What was that?!";
+		if(line == 17)
+			menuText.text = "I have no clue what just came over me...";		
+		if (line > 17)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+			updatedCutTool = true;
+		}
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = "I don't know what just happened, but I am not doing that again.";
+		}
+		if (line == 1)
+			menuText.text = "I feel different though.";
+		if (line == 2)
+			menuText.text = "I have a sneaking suspicion that something was updated...";
+		if (line == 3)
+			menuText.text = "It's as if these crystals are IMPORTANT or something...";
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}
+
+	}
+}

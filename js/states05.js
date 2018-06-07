@@ -15,8 +15,6 @@ GamePlay5.prototype = {
 	create: function() {
 		console.log('GamePlay5: create');
 		autumnVoyage.stop();
-		wind = game.add.audio('wind');
-		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);

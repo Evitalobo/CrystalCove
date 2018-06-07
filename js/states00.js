@@ -30,6 +30,7 @@ MainMenu.prototype =
 		console.log('You are now in the Main menu state.');
 		//preload assets for entire game
 		game.load.atlas('assets', 'assets/img/assets.png', 'assets/img/assets.json');
+		game.load.atlas('2', 'assets/img/2.png', 'assets/img/2.json');
 		game.load.spritesheet('scientist', 'assets/img/WalkSprite.png', 48, 48);
 
 		// load audio assets
@@ -45,10 +46,9 @@ MainMenu.prototype =
 		game.load.audio('woodCut', 'assets/audio/WoodCut.mp3');
 		game.load.audio('newFunction', 'assets/audio/NewFunction.mp3');
 		game.load.audio('download', 'assets/audio/Downloading.mp3');
-
-
-
-
+		game.load.audio('crystalSong', 'assets/audio/CrystalSong.mp3');
+		game.load.audio('caveAmb', 'assets/audio/CaveDripping.mp3');
+		game.load.audio('shatter', 'assets/audio/Shatter.mp3');
 
 		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
 
@@ -60,13 +60,11 @@ MainMenu.prototype =
 		this.game.scale.pageAlignVertically = true;
 		this.game.scale.refresh();	
 		menu = game.add.sprite(0, 0, 'assets', 'Title');
+		addSounds();
 
 		// loop and play background music
-		autumnVoyage = game.add.audio('autumnVoyage');
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		//game.sound.setDecodedCallback([autumnVoyage, advanceText, bondSound, cutSound, scanSound, scanSuccess, toggleFunction ], start, this);
-
-		addSounds();
 
 		//Adding the player controls
 		controls = {

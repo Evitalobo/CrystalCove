@@ -19,7 +19,6 @@ GamePlay3.prototype = {
 	create: function() {
 		console.log('GamePlay3: create');
 		autumnVoyage.stop();
-		wind = game.add.audio('wind');
 		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
@@ -34,11 +33,11 @@ GamePlay3.prototype = {
 		trail.scale.setTo(1, .3);
 		trail.alpha = .9;
 
-		entrance = game.add.sprite(418, 398, 'assets', 'bigHouseEntrance');
+		entrance = game.add.sprite(418, 398, '2', 'bigHouseEntrance');
 		entrance.anchor.set(.5, .5);
 		entrance.scale.setTo(.51, .5);		
 		game.physics.arcade.enable(entrance);
-		entrance.body.setSize(114, 140, 0, 0);
+		entrance.body.setSize(114, 100, 0, 0);
 		entrance.body.immovable = true;
 		
 		//Adding the player sprite->Position depending on the bounds of map
@@ -54,7 +53,7 @@ GamePlay3.prototype = {
 		}
 		else if(map == 6)
 		{
-			player = game.add.sprite(418, 398, 'scientist');
+			player = game.add.sprite(418, 430, 'scientist');
 			player.anchor.setTo(.5);
 			barrierBroken = true;
 		}
@@ -162,21 +161,21 @@ GamePlay3.prototype = {
 		if(player.body.x < 1)
 		{
 			map = 3;
-			playerY = player.body.y;
+			playerY = player.y;
 			game.state.start('GamePlay2');
 		}
 
 		if(player.body.x > 770)
 		{
 			map = 3;
-			playerY = player.body.y;
+			playerY = player.y;
 			game.state.start('GamePlay5');
 		}
 		//go to river state if player is at right world bound
 		if(player.body.y > 550 )
 		{
 			map = 3;
-			playerX = player.body.x;
+			playerX = player.x;
 			game.state.start('GamePlay4');
 		}
 		
@@ -184,7 +183,7 @@ GamePlay3.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, barrier, cutBarrier, null, this);
-		game.physics.arcade.overlap(scanEffect, entrance, enterHouse, null, this);
+		game.physics.arcade.overlap(player, entrance, enterHouse, null, this);
 		game.physics.arcade.overlap(scanEffect, house, houseFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, barrier, houseFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, huts, hutFlavor, null, this);
@@ -196,9 +195,10 @@ GamePlay3.prototype = {
 
 }
 
-function enterHouse(player, entrance) {
+function enterHouse(player, entrance) 
+{
  	map=3;
- 	this.game.state.start('GamePlay6');
+ 	game.state.start('GamePlay6');
     dialogue=false;
 }
 
@@ -226,8 +226,8 @@ function cutBarrier(cutEffect, barrier){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = barrier.body.x + 20;
-			debris.y = barrier.body.y;
+			debris.x = barrier.body.x + 40;
+			debris.y = barrier.body.y + 40;
 			debris.start(true, 1000, null, 15);
 			barrier.destroy();
 			woodCut.play('', 0, 1, false);

@@ -13,6 +13,9 @@ function addSounds()
 		download = game.add.audio('download');
 		newFunction = game.add.audio('newFunction');
 		resonate = game.add.audio('resonate');
+		autumnVoyage = game.add.audio('autumnVoyage');
+		wind = game.add.audio('wind');
+		shatter = game.add.audio('shatter');
 }
 function createUI()
 {
@@ -324,6 +327,9 @@ function createInventory()
 	woodIcon = game.add.sprite(210, 0, 'assets', 'obj3');
 	woodIcon.scale.setTo( .15, .2);
 	woodText = game.add.bitmapText(260, 15, 'pixel', 'x 0', 20);
+	crystal2Icon = game.add.sprite(290, 0, 'assets', 'crystal2');
+	crystal2Icon.scale.setTo( .15, .2);
+	crystal2Text = game.add.bitmapText(340, 15, 'pixel', 'x 0', 20);
 }
 
 function showInventory()
@@ -333,7 +339,7 @@ function showInventory()
 		woodIcon.alpha = 1;
 		woodText.text = 'x ' + woodCt;
 	}	
-	else if (inventoryBox.body.y >= 0 && woodCt == 0)
+	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2ct == 0)
 	{
 		woodText.text = 'INVENTORY IS EMPTY';
 	}
@@ -341,6 +347,17 @@ function showInventory()
 	{
 		woodIcon.alpha = 0;
 		woodText.text = ' ';
+	}
+
+	if (crystal2Ct > 0 && inventoryBox.body.y >= 0)
+	{
+		crystal2Icon.alpha = 1;
+		crytal2Text.text = 'x ' + crystal2Ct;
+	}	
+	else
+	{
+		crystal2Icon.alpha = 0;
+		crystal2Text.text = ' ';
 	}
 }
 

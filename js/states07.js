@@ -1,8 +1,7 @@
 //INSIDE OF LAB
-
-
 var crystal1Cut = false;
 var crystal1Ct=0;
+var updatedCutTool = false;
 
 
 var GamePlay7=function(game){};
@@ -19,11 +18,11 @@ GamePlay7.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay7: create');
-		autumnVoyage.stop();
-		dialogue=false;
+		wind.stop();
+		caveAmb = game.add.audio('caveAmb');
+		caveAmb.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		dialogue = false;
 		//FIND ECHO-Y MUSIC FOR THE INSIDE OF THE HOUSE 
-		wind = game.add.audio('wind');
-		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -48,7 +47,6 @@ GamePlay7.prototype = {
 
 
 		game.physics.arcade.enable(player);
-		//game.camera.follow(player);
 		player.body.setSize(30, 48, 9, 0);
 		player.body.collideWorldBounds = true;
 
@@ -60,15 +58,15 @@ GamePlay7.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
-		crystals = game.add.group();
-		crystals.enableBody = true;
-
 
 		//create lab
-		crystal1 = crystals.create(330, 170, 'assets', 'crystal1');
-		crystal1.scale.setTo(0.3);
-		//lab.body.setSize(270, 200, 60, 154);
-		crystal1.body.immovable = true;
+		if (!crystal1Cut)
+		{
+			crystal1 = game.add.sprite(330, 170, 'assets', 'crystal1');
+			crystal1.scale.setTo(0.3);
+			game.physcis.arcade.enable(crystal1);
+			crystal1.body.immovable = true;
+		}
 
 
 		debris = game.add.emitter(0, 0, 200);
@@ -79,6 +77,9 @@ GamePlay7.prototype = {
 
 		createUI();
 		createInventory();
+
+		crystal1Scale = game.add.tween(crystal1.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, false, 0, 500, true);
+		crystal1Alpha = game.add.tween(crystal1).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
 
 	},
 	update: function() 
@@ -116,8 +117,8 @@ GamePlay7.prototype = {
 		}*/
 
 		// Checking for an overlap and collisions
-		game.physics.arcade.overlap(cutEffect, crystal1, cutCrystal, null, this);
-		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
+		game.physics.arcade.overlap(cutEffect, crystal1, cutCrystal1, null, this);
+		game.physics.arcade.overlap(scanEffect, crystal1, crystal1Flavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, crystal1);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
@@ -127,31 +128,3 @@ GamePlay7.prototype = {
 
 }
 
-function cutCrystal(cutEffect, crystals){
-
-	
-		dialogue = true;
-		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Now you're damaging property. Great.";
-		if (line == 1)
-			menuText.text = "I'll just turn my eye the other way... Not that I have eyes \nanyways";
-		if (line == 2)
-			menuText.text = "So you want to get charged with vandalism too???";
-		if (line == 3)
-			menuText.text = "Well, lets hope it comes in HANDY later.";
-		
-		if (line > 3)
-		{
-			menuText.text = ' ';
-			dialogue = false;
-			line = 0;
-			cutEffect.body.x = -48;
-			debris.x = crystal1.body.x + 20;
-			debris.y = crystal1.body.y;
-			debris.start(true, 1000, null, 15);
-			crystal1.destroy();
-			woodCut.play('', 0, 1, false);
-			crystal1Cut = true;
-			crystal1Ct =1;
-		}
-}
