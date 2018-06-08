@@ -27,14 +27,12 @@ GamePlay3.prototype = {
 		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 
-		trail = game.add.sprite(420, 500, 'assets', 'path');
+
+		trail = game.add.sprite(418, 538, 'assets', 'path');
 		trail.angle = 90;
 		trail.anchor.setTo(.5);
-		trail.scale.setTo(1, .27);
-		trail.alpha = .9;
-
+		trail.scale.setTo(1, .29);
 		
-
 		// Creating the hut group and house group
 		huts = game.add.group();
 		huts.enableBody = true;
@@ -54,7 +52,7 @@ GamePlay3.prototype = {
 		hut1.body.setSize(270, 200, 60, 154);
 		hut1.body.immovable = true;
 
-		hut2 = huts.create(500, 400, 'assets', 'smallHouse');
+		hut2 = huts.create(170, 220, 'assets', 'smallHouse');
 		hut2.scale.setTo(0.3);
 		hut2.body.setSize(270, 200, 60, 154);
 		hut2.body.immovable = true;
@@ -68,14 +66,28 @@ GamePlay3.prototype = {
 		leftWall = house.create(332, 398, 'assets', 'houseLeftWall');
 		leftWall.anchor.set(.5, .5);
 		leftWall.scale.setTo(.5);
-		leftWall.body.setSize(170, 221, 51, 0);
+		leftWall.body.setSize(170, 200, 51, 0);
 		leftWall.body.immovable = true;
 
 		rightWall = house.create(486, 398, 'assets', 'houseRightWall');
 		rightWall.anchor.set(.5, .5);
 		rightWall.scale.setTo(.5);
-		rightWall.body.setSize(126, 221, 0, 0);
+		rightWall.body.setSize(126, 200, 0, 0);
 		rightWall.body.immovable = true;
+
+		trail1 = game.add.sprite(420, 518, 'assets', 'path2');
+		//trail.angle = 90;
+		trail1.anchor.setTo(.5);
+		trail1.scale.setTo(.27, .27);
+
+
+		trail2 = game.add.sprite(645, 493, 'assets', 'path');
+		trail2.anchor.setTo(.5);
+		trail2.scale.setTo(.75, .27);
+
+		trail3 = game.add.sprite(140, 495, 'assets', 'path');
+		trail3.anchor.setTo(.5);
+		trail3.scale.setTo(1, .25);
 
 		entrance = game.add.sprite(418, 398, 'assets', 'bigHouseEntrance');
 		entrance.anchor.set(.5, .5);
@@ -83,8 +95,9 @@ GamePlay3.prototype = {
 		game.physics.arcade.enable(entrance);
 		entrance.body.setSize(114, 100, 0, 0);
 		entrance.body.immovable = true;
+		
 
-		barrier = game.add.sprite(368, 328, 'assets', 'barricade');
+		barrier = game.add.sprite(368, 325, 'assets', 'barricade');
 		barrier.scale.setTo(.4);
 		game.physics.arcade.enable(barrier);
 		barrier.body.setSize(200, 300, 20, 0);
