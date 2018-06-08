@@ -804,3 +804,62 @@ function crystal2Flavor()
 
 	}
 }
+
+function labFlavor()
+{
+	dialogue = true;
+	scanSuccessful=true;
+	if (!labOpen)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "I think this is supposed to be some kind of lab...";
+		if (line == 1)
+			menuText.text = "But it's weird-looking for a laboratory...";
+		if (line == 2)
+			menuText.text = "Who the hell builds a laboratory out of crystal?!";
+		if (line == 3)
+			menuText.text = "HOW do you even do that?!!";
+		if (line == 4)
+			menuText.text = "I admire the craftsmanship though. This is a work of art.";
+		if (line == 5)
+			menuText.text = "If only we could get INSIDE..."
+		if (line == 6)
+			menuText.text = "These crystals are blocking the entrance.";
+		if (line == 7)
+			menuText.text = "No ordinary laser will be able to cut through it...";
+		if (line > 7){
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Some kind of laboratory that doubles as a contemporary art piece...";
+		if (line == 1)
+			menuText.text = "Architects are just FULL of ideas nowadays.";
+		if (line == 2)
+			menuText.text = "Now that you've shattered the crystals blocking the path, \nwe can enter!";
+		if (line == 3)
+			menuText.text = "Onward and outward!! ";
+		if (line == 4)
+			menuText.text = "Uh...inward in this case...";
+		if (line == 5)
+			menuText.text = "Just go inside."
+		if (line > 5){
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+
+	}
+}

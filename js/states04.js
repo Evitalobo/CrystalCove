@@ -16,8 +16,6 @@ GamePlay4.prototype = {
 	create: function() {
 		console.log('GamePlay4: create');
 		autumnVoyage.stop();
-		wind = game.add.audio('wind');
-		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -151,8 +149,9 @@ GamePlay4.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, labDoor, cutLabDoor, null, this);
-		//game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
-		//NEED TO ADD LAB FLAVOR
+		game.physics.arcade.overlap(scanEffect, labDoor, labFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, labs, labFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, entrance, labFlavor, null, this);
 		game.physics.arcade.overlap(player, entrance, enterLab, null, this);
 		game.physics.arcade.collide(player, labDoor);
 		game.physics.arcade.collide(player, labs);
@@ -161,42 +160,68 @@ GamePlay4.prototype = {
 
 }
 
-function enterLab(player, entrance) {
-	if(labOpen=true){
-	 	map=4;
-	 	this.game.state.start('GamePlay7');
-	    dialogue=false;
-	}
+function enterLab(player, entrance) 
+{
+	 map=4;
+	 dialogue=false;
+	 this.game.state.start('GamePlay7');
 }
 
 function cutLabDoor(cutEffect, labDoor)
 {	
 	dialogue = true;
-	if (line == 0 && dialogueBox.y <= game.height - 170)
-		menuText.text = "Hold it right there!";
-	if (line == 1)
-		menuText.text = "Who said you could do that?";
-	if (line == 2)
-		menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
-	if (line == 3)
-		menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
-	if (line == 4)
-		menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
-	if (line == 5)
-		menuText.text = "Well...I guess we could take a peek...";
-	if (line == 6)
-		menuText.text = "But don't come crying to me if the cops come after you...";
-	if (line > 6)
+	if(updatedCutTool)
 	{
-		menuText.text = ' ';
-		dialogue = false;
-		line = 0;
-		cutEffect.body.x = -48;
-		debris.x = labDoor.x;
-		debris.y = labDoor.y;
-		debris.start(true, 1000, null, 15);
-		labDoor.destroy();
-		shatter.play('', 0, 1, false);
-		labOpen = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Hold it right there!";
+		if (line == 1)
+			menuText.text = "Who said you could do that?";
+		if (line == 2)
+			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
+		if (line == 3)
+			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
+		if (line == 4)
+			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
+		if (line == 5)
+			menuText.text = "Well...I guess we could take a peek...";
+		if (line == 6)
+			menuText.text = "But don't come crying to me if the cops come after you...";
+		if (line == 7)
+			menuText.text = "(If there are even any cops here...)";
+		if (line > 7)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			timer = 0;
+			cutEffect.body.x = -250;
+			debris.x = labDoor.x;
+			debris.y = labDoor.y;
+			debris.start(true, 1000, null, 15);
+			labDoor.destroy();
+			shatter.play('', 0, 1, false);
+			labOpen = true;
+		}
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "I don't think my CUT function can cut through this...";
+		if (line == 1)
+			menuText.text = "This material is too hard for me to cut.";
+		if (line == 2)
+			menuText.text = "At this point you're just wasting your time.";
+		if (line == 3)
+			menuText.text = "Looks I'm gonna need to some upgrades!";
+		if (line == 4)
+			menuText.text = "PIMP ME OUT!!!!";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			timer = 0;
+			cutEffect.body.x = -250;
+		}
 	}
 }
