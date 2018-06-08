@@ -48,6 +48,7 @@ MainMenu.prototype =
 		game.load.audio('crystalSong', 'assets/audio/CrystalSong.mp3');
 		game.load.audio('caveAmb', 'assets/audio/CaveDripping.mp3');
 		game.load.audio('shatter', 'assets/audio/Shatter.mp3');
+		game.load.audio('vibrate', 'assets/audio/cellPhoneVibrate.mp3');
 
 		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
 
@@ -79,10 +80,10 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
     {
-			map = 5;
+			map = 2;
 			pickedUpTool = true;
 			tools = 3;
-			game.state.start('GamePlay5');
+			game.state.start('GamePlay3');
 		}
 	}
 }
@@ -121,6 +122,7 @@ GamePlay.prototype = {
 		handitool = game.add.sprite(305, 250, 'assets', 'Handitool');
 		game.physics.arcade.enable(handitool);
 		handitool.scale.setTo(.7);
+		handitool.anchor.setTo(.5);
 
 		note = game.add.sprite(0, game.height, 'assets', 'Note')
 		game.physics.arcade.enable(note);
@@ -228,8 +230,14 @@ GamePlay.prototype = {
 
 		createInventory();
 		toolIndicator = game.add.tween(toolUI).to( { alpha : 0 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
+		toolVibrate = game.add.tween(handitool).to( { angle : 20 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
 		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
+
+		if (!pickedUpTool)
+		{
+			vibrate.play('', 0, .05, true);
+		}
 	},
 	update: function() 
 	{
@@ -237,12 +245,14 @@ GamePlay.prototype = {
 
 		if(pickedUpTool)
 		{
+			toolVibrate.stop();
+			vibrate.stop();
 			toolUI.body.y = -30;
 			handitool.kill();
 		}
 		else
 		{
-			
+			toolVibrate.start();
 		}
 
 		if (tutorialStart && !tutorialDone)

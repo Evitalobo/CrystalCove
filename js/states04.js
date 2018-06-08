@@ -84,15 +84,11 @@ GamePlay4.prototype = {
 		labs.setAll('body.immovable' ,true);
 
 
-
-		if(labOpen)
-			{
-				labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
-				labDoor.scale.setTo(.5);
-				game.physics.arcade.enable(labDoor);
-				//labDoor.body.setSize(200, 300, 20, 0);
-				labDoor.body.immovable = true;
-			}
+		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
+		labDoor.scale.setTo(.5);
+		game.physics.arcade.enable(labDoor);
+		//labDoor.body.setSize(200, 300, 20, 0);
+		labDoor.body.immovable = true;
 
 
 
@@ -196,11 +192,11 @@ function cutLabDoor(cutEffect, labDoor)
 		dialogue = false;
 		line = 0;
 		cutEffect.body.x = -48;
-		debris.x = labDoor.body.x + 20;
-		debris.y = labDoor.body.y;
+		debris.x = labDoor.x;
+		debris.y = labDoor.y;
 		debris.start(true, 1000, null, 15);
 		labDoor.destroy();
-		woodCut.play('', 0, 1, false);
+		shatter.play('', 0, 1, false);
 		labOpen = true;
 	}
 }

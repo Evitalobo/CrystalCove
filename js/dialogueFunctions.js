@@ -680,7 +680,7 @@ function houseFlavor()
 		if (line == 2)
 			menuText.text = "But it would be considered trespassing...";
 		if (line == 3)
-			menuText.text = "But you don't care do you. I know I don't. ";
+			menuText.text = "But you don't care, do you? I know I don't. ";
 		if (line == 4)
 			menuText.text = "Plus you've already blown up the door..";
 		if (line == 5)
