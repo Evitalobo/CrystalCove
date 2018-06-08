@@ -18,8 +18,8 @@ GamePlay6.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay6: create');
-		wind.stop();
 		dialogue=false;
+		wind.stop();
 		crystalSong = game.add.audio('crystalSong');
 		crystalSong.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 
@@ -55,7 +55,7 @@ GamePlay6.prototype = {
 		crystal2 = game.add.sprite(639, 405, 'assets', 'crystal2');
 		game.physics.arcade.enable(crystal2);
 		crystal2.scale.setTo(0.3);
-		//lab.body.setSize(270, 200, 60, 154);
+		crystal2.anchor.setTo(.5);
 		crystal2.body.immovable = true;
 
 
@@ -96,6 +96,7 @@ GamePlay6.prototype = {
 		{
 			map = 6;
 			barrierBroken=true;
+			crystalSong.stop();
 			game.state.start('GamePlay3');
 		}
 		//go to river state if player is at right world bound

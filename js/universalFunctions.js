@@ -16,6 +16,7 @@ function addSounds()
 		autumnVoyage = game.add.audio('autumnVoyage');
 		wind = game.add.audio('wind');
 		shatter = game.add.audio('shatter');
+		vibrate = game.add.audio('vibrate');
 }
 function createUI()
 {
@@ -326,10 +327,10 @@ function createInventory()
 	game.physics.arcade.enable(inventoryBox);
 	woodIcon = game.add.sprite(210, 0, 'assets', 'obj3');
 	woodIcon.scale.setTo( .15, .2);
-	woodText = game.add.bitmapText(260, 15, 'pixel', 'x 0', 20);
-	crystal2Icon = game.add.sprite(290, 0, 'assets', 'crystal2');
-	crystal2Icon.scale.setTo( .15, .2);
-	crystal2Text = game.add.bitmapText(340, 15, 'pixel', 'x 0', 20);
+	woodText = game.add.bitmapText(255, 15, 'pixel', 'x 0', 20);
+	crystal2Icon = game.add.sprite(305, 15, 'assets', 'crystal2');
+	crystal2Icon.scale.setTo( .1, .1);
+	crystal2Text = game.add.bitmapText(355, 15, 'pixel', 'x 0', 20);
 }
 
 function showInventory()
@@ -339,7 +340,7 @@ function showInventory()
 		woodIcon.alpha = 1;
 		woodText.text = 'x ' + woodCt;
 	}	
-	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2ct == 0)
+	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2Ct == 0)
 	{
 		woodText.text = 'INVENTORY IS EMPTY';
 	}
@@ -352,7 +353,7 @@ function showInventory()
 	if (crystal2Ct > 0 && inventoryBox.body.y >= 0)
 	{
 		crystal2Icon.alpha = 1;
-		crytal2Text.text = 'x ' + crystal2Ct;
+		crystal2Text.text = 'x ' + crystal2Ct;
 	}	
 	else
 	{

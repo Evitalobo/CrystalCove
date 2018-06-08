@@ -28,10 +28,10 @@ GamePlay3.prototype = {
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 
 
-		trail = game.add.sprite(418, 538, 'assets', 'path');
+		trail = game.add.sprite(418, 558, 'assets', 'path');
 		trail.angle = 90;
 		trail.anchor.setTo(.5);
-		trail.scale.setTo(1, .29);
+		trail.scale.setTo(.2, .29);
 		
 		// Creating the hut group and house group
 		huts = game.add.group();
@@ -75,8 +75,13 @@ GamePlay3.prototype = {
 		rightWall.body.setSize(126, 200, 0, 0);
 		rightWall.body.immovable = true;
 
+
+		bigHouse = game.add.sprite(400, 275, 'assets', 'bigHouse');
+		bigHouse.anchor.set(.5, .5);
+		bigHouse.scale.setTo(.5);
+
+
 		trail1 = game.add.sprite(420, 518, 'assets', 'path2');
-		//trail.angle = 90;
 		trail1.anchor.setTo(.5);
 		trail1.scale.setTo(.27, .27);
 
@@ -95,6 +100,7 @@ GamePlay3.prototype = {
 		game.physics.arcade.enable(entrance);
 		entrance.body.setSize(114, 100, 0, 0);
 		entrance.body.immovable = true;
+
 		
 
 		barrier = game.add.sprite(368, 325, 'assets', 'barricade');
@@ -106,6 +112,7 @@ GamePlay3.prototype = {
 		if(barrierBroken!=false){
 			barrier.kill();
 		}
+
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 2)
@@ -145,7 +152,6 @@ GamePlay3.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		
-
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
 		debris.maxParticleScale = .2;
@@ -164,6 +170,11 @@ GamePlay3.prototype = {
 		// If player presses E, change the current tool function.
 		toolToggle();
 
+		if(barrierBroken)
+		{
+			barrier.kill();
+		}
+
 		if(!dialogue)
 			movement();
 		else
@@ -179,6 +190,7 @@ GamePlay3.prototype = {
 		{
 			map = 3;
 			playerY = player.y;
+			wind.stop();
 			game.state.start('GamePlay2');
 		}
 
@@ -186,6 +198,7 @@ GamePlay3.prototype = {
 		{
 			map = 3;
 			playerY = player.y;
+			wind.stop();
 			game.state.start('GamePlay5');
 		}
 		//go to river state if player is at right world bound
@@ -243,8 +256,8 @@ function cutBarrier(cutEffect, barrier){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = barrier.body.x + 40;
-			debris.y = barrier.body.y + 40;
+			debris.x = barrier.body.x + 30;
+			debris.y = barrier.body.y + 50;
 			debris.start(true, 1000, null, 15);
 			barrier.destroy();
 			woodCut.play('', 0, 1, false);
