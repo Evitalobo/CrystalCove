@@ -22,13 +22,22 @@ GamePlay4.prototype = {
 
 		// Adding a backgrofund.
 		map4 = game.add.sprite(0, 0, 'assets', 'scene2');
-		trail = game.add.sprite(420, 200, 'assets', 'path');
+
+		trail = game.add.sprite(390, 220, 'assets', 'path');
 		trail.angle = 90;
 		trail.anchor.setTo(.5);
-		trail.scale.setTo(1, .3);
-		trail.alpha = .9;
+		trail.scale.setTo(1.1, .3);
+	
 
+		trail1 = game.add.sprite(388, 515, 'assets', 'path 1');
+		trail1.anchor.setTo(.5);
+		trail1.scale.setTo(.335, .32);
 
+		trail2 = game.add.sprite(527, 526, 'assets', 'path4');
+		trail2.anchor.setTo(.5);
+		trail2.scale.setTo(.44, .36);
+
+	
 
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 3)
@@ -42,25 +51,17 @@ GamePlay4.prototype = {
 			player.anchor.setTo(.5);
 			labOpen = true;
 		}
-		/*else
+		else
 		{
 			player = game.add.sprite(50, 30, 'scientist');
 			player.anchor.setTo(.5);
 			labOpen = true;
-		}*/
+		}
 
 		// Creating the hut group and house group
 		labs = game.add.group();
 		labs.enableBody = true;
 
-
-		entrance = game.add.sprite(560, 430, 'assets', 'bigHouseEntrance');
-		entrance.anchor.set(.5, .5);
-		entrance.scale.setTo(.51, .5);		
-		game.physics.arcade.enable(entrance);
-		entrance.body.setSize(114, 140, 0, 0);
-		entrance.body.immovable = true;
-		
 		//create lab
 		lab = game.add.sprite(400, 10, 'assets', 'lab');
 		lab.scale.setTo(0.65);
@@ -81,6 +82,14 @@ GamePlay4.prototype = {
 		labs.scale.setTo(0.65);
 		labs.setAll('body.immovable' ,true);
 
+		entrance = game.add.sprite(565, 425, 'assets', 'bigHouseEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.51, .5);		
+		game.physics.arcade.enable(entrance);
+		entrance.body.setSize(114, 140, 0, 0);
+		entrance.body.immovable = true;
+		
+
 
 		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
 		labDoor.scale.setTo(.5);
@@ -88,6 +97,9 @@ GamePlay4.prototype = {
 		//labDoor.body.setSize(200, 300, 20, 0);
 		labDoor.body.immovable = true;
 
+		if(labOpen!=false){
+			labDoor.kill();
+		}
 
 
 		game.physics.arcade.enable(player);
