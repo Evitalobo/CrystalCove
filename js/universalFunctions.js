@@ -49,7 +49,7 @@ function createUI()
 
 	dialogueBox = game.add.sprite(2, game.height, 'assets', 'scannerDialogue');
 	dialogueBox.scale.setTo(.48, .4);
-	dialogueBox.alpha = .7;
+	dialogueBox.alpha = .85;
 
 	menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
 }

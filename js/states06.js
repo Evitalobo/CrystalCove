@@ -162,11 +162,11 @@ function cutCrystal2(cutEffect, crystal2)
 			if (line == 2)
 				menuText.text = "At least not in my CURRENT state...";
 			if (line == 3)
-				menuText.text = "Why do you want some crystals anyways? What a hippy.";
+				menuText.text = "Why are you trying to collect crystals anyway? What are you? \nA hippie?";
 			if (line == 4)
-				menuText.text = "I might be able to CUT through more than just WOOD.";
+				menuText.text = "I might be able to CUT through more than just WOOD if I can \ndownload an UPDATE.";
 			if (line == 5)
-				menuText.text = "How did I get updated last time....";
+				menuText.text = "How did I get updated last time....?";
 			if (line > 5)
 			{
 				menuText.text = ' ';
