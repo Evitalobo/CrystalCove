@@ -27,16 +27,72 @@ GamePlay3.prototype = {
 		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 
-		trail = game.add.sprite(420, 500, 'assets', 'path');
+
+		trail = game.add.sprite(418, 558, 'assets', 'path');
 		trail.angle = 90;
 		trail.anchor.setTo(.5);
-		trail.scale.setTo(1, .27);
-		trail.alpha = .9;
+		trail.scale.setTo(.2, .29);
+		
+		// Creating the hut group and house group
+		huts = game.add.group();
+		huts.enableBody = true;
+
+		house = game.add.group();
+		house.enableBody = true;
+
+
+		//spawning huts
+		hut = huts.create(50, 25, 'assets', 'smallHouse');
+		hut.scale.setTo(0.3);
+		hut.body.setSize(270, 200, 60, 154);
+		hut.body.immovable = true;
+
+		hut1 = huts.create(600, 100, 'assets', 'smallHouse');
+		hut1.scale.setTo(0.3);
+		hut1.body.setSize(270, 200, 60, 154);
+		hut1.body.immovable = true;
+
+		hut2 = huts.create(170, 220, 'assets', 'smallHouse');
+		hut2.scale.setTo(0.3);
+		hut2.body.setSize(270, 200, 60, 154);
+		hut2.body.immovable = true;
+
+		roof = house.create(400, 220, 'assets', 'houseRoof');
+		roof.anchor.set(.5, .5);
+		roof.scale.setTo(.5);
+		roof.body.setSize(420, 300, 50, 240);
+		roof.body.immovable = true;
+
+		leftWall = house.create(332, 398, 'assets', 'houseLeftWall');
+		leftWall.anchor.set(.5, .5);
+		leftWall.scale.setTo(.5);
+		leftWall.body.setSize(170, 200, 51, 0);
+		leftWall.body.immovable = true;
+
+		rightWall = house.create(486, 398, 'assets', 'houseRightWall');
+		rightWall.anchor.set(.5, .5);
+		rightWall.scale.setTo(.5);
+		rightWall.body.setSize(126, 200, 0, 0);
+		rightWall.body.immovable = true;
 
 
 		bigHouse = game.add.sprite(400, 275, 'assets', 'bigHouse');
 		bigHouse.anchor.set(.5, .5);
 		bigHouse.scale.setTo(.5);
+
+
+		trail1 = game.add.sprite(420, 518, 'assets', 'path2');
+		trail1.anchor.setTo(.5);
+		trail1.scale.setTo(.27, .27);
+
+
+		trail2 = game.add.sprite(645, 493, 'assets', 'path');
+		trail2.anchor.setTo(.5);
+		trail2.scale.setTo(.75, .27);
+
+		trail3 = game.add.sprite(140, 495, 'assets', 'path');
+		trail3.anchor.setTo(.5);
+		trail3.scale.setTo(1, .25);
 
 		entrance = game.add.sprite(418, 398, 'assets', 'bigHouseEntrance');
 		entrance.anchor.set(.5, .5);
@@ -44,6 +100,19 @@ GamePlay3.prototype = {
 		game.physics.arcade.enable(entrance);
 		entrance.body.setSize(114, 100, 0, 0);
 		entrance.body.immovable = true;
+
+		
+
+		barrier = game.add.sprite(368, 325, 'assets', 'barricade');
+		barrier.scale.setTo(.4);
+		game.physics.arcade.enable(barrier);
+		barrier.body.setSize(200, 300, 20, 0);
+		barrier.body.immovable = true;
+
+		if(barrierBroken!=false){
+			barrier.kill();
+		}
+
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 2)
@@ -82,54 +151,7 @@ GamePlay3.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
-		// Creating the hut group and house group
-		huts = game.add.group();
-		huts.enableBody = true;
-
-
-		//spawning huts
-		hut = huts.create(50, 25, 'assets', 'smallHouse');
-		hut.scale.setTo(0.3);
-		hut.body.setSize(270, 200, 60, 154);
-		hut.body.immovable = true;
-
-		hut1 = huts.create(600, 100, 'assets', 'smallHouse');
-		hut1.scale.setTo(0.3);
-		hut1.body.setSize(270, 200, 60, 154);
-		hut1.body.immovable = true;
-
-		hut2 = huts.create(100, 400, 'assets', 'smallHouse');
-		hut2.scale.setTo(0.3);
-		hut2.body.setSize(270, 200, 60, 154);
-		hut2.body.immovable = true;
-
-		house = game.add.group();
-		house.enableBody = true;
-
-		roof = house.create(400, 220, 'assets', 'houseRoof');
-		roof.anchor.set(.5, .5);
-		roof.scale.setTo(.5);
-		roof.body.setSize(420, 300, 50, 240);
-		roof.body.immovable = true;
-
-		leftWall = house.create(332, 398, 'assets', 'houseLeftWall');
-		leftWall.anchor.set(.5, .5);
-		leftWall.scale.setTo(.5);
-		leftWall.body.setSize(170, 221, 51, 0);
-		leftWall.body.immovable = true;
-
-		rightWall = house.create(486, 398, 'assets', 'houseRightWall');
-		rightWall.anchor.set(.5, .5);
-		rightWall.scale.setTo(.5);
-		rightWall.body.setSize(126, 221, 0, 0);
-		rightWall.body.immovable = true;
-
-		barrier = game.add.sprite(368, 328, 'assets', 'barricade');
-		barrier.scale.setTo(.4);
-		game.physics.arcade.enable(barrier);
-		barrier.body.setSize(200, 300, 20, 0);
-		barrier.body.immovable = true;
-
+		
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
 		debris.maxParticleScale = .2;
