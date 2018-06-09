@@ -331,10 +331,9 @@ function createInventory()
 	crystal2Icon = game.add.sprite(305, 15, 'assets', 'crystal2');
 	crystal2Icon.scale.setTo( .1, .1);
 	crystal2Text = game.add.bitmapText(355, 15, 'pixel', 'x 0', 20);
-	crystal1Icon = game.add.sprite(355, 15, 'assets', 'crystal1');
-	crystal1Icon.scale.setTo( .1, .1);
+	crystal1Icon = game.add.sprite(305, 50, 'assets', 'crystal1');
+	crystal1Icon.scale.setTo( .1, .13);
 	crystal1Text = game.add.bitmapText(355, 55, 'pixel', 'x 0', 20);
-
 }
 
 function showInventory()

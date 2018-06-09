@@ -846,44 +846,58 @@ function crystal1Flavor()
 {
 	dialogue = true;
 	scanSuccessful = true;
-	if(dialogue){
+	if(!scannedCrystal1)
+	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Another crystal fragment. This one emits a purple light..";
+			menuText.text = "Another crystal fragment... This one emits a purple light..";
 		if(line == 1)
 		{
-			menuText.text = "Oh?!";
+			menuText.text = "Ugh...";
 			//play resonating sound
 			crystal1Alpha.start();
 			resonate.play('', 0, 1, true);
 		}
 		if(line == 2)
-			menuText.text = "Here we go again...";
+			menuText.text = "Here we go again...This better be worth it.";
 		if(line == 3)
-			menuText.text = "It's almost like the crystal is alive";
+			menuText.text = "I better grow wings or something super badass like that...";
 		if(line == 4)
 		{
-			menuText.text = "What if... it is it's own entity";
+			menuText.text = "It's almost like the crystal is alive...";
 		}
 		if(line == 5)
 		{
-			menuText.text = "Are these crystals even safe to be around?";
+			menuText.text = "BLAH BLAH BLAH Glowing crystals BLAH BLAH.";
 			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
 				download.play('', 0, 1, false);
 		}
 		if(line == 6)
 		{
-			menuText.text = "Glowing crystals? Sounds like it could be radioactive.";
+			menuText.text = "BLAH BLAH BLAH Safe to be around? BLABBITY BLABBITY BLAH!";
 			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
 				download.play('', 0, 1, false);
 		}
-		
+		if (line == 7)
+		{
+			menuText.text = "BLUBLE BLURBLE Probably not. BLAH."
 			//stop resonating sound
 			//electronic chime
 			crystal1Alpha.stop();
 			resonate.stop();
 			crystal1.alpha = .9;
+		}
+		if(line == 8)
+			menuText.text = "BLAH BLAH Radioactive? Maybe. Like I care.";
+		if (line == 9)
+			menuText.text = "Wait. Is it over?";
+		if (line == 10)
+			menuText.text = "What?! I don't feel any different!!!!";
+		if (line == 11)
+			menuText.text = "This sucks...What a disappointment..";
+		if (line == 12)
+			menuText.text = "Just cut the damn crystal already...";
 
-		if (line >6)
+		if (line > 12)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -891,7 +905,25 @@ function crystal1Flavor()
 			timer = 0;
 			line = 0;
 			scanEffect.body.x = -250;
-			updatedCutTool = true;
+			scannedCrystal1 = true;
+		}
+	}
+	else
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "A crystal.";
+		if(line == 1)
+			menuText.text = "I didn't get anything from it.";
+		if(line == 2)
+			menuText.text = "It's stupid, purple, useless, and stupid.";
+		if (line > 2)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
 		}
 	}
 }

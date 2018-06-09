@@ -18,9 +18,8 @@ GamePlay8.prototype = {
 		console.log('GamePlay8: create');
 		autumnVoyage.stop();
 		dialogue=false;
-		//FIND ECHO-Y MUSIC FOR THE INSIDE OF THE HOUSE 
-		wind = game.add.audio('wind');
-		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		caveAmb.play('', 0, 1, true);
+
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);

@@ -1,10 +1,10 @@
 //INSIDE OF LAB
 var crystal1Cut = false;
 var crystal1Ct=0;
-var updatedCutTool = false;
+var scannedCrystal1 = false;
 
 
-var GamePlay7=function(game){};
+var GamePlay7 = function(game){};
 GamePlay7.prototype = {
 
 	// preloading assets.
@@ -22,7 +22,6 @@ GamePlay7.prototype = {
 		caveAmb = game.add.audio('caveAmb');
 		caveAmb.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		dialogue = false;
-		//FIND ECHO-Y MUSIC FOR THE INSIDE OF THE HOUSE 
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -38,14 +37,17 @@ GamePlay7.prototype = {
 		note2 = game.add.sprite(400, 400, 'assets', 'Note')
 		game.physics.arcade.enable(note2);
 		note2.scale.setTo(.5);
+		note2.angle = 20;
 
 		note3 = game.add.sprite(600, 500, 'assets', 'Note')
 		game.physics.arcade.enable(note3);
 		note3.scale.setTo(.5);
+		note3.angle = 45;
 
 		note4 = game.add.sprite(100,500, 'assets', 'Note')
 		game.physics.arcade.enable(note4);
 		note4.scale.setTo(.5);
+		note4.angle = 100;
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 4)
@@ -77,7 +79,7 @@ GamePlay7.prototype = {
 		//create lab
 		if (!crystal1Cut)
 		{
-			crystal1 = game.add.sprite(355, 196, 'assets', 'crystal1');
+			crystal1 = game.add.sprite(400, 220, 'assets', 'crystal1');
 			crystal1.scale.setTo(0.3);
 			crystal1.anchor.setTo(.5, .5);
 			game.physics.arcade.enable(crystal1);
@@ -152,22 +154,20 @@ function cutCrystal1(cutEffect, crystal1)
 {	
 		dialogue = true;
 
-		if (updatedCutTool)
+		if (scannedCrystal1)
 		{
 			if (line == 0 && dialogueBox.y <= game.height - 170)
-				menuText.text = "And now you're damaging property. Great.";
+				menuText.text = "Another crystal to add to the collection.";
 			if (line == 1)
-				menuText.text = "So you want to get charged with vandalism too, huh?!!";
+				menuText.text = "Why exactly are we collecting these?";
 			if (line == 2)
-				menuText.text = "Well it's not like I'LL get in trouble. I'm just a tool at YOUR disposal.";
+				menuText.text = "Do you think they'll absorb some kind of bad juju or something?";
 			if (line == 3)
-				menuText.text = "Well, let's hope THIS comes in handy at some point.";
+				menuText.text = "God, I hope you're not a hippie.";
 			if (line == 4)
-				menuText.text = "For your own sake, of course. I'm just here for the ride.";
-			if (line == 5)
-				menuText.text = "I actually can't care less about whatever happens to you.";
+				menuText.text = "Whatever. Let's take it and go.";
 		
-			if (line > 5)
+			if (line > 4)
 			{
 				menuText.text = ' ';
 				dialogue = false;
@@ -185,27 +185,16 @@ function cutCrystal1(cutEffect, crystal1)
 		else
 		{
 			if (line == 0 && dialogueBox.y <= game.height - 170)
-				menuText.text = "Hm...";
+				menuText.text = "Wouldn't you rather learn about this crystal first?";
 			if (line == 1)
-				menuText.text = "It appears that I'm not able to cut through this.";
-			if (line == 2)
-				menuText.text = "At least not in my CURRENT state...";
-			if (line == 3)
-				menuText.text = "Why do you want some crystals anyways? What a hippy.";
-			if (line == 4)
-				menuText.text = "I might be able to CUT through more than just WOOD.";
-			if (line == 5)
-				menuText.text = "How did I get updated last time....";
-			if (line > 5)
+				menuText.text = "Try scanning it. I might get a sweet upgrade...";
+			if (line > 1)
 			{
 				menuText.text = ' ';
 				dialogue = false;
-				scanSuccessful = false;
-				timer = 0;
 				line = 0;
-				scanEffect.body.x = -250;
+				cutEffect.body.x = -250;
 			}
-
 		}
 }
 

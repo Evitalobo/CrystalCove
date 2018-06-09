@@ -2,6 +2,7 @@
 
 var crystal2Cut = false;
 var crystal2Ct=0;
+var updatedCutTool = false;
 
 
 var GamePlay6=function(game){};

@@ -188,22 +188,18 @@ function cutLabDoor(cutEffect, labDoor)
 	if(updatedCutTool)
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Hold it right there!";
+			menuText.text = "At this point, I guess nothing is stopping you.";
 		if (line == 1)
-			menuText.text = "Who said you could do that?";
+			menuText.text = "Does this stuff even concern you at all?";
 		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
+			menuText.text = "Why the hell are you even doing all this?";
 		if (line == 3)
-			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
+			menuText.text = "What do you have to gain from cutting down this wall?";
 		if (line == 4)
-			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
+			menuText.text = "You're a pretty interesting guy, I guess.";
 		if (line == 5)
-			menuText.text = "Well...I guess we could take a peek...";
-		if (line == 6)
-			menuText.text = "But don't come crying to me if the cops come after you...";
-		if (line == 7)
-			menuText.text = "(If there are even any cops here...)";
-		if (line > 7)
+			menuText.text = "Welp, no point in stopping now.";
+		if (line > 5)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -221,15 +217,21 @@ function cutLabDoor(cutEffect, labDoor)
 	else
 	{
 		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "I don't think my CUT function can cut through this...";
+			menuText.text = "WHOA! Jeez! Slow down there, buddy!";
 		if (line == 1)
-			menuText.text = "This material is too hard for me to cut.";
+			menuText.text = "You think I can just cut crystal out of the box?!";
 		if (line == 2)
-			menuText.text = "At this point you're just wasting your time.";
+			menuText.text = "You're gonna need to BUY the upgrade!";
 		if (line == 3)
-			menuText.text = "Looks I'm gonna need to some upgrades!";
+			menuText.text = "Or pirate it somehow...";
 		if (line == 4)
-			menuText.text = "PIMP ME OUT!!!!";
+			menuText.text = "Pfft! But how would you do that? It's not like there's \ninternet here...";
+		if (line == 5)
+			menuText.text = "Good luck getting around this PAY WALL!";
+		if (line == 6)
+			menuText.text = "Heh! Get it? WALL?";
+		if (line == 7)
+			menuText.text = "Ahem...There's an actual wall here."
 		if (line > 4)
 		{
 			menuText.text = ' ';

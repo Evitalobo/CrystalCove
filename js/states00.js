@@ -82,8 +82,11 @@ MainMenu.prototype =
 		{
 			map = 4;
 			pickedUpTool = true;
+			updatedCutTool = true;
 			tools = 3;
-			game.state.start('GamePlay4');
+			crystal1Ct = 1;
+			crystal2Ct = 1;
+			game.state.start('GamePlay7');
 		}
 	}
 }
