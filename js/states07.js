@@ -19,6 +19,7 @@ GamePlay7.prototype = {
 	create: function() {
 		console.log('GamePlay7: create');
 		wind.stop();
+		autumnVoyage.stop();
 		caveAmb = game.add.audio('caveAmb');
 		caveAmb.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		dialogue = false;
@@ -52,7 +53,7 @@ GamePlay7.prototype = {
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 4)
 		{
-			player = game.add.sprite(300, 530, 'scientist');
+			player = game.add.sprite(400, 530, 'scientist');
 			player.anchor.setTo(.5);
 		}
 		/*else
