@@ -107,6 +107,7 @@ GamePlay1.prototype = {
 				game.physics.arcade.enable(crystal3);
 				crystal3.body.immovable = true;
 				crystal3Alpha = game.add.tween(crystal3).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
+				resonate.play('', 0, .5, true);
 
 				for (i = 0; i < 12; i++)
 				{

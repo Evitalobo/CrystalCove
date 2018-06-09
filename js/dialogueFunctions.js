@@ -1039,7 +1039,35 @@ function crystal2Flavor()
 	}
 }
 
-
+function crystal3Signal()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'Oh?';
+		}
+		if (line == 1)
+			menuText.text = "I'm detecting an odd energy spike to the west.";
+		if (line == 2)
+			menuText.text = "I think it's coming from the forested area.";
+		if (line == 3)
+			menuText.text = "Might wanna go check that out..";
+		if (line == 4)
+			menuText.text = "Weird energy readings don't happen every day, you know~";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			line = 0;
+			tutorialDone = true;
+			timer = 0;
+		}
+	}
+}
 
 function crystal3Flavor()
 {
@@ -1048,7 +1076,10 @@ function crystal3Flavor()
 	if(!scannedCrystal3)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
 			menuText.text = "This must be the source of that weird energy spike. Hm..green. \nCool color.";
+			resonate.stop();
+		}
 		if(line == 1)
 		{
 			menuText.text = "Well what are we waiting for? Let's get this over with.";
@@ -1072,11 +1103,14 @@ function crystal3Flavor()
 			menuText.text = "I think those pages in the lab came from a journal YOU wrote... \nI am YOUR final invention.";
 			crystal3Alpha.stop();
 			resonate.stop();
-			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
-				revelation.play('', 0, 1, false);
+			crystal3.alpha = .9
 		}
 		if(line == 4)
+		{
 			menuText.text = "I hate to break this to you... but I know why the entire island \ndied out.";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				revelation.play('', 0, 1, true);
+		}
 		if(line == 5)
 			menuText.text = "The crystals on this island provide the life energy to all of the \nisland's inhabitants.";
 		if(line == 6)
@@ -1086,9 +1120,16 @@ function crystal3Flavor()
 		if(line == 8)
 			menuText.text = "And you were unaffected because your crystal lab constantly \nirradiated you with life energy.";
 		if(line == 9)
+		{
 			menuText.text = "All that trouble just to build me. I'm not sure whether to \nbe grateful or disgusted.";
+			revelation.stop();
+		}
 		if(line == 10)
+		{
 			menuText.text = "Disgust is probably more like it, especially with the personality \nyou originally programmed for me. UGH...";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				autumnVoyage.play('', 0, 1, true);
+		}
 		if(line == 11)
 			menuText.text = "MASTER this. MASTER that. What kind of things were you into? I'm \nglad you were stupid enough to step on me.";
 		if (line > 11)
@@ -1102,6 +1143,8 @@ function crystal3Flavor()
 			scannedCrystal3 = true;
 		}
 	}
+	else
+	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 			menuText.text = "I think this is everything we need.";
 		if (line == 1)

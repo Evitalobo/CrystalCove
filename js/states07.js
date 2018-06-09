@@ -121,6 +121,13 @@ GamePlay7.prototype = {
 		scannerBoxMovement();
 		showInventory();
 
+		if (crystal1Cut && crystal2Cut && !tutorialDone)
+		{
+			timer += 1;
+		}
+		if (timer > 60)
+			crystal3Signal();
+
 		//go to beach state of near top world bound
 		if(player.body.y > 550)
 		{
@@ -181,6 +188,7 @@ function cutCrystal1(cutEffect, crystal1)
 				shatter.play('', 0, 1, false);
 				crystal1Cut = true;
 				crystal1Ct = 1;
+				tutorialDone = false;
 			}
 		}
 		else
