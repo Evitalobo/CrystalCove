@@ -39,32 +39,9 @@ GamePlay4.prototype = {
 
 	
 
-		//Adding the player sprite->Position depending on the bounds of map
-		if(map == 3)
-		{
-			player = game.add.sprite(playerX, 30, 'scientist');
-			player.anchor.setTo(.5);
-		}
-		else if(map == 7)
-		{
-			player = game.add.sprite(548, 500, 'scientist');
-			player.anchor.setTo(.5);
-			labOpen = true;
-		}
-		else
-		{
-			player = game.add.sprite(50, 30, 'scientist');
-			player.anchor.setTo(.5);
-			labOpen = true;
-		}
-
 		// Creating the hut group and house group
 		labs = game.add.group();
 		labs.enableBody = true;
-
-		//create lab
-		lab = game.add.sprite(400, 10, 'assets', 'lab');
-		lab.scale.setTo(0.65);
 
 		//bounds for lab
 		labL = labs.create(680, 600, 'assets', 'labL');
@@ -82,24 +59,27 @@ GamePlay4.prototype = {
 		labs.scale.setTo(0.65);
 		labs.setAll('body.immovable' ,true);
 
-		entrance = game.add.sprite(565, 425, 'assets', 'bigHouseEntrance');
-		entrance.anchor.set(.5, .5);
-		entrance.scale.setTo(.51, .5);		
-		game.physics.arcade.enable(entrance);
-		entrance.body.setSize(114, 140, 0, 0);
-		entrance.body.immovable = true;
-		
 
 
-		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
-		labDoor.scale.setTo(.5);
-		game.physics.arcade.enable(labDoor);
-		//labDoor.body.setSize(200, 300, 20, 0);
-		labDoor.body.immovable = true;
-
-		if(labOpen!=false){
-			labDoor.kill();
+		//Adding the player sprite->Position depending on the bounds of map
+		if(map == 3)
+		{
+			player = game.add.sprite(playerX, 30, 'scientist');
+			player.anchor.setTo(.5);
 		}
+		else if(map == 7)
+		{
+			player = game.add.sprite(548, 510, 'scientist');
+			player.anchor.setTo(.5);
+			labOpen = true;
+		}
+		else
+		{
+			player = game.add.sprite(50, 30, 'scientist');
+			player.anchor.setTo(.5);
+			//labOpen = true;
+		}
+
 
 
 		game.physics.arcade.enable(player);
@@ -114,6 +94,29 @@ GamePlay4.prototype = {
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
 
+
+		//create lab
+		lab = game.add.sprite(400, 10, 'assets', 'lab');
+		lab.scale.setTo(0.65);
+
+		entrance = game.add.sprite(569, 430, 'assets', 'labEntrance');
+		entrance.anchor.set(.5, .5);
+		entrance.scale.setTo(.65, .65);		
+		game.physics.arcade.enable(entrance);
+		//entrance.body.setSize(124, 150, 0, 0);
+		entrance.body.immovable = true;
+		
+
+
+		labDoor = game.add.sprite(490, 360, 'assets', 'crystalcluster');
+		labDoor.scale.setTo(.5);
+		game.physics.arcade.enable(labDoor);
+		//labDoor.body.setSize(200, 300, 20, 0);
+		labDoor.body.immovable = true;
+
+		if(labOpen!=false){
+			labDoor.kill();
+		}
 
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'crystalcluster');

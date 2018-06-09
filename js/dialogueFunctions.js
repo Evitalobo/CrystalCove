@@ -294,9 +294,153 @@ function noteFlavor()
 		if (line == 5)
 			menuText.text = "And CUT to..erm..cut certain things with.";
 		if (line == 6)
-			menuText.text = 'Did you really need to read that?';
+			menuText.text = "Press SHIFT to view the inventory.";
 		if (line == 7)
+			menuText.text = 'Did you really need to read that?';
+		if (line == 8)
 			menuText.text = '-sigh- You really are an idiot.'
+		if (line > 8)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
+function note1Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'The catastrophe began when I started my final invention.';
+		}
+		if (line == 1)
+			menuText.text = 'I was looking for a powerful energy to fuel my invention.';
+		if (line == 2)
+			menuText.text = 'I tried everything I could find on this island.';
+		if (line == 3)
+			menuText.text = "From trees to using the water currents";
+		if (line == 4)
+			menuText.text = "But nothing was powerful enough.";
+		if (line == 5)
+			menuText.text = "I took a step back and watched nature for a while.";
+		if (line == 6)
+			menuText.text = 'It always bewildered me how quickly everything would regrow\n on this island.';
+		if (line > 6)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
+function note2Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'I was born and raised on this island. I never really had much \ninterest in leaving.';
+		}
+		if (line == 1)
+			menuText.text = 'However, I needed to find a more powerful energy source.';
+		if (line == 2)
+			menuText.text = 'It was then when I made up my mind that I must set out on \na journey.';
+		if (line == 3)
+			menuText.text = "I set out with provisions after building my ship to find the nearest \nsource of land.";
+		if (line == 4)
+			menuText.text = "It took me 2 months of sailing to find the nearest island.";
+		if (line == 5)
+			menuText.text = "I found different trees and rocks but nothing \nwas powerful enough.";
+		if (line == 6)
+			menuText.text = 'The strange thing is... nothing grew back as \nfast as it did on my island.';
+		if (line == 7)
+			menuText.text = 'It was then when I realized the greatest energy \nwas right under my nose the whole time.'
+		if (line > 7)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
+function note3Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'I could not find the crystals native to my \nisland anywhere else';
+		}
+		if (line == 1)
+			menuText.text = 'I conducted so many trials to try and harvest the \npower of the crystals';
+		if (line == 2)
+			menuText.text = 'I started creating blueprints for a lab designed \nentirely of crystals.';
+		if (line == 3)
+			menuText.text = "It took me several years for my dream of the \nlab to come true.";
+		if (line == 4)
+			menuText.text = "I was finally able to work on my final \ninvention after all these years of research.";
+		if (line == 5)
+			menuText.text = "I would create the first tool that would \nbe able to alter matter.";
+		if (line == 6)
+			menuText.text = 'With this tool, I would be able to \nrefabricate the world to my liking.';
+		if (line == 7)
+			menuText.text = 'The elder of the town figured out what I was \nup to and tried to put a stop to my creation.'
+		if (line > 7)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
+function note4Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'It was too late though. By the time they confronted me, I \nalready had finished my invention.';
+		}
+		if (line == 1)
+			menuText.text = 'The people of the town were dying out at a rapid rate.';
+		if (line == 2)
+			menuText.text = 'Children were growing with genetic mutations and \nthe remainder of the population was shrinking.';
+		if (line == 3)
+			menuText.text = "Nobody could seem to figure it out. It was more \nimportant now than ever that I finish my invention.";
+		if (line == 4)
+			menuText.text = "Strange enough, it didn't affect me. I almost never left the lab.";
+		if (line == 5)
+			menuText.text = "Before I left, there were only a few people \non the island still alive.";
+		if (line == 6)
+			menuText.text = 'They coveted my inventions and planned to \nambush and murder me.';
+		if (line == 7)
+			menuText.text = 'I made a hasty escape to the sea with my \ninvention though. It was too late to save them.'
 		if (line > 7)
 		{
 			menuText.text = ' ';
@@ -698,6 +842,60 @@ function houseFlavor()
 	}
 }
 
+function crystal1Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if(dialogue){
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Another crystal fragment. This one emits a purple light..";
+		if(line == 1)
+		{
+			menuText.text = "Oh?!";
+			//play resonating sound
+			crystal1Alpha.start();
+			resonate.play('', 0, 1, true);
+		}
+		if(line == 2)
+			menuText.text = "Here we go again...";
+		if(line == 3)
+			menuText.text = "It's almost like the crystal is alive";
+		if(line == 4)
+		{
+			menuText.text = "What if... it is it's own entity";
+		}
+		if(line == 5)
+		{
+			menuText.text = "Are these crystals even safe to be around?";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		if(line == 6)
+		{
+			menuText.text = "Glowing crystals? Sounds like it could be radioactive.";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		
+			//stop resonating sound
+			//electronic chime
+			crystal1Alpha.stop();
+			resonate.stop();
+			crystal1.alpha = .9;
+
+		if (line >6)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+			updatedCutTool = true;
+		}
+	}
+}
+
 function crystal2Flavor()
 {
 	dialogue = true;
@@ -804,6 +1002,8 @@ function crystal2Flavor()
 
 	}
 }
+
+
 
 function labFlavor()
 {

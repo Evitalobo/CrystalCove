@@ -331,6 +331,10 @@ function createInventory()
 	crystal2Icon = game.add.sprite(305, 15, 'assets', 'crystal2');
 	crystal2Icon.scale.setTo( .1, .1);
 	crystal2Text = game.add.bitmapText(355, 15, 'pixel', 'x 0', 20);
+	crystal1Icon = game.add.sprite(355, 15, 'assets', 'crystal1');
+	crystal1Icon.scale.setTo( .1, .1);
+	crystal1Text = game.add.bitmapText(355, 55, 'pixel', 'x 0', 20);
+
 }
 
 function showInventory()
@@ -340,7 +344,7 @@ function showInventory()
 		woodIcon.alpha = 1;
 		woodText.text = 'x ' + woodCt;
 	}	
-	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2Ct == 0)
+	else if (inventoryBox.body.y >= 0 && woodCt == 0 && crystal2Ct == 0 && crystal1Ct == 0)
 	{
 		woodText.text = 'INVENTORY IS EMPTY';
 	}
@@ -359,6 +363,17 @@ function showInventory()
 	{
 		crystal2Icon.alpha = 0;
 		crystal2Text.text = ' ';
+	}
+
+	if (crystal1Ct > 0 && inventoryBox.body.y >= 0)
+	{
+		crystal1Icon.alpha = 1;
+		crystal1Text.text = 'x ' + crystal1Ct;
+	}	
+	else
+	{
+		crystal1Icon.alpha = 0;
+		crystal1Text.text = ' ';
 	}
 }
 

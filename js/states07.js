@@ -29,8 +29,23 @@ GamePlay7.prototype = {
 
 		// Adding a backgrofund.
 		map7 = game.add.sprite(0, 0, 'assets', 'scene7');
-		//trail = game.add.sprite(0, 220, 'assets', 'path');
-		//trail.scale.setTo(2, .5);
+		
+
+		note1 = game.add.sprite(200, 300, 'assets', 'Note')
+		game.physics.arcade.enable(note1);
+		note1.scale.setTo(.5);
+
+		note2 = game.add.sprite(400, 400, 'assets', 'Note')
+		game.physics.arcade.enable(note2);
+		note2.scale.setTo(.5);
+
+		note3 = game.add.sprite(600, 500, 'assets', 'Note')
+		game.physics.arcade.enable(note3);
+		note3.scale.setTo(.5);
+
+		note4 = game.add.sprite(100,500, 'assets', 'Note')
+		game.physics.arcade.enable(note4);
+		note4.scale.setTo(.5);
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 4)
@@ -62,7 +77,7 @@ GamePlay7.prototype = {
 		//create lab
 		if (!crystal1Cut)
 		{
-			crystal1 = game.add.sprite(330, 170, 'assets', 'crystal1');
+			crystal1 = game.add.sprite(355, 196, 'assets', 'crystal1');
 			crystal1.scale.setTo(0.3);
 			crystal1.anchor.setTo(.5, .5);
 			game.physics.arcade.enable(crystal1);
@@ -119,7 +134,11 @@ GamePlay7.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, crystal1, cutCrystal1, null, this);
-		//game.physics.arcade.overlap(scanEffect, crystal1, crystal1Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, crystal1, crystal1Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, note1, note1Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, note2, note2Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, note3, note3Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, note4, note4Flavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, crystal1);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM

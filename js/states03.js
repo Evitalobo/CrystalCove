@@ -57,11 +57,6 @@ GamePlay3.prototype = {
 		hut2.body.setSize(270, 200, 60, 154);
 		hut2.body.immovable = true;
 
-		roof = house.create(400, 220, 'assets', 'houseRoof');
-		roof.anchor.set(.5, .5);
-		roof.scale.setTo(.5);
-		roof.body.setSize(420, 300, 50, 240);
-		roof.body.immovable = true;
 
 		leftWall = house.create(332, 398, 'assets', 'houseLeftWall');
 		leftWall.anchor.set(.5, .5);
@@ -150,6 +145,12 @@ GamePlay3.prototype = {
 		player.animations.add('left', [3,4,5,4],10,true);
 		player.animations.add('right',[6,7,8,7],10,true);
 		player.animations.add('up', [9,10,11,10],10,true);
+
+		roof = house.create(400, 220, 'assets', 'houseRoof');
+		roof.anchor.set(.5, .5);
+		roof.scale.setTo(.5);
+		roof.body.setSize(420, 300, 50, 240);
+		roof.body.immovable = true;
 
 		
 		debris = game.add.emitter(0, 0, 200);
