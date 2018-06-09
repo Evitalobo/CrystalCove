@@ -79,7 +79,8 @@ GamePlay7.prototype = {
 		//create lab
 		if (!crystal1Cut)
 		{
-			crystal1 = game.add.sprite(400, 220, 'assets', 'crystal1');
+			crystal1 = game.add.sprite(390, 210, 'assets', 'crystal1');
+			crystal1.angle=90;
 			crystal1.scale.setTo(0.3);
 			crystal1.anchor.setTo(.5, .5);
 			game.physics.arcade.enable(crystal1);
@@ -141,10 +142,9 @@ GamePlay7.prototype = {
 		game.physics.arcade.overlap(scanEffect, note2, note2Flavor, null, this);
 		game.physics.arcade.overlap(scanEffect, note3, note3Flavor, null, this);
 		game.physics.arcade.overlap(scanEffect, note4, note4Flavor, null, this);
-		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, crystal1);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
-		//game.physics.arcade.collide(player, lab);
+		//game.physics.arcade.collide(player, labWall);
 		
 	},
 

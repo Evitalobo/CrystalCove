@@ -1,9 +1,13 @@
+
 var GamePlay1 = function(game) {};
 var woodText;
 var woodNumber = 0;
 var treesScanned = 0;
 var stumpsScanned = 0;
 var woodCt = 0;
+var crystal3Cut = false;
+var crystal3Ct=0;
+
 
 GamePlay1.prototype = {
 
@@ -91,6 +95,23 @@ GamePlay1.prototype = {
 			wood.body.immovable = true;
 		}
 
+		if(crystal1Cut && crystal2Cut){
+			if (!crystal3Cut)
+			{
+				crystal3 = game.add.sprite(730, 450, 'assets', 'crystal3');
+				crystal3.angle=90;
+				crystal3.scale.setTo(0.3);
+				crystal3.anchor.setTo(.5, .5);
+				game.physics.arcade.enable(crystal3);
+				crystal3.body.immovable = true;
+			}
+
+
+		}
+
+
+
+
 		debris = game.add.emitter(0, 0, 200);
 		debris.makeParticles('assets', 'obj3');
 		debris.maxParticleScale = .2;
@@ -136,18 +157,27 @@ GamePlay1.prototype = {
 			game.state.start('GamePlay2');
 		}
 
+		if(crystal1Cut && crystal2Cut){
+			game.physics.arcade.collide(player, crystal3);
+			game.physics.arcade.overlap(cutEffect, crystal3, cutCrystal3, null, this);
+		    game.physics.arcade.overlap(scanEffect, crystal3, crystal3Flavor, null, this);
+		}
+
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, woods, collectWood, null, this);
 		game.physics.arcade.overlap(scanEffect, woods, treeFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, stumps, stumpFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
 		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
+	
+		
 		game.physics.arcade.collide(player, ferns);
 		game.physics.arcade.collide(player, woods);
 		game.physics.arcade.collide(player, stumps);
 	},
 
 }
+
 
 function collectWood(cutEffect, wood)
 {
@@ -161,4 +191,90 @@ function collectWood(cutEffect, wood)
 	stump.body.immovable = true;
 	wood.destroy();
 	woodCt += 1;
+}
+
+
+function cutCrystal3(cutEffect, crystal3)
+{	
+		dialogue = true;
+		if (updatedCutTool)
+		{
+			if (line == 0 && dialogueBox.y <= game.height - 170)
+				menuText.text = "You know. I really resent your smug attitude.";
+			if (line == 1)
+				menuText.text = "You've been nothing but selfish since you've got here.";
+			if (line == 2)
+				menuText.text = "Continuously breaking and entering for your own sake.";
+			if (line == 3)
+				menuText.text = "Not really caring about ANY consequences.";
+			if (line == 4)
+				menuText.text = "Do you have no shame? Take so responsibility.";
+			if (line == 5)
+				menuText.text = "I actually can't care less about whatever happens to you.";
+		
+			if (line > 5)
+			{
+				menuText.text = ' ';
+				dialogue = false;
+				line = 0;
+				cutEffect.body.x = -48;
+
+				debris = game.add.emitter(0, 0, 200);
+				debris.makeParticles('assets', 'crystal3');
+				debris.maxParticleScale = .2;
+				debris.minParticleScale = .1;
+				debris.alpha = .7;
+				debris.x = crystal3.x;
+				debris.y = crystal3.y;
+				debris.start(true, 1000, null, 15);
+				crystal3.destroy();
+				shatter.play('', 0, 1, false);
+				crystal3Cut = true;
+				crystal3Ct = 1;
+				tutorialDone=true;
+			}
+		}
+		else
+		{
+			if(line == 0 && dialogueBox.y <= game.height - 170)
+				menuText.text = "I think this should be all the crystals I need.";
+			if(line == 1)
+			{
+				menuText.text = "I've been thinking about this lately...";
+			}
+			if(line == 2)
+				menuText.text = "You know the notes from the labratory?";
+			if(line == 3)
+				menuText.text = "I think it was your diary...I AM the final invention.";
+			if(line == 4)
+			{
+				menuText.text = "I hate to break this to you... but I know why \nthe entire town died out.";
+			}
+			if(line == 5)
+			{
+				menuText.text = "The crystals on this island provide the energy for \nall of the island. ";
+			}
+			if(line == 6)
+			{
+				menuText.text = "By harvesting the energy of the crystals, you were \n draining the life of the people and polluting the crystals.";
+			}
+			if(line == 7)
+			{
+				menuText.text = "Which leads to genetic mutation for the people that relied \n on the crystals.";
+			}
+			if(line == 8)
+			{
+				menuText.text = "You weren't affected by it because you had your own palace of \ncrystals that constantly kept the power alive.";
+			}
+			if (line > 8)
+			{
+				menuText.text = ' ';
+				dialogue = false;
+				scanSuccessful = false;
+				timer = 0;
+				line = 0;
+				scanEffect.body.x = -250;
+			}
+
+		}
 }

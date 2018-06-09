@@ -52,12 +52,14 @@ GamePlay6.prototype = {
 		// Creating the hut group and house group
 
 
-		//create lab
+		//don't spawn crystal if already cut
+		if (!crystal2Cut){
 		crystal2 = game.add.sprite(639, 405, 'assets', 'crystal2');
 		game.physics.arcade.enable(crystal2);
 		crystal2.scale.setTo(0.3);
 		crystal2.anchor.setTo(.5);
 		crystal2.body.immovable = true;
+		}
 
 
 		debris = game.add.emitter(0, 0, 200);

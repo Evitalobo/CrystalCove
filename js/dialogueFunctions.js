@@ -1037,6 +1037,60 @@ function crystal2Flavor()
 
 
 
+function crystal3Flavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if(dialogue){
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "I think this should be all the crystals I need.";
+		if(line == 1)
+		{
+			menuText.text = "I've been thinking about this lately...";
+		}
+		if(line == 2)
+			menuText.text = "You know the notes from the labratory?";
+		if(line == 3)
+			menuText.text = "I think it was your diary...I AM the final invention.";
+		if(line == 4)
+		{
+			menuText.text = "I hate to break this to you... but I know why \nthe entire town died out.";
+		}
+		if(line == 5)
+		{
+			menuText.text = "The crystals on this island provide the energy for \nall of the island. ";
+		}
+		if(line == 6)
+		{
+			menuText.text = "By harvesting the energy of the crystals, you were \n draining the life of the people and polluting the crystals.";
+		}
+		if(line == 7)
+		{
+			menuText.text = "Which leads to genetic mutation for the people that relied \n on the crystals.";
+		}
+		if(line == 8)
+		{
+			menuText.text = "You weren't affected by it because you had your own palace of \ncrystals that constantly kept the power alive.";
+		}
+
+		if (line >8)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+			updatedCutTool = true;
+		}
+	}
+}
+
+
+
+
+
+
 function labFlavor()
 {
 	dialogue = true;
