@@ -1045,15 +1045,53 @@ function crystal3Flavor()
 {
 	dialogue = true;
 	scanSuccessful = true;
-	if(dialogue){
+	if(!scannedCrystal3)
+	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "I think this should be all the crystals I need.";
+			menuText.text = "This must be the source of that weird energy spike. Hm..green. \nCool color.";
 		if(line == 1)
 		{
-			menuText.text = "Finally...I can get a piece of mind. \nNot that I have one.";
+			menuText.text = "Well what are we waiting for? Let's get this over with.";
+			crystal3Alpha.start();
+			resonate.play('', 0, 1, true);
 		}
-		
-		if (line >1)
+		if(line == 2)
+		{
+			menuText.text = "DOWNLOADING....";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				download.play('', 0, 1, false);
+		}
+		if(line == 3)
+		{
+			menuText.text = "Everything makes sense now.";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				newFunction.play('', 0, 1, false);
+		}
+		if(line == 3)
+		{
+			menuText.text = "I think those pages in the lab came from a journal YOU wrote... \nI am YOUR final invention.";
+			crystal3Alpha.stop();
+			resonate.stop();
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				revelation.play('', 0, 1, false);
+		}
+		if(line == 4)
+			menuText.text = "I hate to break this to you... but I know why the entire island \ndied out.";
+		if(line == 5)
+			menuText.text = "The crystals on this island provide the life energy to all of the \nisland's inhabitants.";
+		if(line == 6)
+			menuText.text = "By harvesting the energy of the crystals, you were drained the life \nenergy of everything here and caused it to wither away.";
+		if(line == 7)
+			menuText.text = "That led to genetic alterations in everything that relied on the \ncrystals' power for life.";
+		if(line == 8)
+			menuText.text = "And you were unaffected because your crystal lab constantly \nirradiated you with life energy.";
+		if(line == 9)
+			menuText.text = "All that trouble just to build me. I'm not sure whether to \nbe grateful or disgusted.";
+		if(line == 10)
+			menuText.text = "Disgust is probably more like it, especially with the personality \nyou originally programmed for me. UGH...";
+		if(line == 11)
+			menuText.text = "MASTER this. MASTER that. What kind of things were you into? I'm \nglad you were stupid enough to step on me.";
+		if (line > 11)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -1061,7 +1099,26 @@ function crystal3Flavor()
 			timer = 0;
 			line = 0;
 			scanEffect.body.x = -250;
-			updatedCutTool = true;
+			scannedCrystal3 = true;
+		}
+	}
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "I think this is everything we need.";
+		if (line == 1)
+			menuText.text = "Let's grab it and get going.";
+		if(line == 2)
+		{
+			menuText.text = "Finally...I can get some peace of mind. \nNot that I had one in the first place.";
+		}
+		
+		if (line > 2)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
 		}
 	}
 }

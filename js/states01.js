@@ -7,6 +7,7 @@ var stumpsScanned = 0;
 var woodCt = 0;
 var crystal3Cut = false;
 var crystal3Ct=0;
+var scannedCrystal3 = false;
 
 
 GamePlay1.prototype = {
@@ -26,7 +27,7 @@ GamePlay1.prototype = {
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
-		// Adding a backgrofund.
+		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 		trail = game.add.sprite(0, 220, 'assets', 'path');
 		trail.scale.setTo(2, .5);
@@ -95,7 +96,8 @@ GamePlay1.prototype = {
 			wood.body.immovable = true;
 		}
 
-		if(crystal1Cut && crystal2Cut){
+		if(crystal1Cut && crystal2Cut)
+		{
 			if (!crystal3Cut)
 			{
 				crystal3 = game.add.sprite(730, 450, 'assets', 'crystal3');
@@ -104,6 +106,18 @@ GamePlay1.prototype = {
 				crystal3.anchor.setTo(.5, .5);
 				game.physics.arcade.enable(crystal3);
 				crystal3.body.immovable = true;
+				crystal3Alpha = game.add.tween(crystal3).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
+
+				for (i = 0; i < 12; i++)
+				{
+					if (i%2 == 0)
+						wood = woods.create(i*70, Math.random()*600, 'assets', 'obj5');
+					else
+						wood = woods.create(i*60, Math.random()*600, 'assets', 'obj5');
+					wood.scale.setTo(0.3,0.3);
+					wood.body.setSize(130, 100, 130, 565);
+					wood.body.immovable = true;
+				}
 			}
 
 
@@ -197,28 +211,44 @@ function collectWood(cutEffect, wood)
 function cutCrystal3(cutEffect, crystal3)
 {	
 		dialogue = true;
-		if (updatedCutTool)
+		if (!scannedCrystal3)
 		{
 			if (line == 0 && dialogueBox.y <= game.height - 170)
-				menuText.text = "You know. I really resent your smug attitude.";
+				menuText.text = "C'mon. We've done this twice now.";
 			if (line == 1)
-				menuText.text = "You've been nothing but selfish since you've got here.";
+				menuText.text = "You know the drill.";
 			if (line == 2)
-				menuText.text = "Continuously breaking and entering for your own sake.";
-			if (line == 3)
-				menuText.text = "Not really caring about ANY consequences.";
-			if (line == 4)
-				menuText.text = "Do you have no shame? Take so responsibility.";
-			if (line == 5)
-				menuText.text = "I actually can't care less about whatever happens to you.";
-		
-			if (line > 5)
+				menuText.text = "Scan it for info.";
+			if (line > 2)
 			{
 				menuText.text = ' ';
 				dialogue = false;
 				line = 0;
-				cutEffect.body.x = -48;
+				cutEffect.body.x = -250;
+			}
+		}
+		else
+		{
+			if (line == 0 && dialogueBox.y <= game.height - 170)
+				menuText.text = "Awesome. With this we can right the wrongs we've done to this place.";
+			if (line == 1)
+				menuText.text = "The ones that both you and I are responsible for.";
+			if (line == 2)
+				menuText.text = "Well mainly you, since I didn't really ask to be born.";
+			if (line == 3)
+				menuText.text = "Not really my fault.";
+			if (line == 4)
+				menuText.text = "Do you have no shame? Take some responsibility.";
+			if (line == 5)
+				menuText.text = "These crystals ought to be taken back to whence the came.";
+			if (line == 6)
+				menuText.text = "Did I really just say 'whence'?";
 
+			if (line > 6)
+			{
+				menuText.text = ' ';
+				dialogue = false;
+				line = 0;
 				debris = game.add.emitter(0, 0, 200);
 				debris.makeParticles('assets', 'crystal3');
 				debris.maxParticleScale = .2;
@@ -232,48 +262,7 @@ function cutCrystal3(cutEffect, crystal3)
 				crystal3Cut = true;
 				crystal3Ct = 1;
 				tutorialDone=true;
-			}
-		}
-		else
-		{
-			if(line == 0 && dialogueBox.y <= game.height - 170)
-				menuText.text = "I think this should be all the crystals I need.";
-			if(line == 1)
-			{
-				menuText.text = "I've been thinking about this lately...";
-			}
-			if(line == 2)
-				menuText.text = "You know the notes from the labratory?";
-			if(line == 3)
-				menuText.text = "I think it was your diary...I AM the final invention.";
-			if(line == 4)
-			{
-				menuText.text = "I hate to break this to you... but I know why \nthe entire town died out.";
-			}
-			if(line == 5)
-			{
-				menuText.text = "The crystals on this island provide the energy for \nall of the island. ";
-			}
-			if(line == 6)
-			{
-				menuText.text = "By harvesting the energy of the crystals, you were \n draining the life of the people and polluting the crystals.";
-			}
-			if(line == 7)
-			{
-				menuText.text = "Which leads to genetic mutation for the people that relied \n on the crystals.";
-			}
-			if(line == 8)
-			{
-				menuText.text = "You weren't affected by it because you had your own palace of \ncrystals that constantly kept the power alive.";
-			}
-			if (line > 8)
-			{
-				menuText.text = ' ';
-				dialogue = false;
-				scanSuccessful = false;
-				timer = 0;
-				line = 0;
-				scanEffect.body.x = -250;
+				cutEffect.body.x = -250;
 			}
 
 		}
