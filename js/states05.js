@@ -15,6 +15,7 @@ GamePlay5.prototype = {
 	create: function() {
 		console.log('GamePlay5: create');
 		autumnVoyage.stop();
+		caveAmb.stop();
 		wind.play('', 0, 1, true);
 
 		// Enabling Arcade Physics system.
