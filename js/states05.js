@@ -15,6 +15,8 @@ GamePlay5.prototype = {
 	create: function() {
 		console.log('GamePlay5: create');
 		autumnVoyage.stop();
+		caveAmb.stop();
+		wind.play('', 0, 1, true);
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -151,8 +153,9 @@ GamePlay5.prototype = {
 
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, caveDoor, cutCaveDoor, null, this);
-		game.physics.arcade.overlap(scanEffect, caveEntrance, enterCave, null, this);
-		//NEED TO ADD LAB FLAVOR
+		game.physics.arcade.overlap(player, caveEntrance, enterCave, null, this);
+		game.physics.arcade.overlap(scanEffect, caveDoor, caveFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, caves, caveFlavor, null, this);
 		game.physics.arcade.collide(player, caveDoor);
 		game.physics.arcade.collide(player, caves);
 		
@@ -192,11 +195,11 @@ function cutCaveDoor(cutEffect, caveDoor){
 			dialogue = false;
 			line = 0;
 			cutEffect.body.x = -48;
-			debris.x = caveDoor.body.x + 20;
-			debris.y = caveDoor.body.y;
+			debris.x = caveDoor.body.x + 50;
+			debris.y = caveDoor.body.y + 50;
 			debris.start(true, 1000, null, 15);
 			caveDoor.destroy();
-			woodCut.play('', 0, 1, false);
+			shatter.play('', 0, 1, false);
 			caveOpen = true;
 		}
 }

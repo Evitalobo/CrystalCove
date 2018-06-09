@@ -16,6 +16,8 @@ GamePlay4.prototype = {
 	create: function() {
 		console.log('GamePlay4: create');
 		autumnVoyage.stop();
+		caveAmb.stop();
+		wind.play('', 0, 1, true);
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -69,7 +71,7 @@ GamePlay4.prototype = {
 		}
 		else if(map == 7)
 		{
-			player = game.add.sprite(548, 510, 'scientist');
+			player = game.add.sprite(555, 510, 'scientist');
 			player.anchor.setTo(.5);
 			labOpen = true;
 		}

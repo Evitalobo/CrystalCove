@@ -319,20 +319,20 @@ function note1Flavor()
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = 'The catastrophe began when I started my final invention.';
+			menuText.text = 'The catastrophe began when I created my final invention.';
 		}
 		if (line == 1)
-			menuText.text = 'I was looking for a powerful energy to fuel my invention.';
+			menuText.text = 'I searched high and low for a powerful energy source to fuel it.';
 		if (line == 2)
 			menuText.text = 'I tried everything I could find on this island.';
 		if (line == 3)
-			menuText.text = "From trees to using the water currents";
+			menuText.text = "From the trees to the wind to the water currents...";
 		if (line == 4)
-			menuText.text = "But nothing was powerful enough.";
+			menuText.text = "But nothing generated the power that I needed.";
 		if (line == 5)
 			menuText.text = "I took a step back and watched nature for a while.";
 		if (line == 6)
-			menuText.text = 'It always bewildered me how quickly everything would regrow\n on this island.';
+			menuText.text = 'It always bewildered me how quickly everything grew back\non this island...';
 		if (line > 6)
 		{
 			menuText.text = ' ';
@@ -358,17 +358,17 @@ function note2Flavor()
 		if (line == 1)
 			menuText.text = 'However, I needed to find a more powerful energy source.';
 		if (line == 2)
-			menuText.text = 'It was then when I made up my mind that I must set out on \na journey.';
+			menuText.text = 'It was then that I made up my mind that I had no other choice but \nto search elsewhere.';
 		if (line == 3)
-			menuText.text = "I set out with provisions after building my ship to find the nearest \nsource of land.";
+			menuText.text = "I set out with provisions after building my ship to find the nearest \nneighboring isle.";
 		if (line == 4)
-			menuText.text = "It took me 2 months of sailing to find the nearest island.";
+			menuText.text = "It took me 2 months of sailing to even get there, but none of it had \nbeen worth it.";
 		if (line == 5)
-			menuText.text = "I found different trees and rocks but nothing \nwas powerful enough.";
+			menuText.text = "I found different trees and rocks but nothing particularly \ninteresting.";
 		if (line == 6)
-			menuText.text = 'The strange thing is... nothing grew back as \nfast as it did on my island.';
+			menuText.text = 'The strange thing I found, however, was that nothing grew back \nas fast as it did on MY island.';
 		if (line == 7)
-			menuText.text = 'It was then when I realized the greatest energy \nwas right under my nose the whole time.'
+			menuText.text = 'It was then when I realized the greatest energy source had been \nright under my nose the whole time.'
 		if (line > 7)
 		{
 			menuText.text = ' ';
@@ -389,22 +389,22 @@ function note3Flavor()
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = 'I could not find the crystals native to my \nisland anywhere else';
+			menuText.text = 'I could not find the crystals native to my island anywhere else.';
 		}
 		if (line == 1)
-			menuText.text = 'I conducted so many trials to try and harvest the \npower of the crystals';
+			menuText.text = 'I conducted so many expeditions to harvest and control the power \nof the crystals.';
 		if (line == 2)
-			menuText.text = 'I started creating blueprints for a lab designed \nentirely of crystals.';
+			menuText.text = 'I started drawing up plans to build a lab composed entirely \nout of crystal.';
 		if (line == 3)
-			menuText.text = "It took me several years for my dream of the \nlab to come true.";
+			menuText.text = "It was a good several years before my dream lab was completed.";
 		if (line == 4)
-			menuText.text = "I was finally able to work on my final \ninvention after all these years of research.";
+			menuText.text = "But now I would finally be able to work on my final invention \nafter all my years of grueling research.";
 		if (line == 5)
-			menuText.text = "I would create the first tool that would \nbe able to alter matter.";
+			menuText.text = "I would create the first tool that would be able to alter the \nproperties of matter.";
 		if (line == 6)
-			menuText.text = 'With this tool, I would be able to \nrefabricate the world to my liking.';
+			menuText.text = 'With this tool, I would be able to refabricate the world to my liking.';
 		if (line == 7)
-			menuText.text = 'The elder of the town figured out what I was \nup to and tried to put a stop to my creation.'
+			menuText.text = 'The elder of the island figured out what I was up to and tried to \nput a stop to my creation.'
 		if (line > 7)
 		{
 			menuText.text = ' ';
@@ -425,22 +425,22 @@ function note4Flavor()
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = 'It was too late though. By the time they confronted me, I \nalready had finished my invention.';
+			menuText.text = 'It was too late though. By the time they confronted me, I had \nalready put the finishing touches on my invention.';
 		}
 		if (line == 1)
 			menuText.text = 'The people of the town were dying out at a rapid rate.';
 		if (line == 2)
-			menuText.text = 'Children were growing with genetic mutations and \nthe remainder of the population was shrinking.';
+			menuText.text = 'Children were growing with genetic mutations and the remainder\nof the population was shrinking.';
 		if (line == 3)
-			menuText.text = "Nobody could seem to figure it out. It was more \nimportant now than ever that I finish my invention.";
+			menuText.text = "Nobody could seem to figure it out. It was more important now \nthan ever that I finish my invention.";
 		if (line == 4)
-			menuText.text = "Strange enough, it didn't affect me. I almost never left the lab.";
+			menuText.text = "Strange enough, I wasn't affected in the slightest. I almost \nnever left the lab.";
 		if (line == 5)
-			menuText.text = "Before I left, there were only a few people \non the island still alive.";
+			menuText.text = "Before I left, there were only a few people on the island \nstill alive.";
 		if (line == 6)
-			menuText.text = 'They coveted my inventions and planned to \nambush and murder me.';
+			menuText.text = 'They coveted my inventions and planned to ambush and murder me.';
 		if (line == 7)
-			menuText.text = 'I made a hasty escape to the sea with my \ninvention though. It was too late to save them.'
+			menuText.text = 'Before they could act, however, I made a hasty escape to the \nsea with my invention. It was too late to save them.'
 		if (line > 7)
 		{
 			menuText.text = ' ';
@@ -887,7 +887,11 @@ function crystal1Flavor()
 			crystal1.alpha = .9;
 		}
 		if(line == 8)
+		{
 			menuText.text = "BLAH BLAH Radioactive? Maybe. Like I care.";
+			if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER))
+				newFunction.play('', 0, 1, false);
+		}
 		if (line == 9)
 			menuText.text = "Wait. Is it over?";
 		if (line == 10)
@@ -1139,6 +1143,68 @@ function labFlavor()
 			menuText.text = "Just go inside."
 		if (line > 5){
 
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+
+	}
+}
+
+function caveFlavor()
+{
+	dialogue = true;
+	scanSuccessful=true;
+	if (!caveOpen)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "I believe this is some kind of cave...";
+		if (line == 1)
+			menuText.text = "Hm..It's as if a giant crystal burrowed its way out of the ground..";
+		if (line == 2)
+			menuText.text = "Amazing....";
+		if (line == 3)
+			menuText.text = "Truly a marvel of nature...";
+		if (line == 4)
+			menuText.text = "So beautiful...";
+		if (line == 5)
+			menuText.text = "I-I mean...."
+		if (line == 6)
+			menuText.text = "These crystals are sealing off the way in.";
+		if (line == 7)
+			menuText.text = "No ordinary laser will be able to cut through it...";
+		if (line == 8)
+			menuText.text = "Luckily I am no ordinary tool. <.<";
+		if (line > 8)
+		{
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "A natural wonder of the world...";
+		if (line == 1)
+			menuText.text = "That we just tampered with and destroyed...";
+		if (line == 2)
+			menuText.text = "I mean we can enter, but...";
+		if (line == 3)
+			menuText.text = "At what cost?";
+		if (line == 4)
+			menuText.text = "Do you feel guilty in the slightest?";
+		if (line == 5)
+			menuText.text = "Oh wait I forgot. You can't feel."
+		if (line > 5)
+		{
 			menuText.text = ' ';
 			dialogue = false;
 			line = 0;
