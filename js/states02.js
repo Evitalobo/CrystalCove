@@ -24,6 +24,9 @@ GamePlay2.prototype = {
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
+
 
 		// Adding a background.
 		riverTop = game.add.sprite(172, 0, 'assets', 'RiverTop');

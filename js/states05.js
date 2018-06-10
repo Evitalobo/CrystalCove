@@ -14,6 +14,8 @@ GamePlay5.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay5: create');
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 		autumnVoyage.stop();
 		caveAmb.stop();
 		wind.play('', 0, 1, true);

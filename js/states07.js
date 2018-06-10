@@ -18,6 +18,8 @@ GamePlay7.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay7: create');
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 		wind.stop();
 		autumnVoyage.stop();
 		caveAmb.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
