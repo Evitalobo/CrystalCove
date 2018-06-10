@@ -135,6 +135,7 @@ GamePlay8.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		if(leftColor == 'R')
 			leftCrystal.animations.play('red');

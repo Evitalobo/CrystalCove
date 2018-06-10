@@ -137,6 +137,7 @@ GamePlay5.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		//go to housemap
 		if(player.body.x < 3)

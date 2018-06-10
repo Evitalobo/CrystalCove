@@ -136,6 +136,7 @@ GamePlay7.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		if (crystal1Cut && crystal2Cut && !tutorialDone)
 		{
