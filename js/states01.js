@@ -29,7 +29,7 @@ GamePlay1.prototype = {
 
 		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
-		trail = game.add.sprite(0, 250, 'assets', 'path');
+		trail = game.add.sprite(0, 260, 'assets', 'path');
 		trail.scale.setTo(2, .4);
 
 		
@@ -90,7 +90,7 @@ GamePlay1.prototype = {
 			if (i%2 == 0)
 				wood = woods.create(i*65, Math.random()*150 - 120, 'assets', 'obj5');
 			else
-				wood = woods.create(i*50, Math.random()*200 + 265, 'assets', 'obj5');
+				wood = woods.create(i*50, Math.random()*200 + 250, 'assets', 'obj5');
 			wood.scale.setTo(0.3,0.3);
 			wood.body.setSize(130, 100, 130, 565);
 			wood.body.immovable = true;
@@ -146,6 +146,7 @@ GamePlay1.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
@@ -174,8 +175,6 @@ GamePlay1.prototype = {
 		game.physics.arcade.overlap(scanEffect, stumps, stumpFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
 		game.physics.arcade.overlap(cutEffect, ferns, burnFern, null, this);
-	
-		
 		game.physics.arcade.collide(player, ferns);
 		game.physics.arcade.collide(player, woods);
 		game.physics.arcade.collide(player, stumps);

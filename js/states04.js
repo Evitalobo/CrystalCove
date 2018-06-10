@@ -148,7 +148,8 @@ GamePlay4.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
-
+		restart();
+		
 		//go to houses state near top world bound
 		if(player.body.y < 1)
 		{

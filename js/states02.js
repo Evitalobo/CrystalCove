@@ -127,6 +127,7 @@ GamePlay2.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		if (bridgeBuilt)
 		{

@@ -434,3 +434,31 @@ function buildBridge()
 		bridgeBuilt = true;
 	}
 }
+
+function restart()
+{
+
+if (game.input.keyboard.justPressed(Phaser.Keyboard.R))
+	{
+		game.state.start('MainMenu');
+		
+		var menuText;
+		var line = 0;
+		var tutorialStart = false
+		var tutorialDone = false
+		var gameText;
+		var gameOverText;
+		var playerSpeed = 5;
+		var face;
+		var timer=0;
+		var playerY;
+		var playerX;
+		var map = 0;
+		var toolType = 0;
+		var tools = 0;
+		var pickedUpTool = false;
+		var dialogue = false;
+		var driftwoodTaken = false;
+	}
+
+}

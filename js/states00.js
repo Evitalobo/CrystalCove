@@ -81,14 +81,14 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			map = 2;
+			map = 0;
 			pickedUpTool = true;
 			updatedCutTool = true;
 			tools = 3;
 			crystal1Ct = 1;
 			crystal2Ct = 1;
 			crystal3Ct = 1;
-			game.state.start('GamePlay2');
+			game.state.start('GamePlay');
 		}
 	}
 }
@@ -132,6 +132,10 @@ GamePlay.prototype = {
 		note = game.add.sprite(0, game.height, 'assets', 'Note')
 		game.physics.arcade.enable(note);
 		note.scale.setTo(.5);
+
+		diary = game.add.sprite(300, 525, 'assets', 'Note')
+		game.physics.arcade.enable(diary);
+		diary.scale.setTo(.5);
 
 		//Adding the player sprite
 		if(map == 1)
@@ -288,6 +292,7 @@ GamePlay.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		game.physics.arcade.collide(player, boundary);
 		game.physics.arcade.collide(player, ferns);
@@ -300,6 +305,7 @@ GamePlay.prototype = {
 		game.physics.arcade.overlap(scanEffect, ferns, fernFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, boundary, oceanFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, note, noteFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, diary, diaryFlavor, null, this);
 
 		if(player.body.x > 750)
 		{

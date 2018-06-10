@@ -296,10 +296,12 @@ function noteFlavor()
 		if (line == 6)
 			menuText.text = "Press SHIFT to view the inventory.";
 		if (line == 7)
-			menuText.text = 'Did you really need to read that?';
+			menuText.text = "Press R to go to the Main Menu.";
 		if (line == 8)
+			menuText.text = 'Did you really need to read that?';
+		if (line == 9)
 			menuText.text = '-sigh- You really are an idiot.'
-		if (line > 8)
+		if (line > 9)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -473,6 +475,37 @@ function puzzleFlavor()
 			menuText.text = "Ancient in terms of... I can't detect any humans that\n recently lived here.";
 
 		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
+function diaryFlavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'Day 23: I have been at sea for nearly a month now.\n Still no sight of land.';
+		}
+		if (line == 1)
+			menuText.text = 'Day 36: It has been over a month.A storm blew me off \nof course. I need to figure out where I am. ';
+		if (line == 2)
+			menuText.text = 'Day 42: I am almost out of food rations. I need to set sail \ndespite the consequences.';
+		if (line == 3)
+			menuText.text = "Day 50: I am down to my last meal... I don't think I'll make it\n back alive.";
+		if (line == 4)
+			menuText.text = "Day 60: I've been hallucinating... I can't tell what's real anymore.\n I'm tired.";
+
+		if (line > 4)
 		{
 			menuText.text = ' ';
 			dialogue = false;

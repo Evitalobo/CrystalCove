@@ -185,6 +185,7 @@ GamePlay3.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		//go to beach state of near left world bound
 		if(player.body.x < 1)
