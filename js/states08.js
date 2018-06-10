@@ -135,6 +135,28 @@ GamePlay8.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
+
+		if(leftColor == 'R')
+			leftCrystal.animations.play('red');
+		else if (leftColor == 'G')
+			leftCrystal.animations.play('green');
+		else
+			leftCrystal.animation.play('purple');
+
+		if(midColor == 'R')
+			midCrystal.animations.play('red');
+		else if (midColor == 'G')
+			midCrystal.animations.play('green');
+		else
+			midCrystal.animation.play('purple');
+
+		if(rightColor == 'R')
+			rightCrystal.animations.play('red');
+		else if (rightColor == 'G')
+			rightCrystal.animations.play('green');
+		else
+			rightCrystal.animation.play('purple');
 
 		//go to beach state of near top world bound
 		if(player.body.y > 550 && player.body.x > 300 && player.body.x < 430)

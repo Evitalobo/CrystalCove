@@ -111,6 +111,7 @@ GamePlay6.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
+		restart();
 
 		//go to beach state of near top world bound
 		if(player.body.y > 550)
