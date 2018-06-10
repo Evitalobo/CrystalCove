@@ -453,6 +453,37 @@ function note4Flavor()
 	}
 }
 
+
+
+function puzzleFlavor()
+{
+	dialogue = true;
+	scanSuccessful = true;
+	if (dialogue)
+	{
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+		{
+			menuText.text = 'Seems like a triangle with three different colored shapes.';
+		}
+		if (line == 1)
+			menuText.text = 'It should be helpful to remember it for later.';
+		if (line == 2)
+			menuText.text = 'One of the few artifacts of history from this ancient civilization.';
+		if (line == 3)
+			menuText.text = "Ancient in terms of... I can't detect any humans that\n recently lived here.";
+
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			scanSuccessful = false;
+			timer = 0;
+			line = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+}
+
 function treeFlavor()
 {
 	dialogue = true;

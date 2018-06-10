@@ -48,6 +48,8 @@ GamePlay7.prototype = {
 		game.physics.arcade.enable(note4);
 		note4.scale.setTo(.5);
 		note4.angle = 100;
+
+	
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 4)
@@ -75,6 +77,13 @@ GamePlay7.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
+					// Creating the hut group and house group
+		labIn = game.add.group();
+		labIn.enableBody = true;
+
+		//bounds for lab
+		labWall = labIn.create(0, 0, 'assets', 'scene7Top');
+		labIn.setAll('body.immovable' ,true);
 
 		//create lab
 		if (!crystal1Cut)
@@ -151,7 +160,7 @@ GamePlay7.prototype = {
 		game.physics.arcade.overlap(scanEffect, note4, note4Flavor, null, this);
 		game.physics.arcade.collide(player, crystal1);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
-		//game.physics.arcade.collide(player, labWall);
+		game.physics.arcade.collide(player, labWall);
 		
 	},
 

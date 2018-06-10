@@ -108,21 +108,11 @@ GamePlay1.prototype = {
 				crystal3.body.immovable = true;
 				crystal3Alpha = game.add.tween(crystal3).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
 				resonate.play('', 0, .5, true);
-
-				for (i = 0; i < 12; i++)
-				{
-					if (i%2 == 0)
-						wood = woods.create(i*70, Math.random()*600, 'assets', 'obj5');
-					else
-						wood = woods.create(i*60, Math.random()*600, 'assets', 'obj5');
-					wood.scale.setTo(0.3,0.3);
-					wood.body.setSize(130, 100, 130, 565);
-					wood.body.immovable = true;
-				}
 			}
-
-
 		}
+
+
+		
 
 
 

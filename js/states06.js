@@ -50,6 +50,22 @@ GamePlay6.prototype = {
 		player.animations.add('up', [9,10,11,10],10,true);
 
 		// Creating the hut group and house group
+		houseIn = game.add.group();
+		houseIn.enableBody = true;
+
+		//bounds for lab
+		houseWall = houseIn.create(0, 0, 'assets', 'map8Top');
+		houseIn.setAll('body.immovable' ,true);
+
+		houseLIn = houseIn.create(3, 265, 'assets', 'map8L');
+		houseIn.setAll('body.immovable' ,true);
+
+		houseRIn = houseIn.create(620, 215, 'assets', 'map8R');
+		houseIn.setAll('body.immovable' ,true);
+
+
+		housePuzz = houseIn.create(177, 142, 'assets', 'puzzleHint');
+		houseIn.setAll('body.immovable' ,true);
 
 
 		//don't spawn crystal if already cut
@@ -113,10 +129,11 @@ GamePlay6.prototype = {
 		// Checking for an overlap and collisions
 		game.physics.arcade.overlap(cutEffect, crystal2, cutCrystal2, null, this);
 		game.physics.arcade.overlap(scanEffect, crystal2, crystal2Flavor, null, this);
+		game.physics.arcade.overlap(scanEffect, housePuzz, puzzleFlavor, null, this);
 		//NEED TO ADD LAB FLAVOR
 		game.physics.arcade.collide(player, crystal2);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
-		//game.physics.arcade.collide(player, lab);
+		game.physics.arcade.collide(player, houseIn);
 		
 	},
 
