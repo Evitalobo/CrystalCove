@@ -48,6 +48,24 @@ GamePlay2.prototype = {
 		bridge.scale.setTo(.7, .8);
 		bridge.alpha = 0;
 
+
+		trail = game.add.sprite(40, 340, 'assets', 'path');
+		trail.anchor.setTo(.5);
+		trail.scale.setTo(.63, .27);
+
+		trail1 = game.add.sprite(591, 360, 'assets', 'path3');
+		trail1.anchor.setTo(.5);
+		trail1.scale.setTo(.35, .345);
+
+
+		trail2 = game.add.sprite(588, 490, 'assets', 'path 1');
+		trail2.anchor.setTo(.5);
+		trail2.scale.setTo(.35, .32);
+
+		trail3 = game.add.sprite(730, 500, 'assets', 'path');
+		trail3.anchor.setTo(.5);
+		trail3.scale.setTo(.4, .33);
+
 		//Adding the player sprite
 		//Adding the player sprite->Position depending on the bounds of map
 		if(map == 1)

@@ -29,8 +29,8 @@ GamePlay1.prototype = {
 
 		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
-		trail = game.add.sprite(0, 220, 'assets', 'path');
-		trail.scale.setTo(2, .5);
+		trail = game.add.sprite(0, 250, 'assets', 'path');
+		trail.scale.setTo(2, .4);
 
 		
 		//Adding the player sprite->Position depending on the bounds of map
@@ -90,7 +90,7 @@ GamePlay1.prototype = {
 			if (i%2 == 0)
 				wood = woods.create(i*65, Math.random()*150 - 120, 'assets', 'obj5');
 			else
-				wood = woods.create(i*50, Math.random()*200 + 225, 'assets', 'obj5');
+				wood = woods.create(i*50, Math.random()*200 + 265, 'assets', 'obj5');
 			wood.scale.setTo(0.3,0.3);
 			wood.body.setSize(130, 100, 130, 565);
 			wood.body.immovable = true;
