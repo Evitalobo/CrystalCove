@@ -17,6 +17,7 @@ GamePlay8.prototype = {
 	create: function() {
 		console.log('GamePlay8: create');
 		autumnVoyage.stop();
+		wind.stop();
 		dialogue=false;
 		caveAmb.play('', 0, 1, true);
 

@@ -81,13 +81,14 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			/*map = 4;
+			map = 5;
 			pickedUpTool = true;
 			updatedCutTool = true;
 			tools = 3;
 			crystal1Ct = 1;
-			crystal2Ct = 1;*/
-			game.state.start('GamePlay');
+			crystal2Ct = 1;
+			crystal3Ct = 1;
+			game.state.start('GamePlay8');
 		}
 	}
 }

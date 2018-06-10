@@ -17,6 +17,7 @@ function addSounds()
 		wind = game.add.audio('wind');
 		shatter = game.add.audio('shatter');
 		vibrate = game.add.audio('vibrate');
+		caveAmb = game.add.audio('caveAmb');
 		revelation = game.add.audio('revelation');
 }
 function createUI()

@@ -20,7 +20,6 @@ GamePlay7.prototype = {
 		console.log('GamePlay7: create');
 		wind.stop();
 		autumnVoyage.stop();
-		caveAmb = game.add.audio('caveAmb');
 		caveAmb.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 		dialogue = false;
 
