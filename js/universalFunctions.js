@@ -1,5 +1,4 @@
 // functions to be used all throughout the game
-var progress
 
 function addSounds()
 {
@@ -177,13 +176,19 @@ function activateTool()
 		}
 
 		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && toolType == 1 && !dialogue)
-			cutSound.play('', 0, 1, true)
+		{
+			cutSound.volume = 1;
+			bondSound.volume = 0;
+		}
 		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && toolType == 2 && !dialogue)
-			bondSound.play('', 0, 1, true)
+		{
+			bondSound.volume = .5;
+			cutSound.volume = 0;
+		}
 		else
 		{
-			cutSound.stop();
-			bondSound.stop();
+			cutSound.volume = 0;
+			bondSound.volume = 0;
 		}
 
 		if ( game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && toolType == 0 && !dialogue)
@@ -396,7 +401,6 @@ function buildBridge()
 {
 	if (!bridgeBuilt && woodCt >= 5)
 	{
-		bondSound.play('', 0, 1, true);
 		bridge.alpha += .01;
 		riverMid.alpha -= .01;
 	}
@@ -432,5 +436,52 @@ function buildBridge()
 	{
 		woodCt -= 5;
 		bridgeBuilt = true;
+	}
+}
+
+function placeCrystals()
+{
+	if (!crystalsPlaced && crystal1Ct == 1 && crystal2Ct == 1 && crystal3Ct == 1)
+	{
+		midCrystal.alpha += .01;
+		leftCrystal.alpha += .01;
+		rightCrystal.alpha += .01;
+	}
+	else if (!crystalsPlaced)
+	{
+		dialogue = true;
+		scanSuccessful = true;
+		if(line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = 'Hmm....';
+		if(line == 1)
+			menuText.text = "Doesn't seem to be working...";
+		if(line == 2)
+			menuText.text = "Can't place things down that I don't have.";
+		if(line == 3)
+			menuText.text = "I think we're missing something...";
+		if(line == 4)
+			menuText.text = "Remember, you can hold SHIFT to check your inventory.";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			bondEffect.body.x = -250;
+		}		
+	}
+	if (midCrystal.alpha > 1 && leftCrystal.alpha > 1 && rightCrystal.alpha > 1)
+	{
+		midCrystal.alpha = 1;
+		leftCrystal.alpha = 1;
+		rightCrystal.alpha = 1;
+	}
+	if (midCrystal.alpha == 1 && !crystalsPlaced)
+	{
+		crystal1Ct = 0;
+		crystal2Ct = 0;
+		crystal3Ct = 0;
+		crystalsPlaced = true;
 	}
 }

@@ -81,14 +81,14 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			map = 2;
+			map = 5;
 			pickedUpTool = true;
 			updatedCutTool = true;
 			tools = 3;
 			crystal1Ct = 1;
 			crystal2Ct = 1;
 			crystal3Ct = 1;
-			game.state.start('GamePlay2');
+			game.state.start('GamePlay8');
 		}
 	}
 }
@@ -109,6 +109,9 @@ GamePlay.prototype = {
 	create: function() 
 	{
 		console.log('GamePlay: create');
+
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 
 		// this.autumnVoyage = game.add.audio('autumnVoyage');
 		// this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
@@ -238,6 +241,8 @@ GamePlay.prototype = {
 		toolVibrate = game.add.tween(handitool).to( { angle : 20 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
 		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 
 		if (!pickedUpTool)
 		{

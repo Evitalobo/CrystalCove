@@ -16,6 +16,8 @@ GamePlay3.prototype = {
 	// Creating assets into game world.
 	create: function() {
 		console.log('GamePlay3: create');
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 		autumnVoyage.stop();
 		wind.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
 

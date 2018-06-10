@@ -23,6 +23,8 @@ GamePlay6.prototype = {
 		wind.stop();
 		crystalSong = game.add.audio('crystalSong');
 		crystalSong.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
 
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);

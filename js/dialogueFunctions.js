@@ -655,7 +655,7 @@ function bridgeFlavor()
 		if(line == 2)
 			menuText.text = "I mean it looks so out of place...";
 		if(line == 3)
-			menuText.text = "The wood isn't even the same color!";
+			menuText.text = "The planks aren't even a consistent size!";
 		if(line == 4)
 			menuText.text = "Just keep moving so I don't have to look at it anymore.";
 		if (line > 4)

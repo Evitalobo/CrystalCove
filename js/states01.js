@@ -27,6 +27,9 @@ GamePlay1.prototype = {
 		// Enabling Arcade Physics system.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
+		bondSound.play('', 0, 0, true);
+		cutSound.play('', 0, 0, true);
+
 		// Adding a background.
 		backdrop = game.add.sprite(0, 0, 'assets', 'scene2');
 		trail = game.add.sprite(0, 250, 'assets', 'path');
