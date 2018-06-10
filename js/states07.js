@@ -57,12 +57,12 @@ GamePlay7.prototype = {
 			player = game.add.sprite(400, 530, 'scientist');
 			player.anchor.setTo(.5);
 		}
-		/*else
+		else
 		{
-			player = game.add.sprite(50, 30, 'scientist');
+			player = game.add.sprite(500, 300, 'scientist');
 			player.anchor.setTo(.5);
 			labOpen = true;
-		}*/
+		}
 
 
 		game.physics.arcade.enable(player);
@@ -83,6 +83,12 @@ GamePlay7.prototype = {
 
 		//bounds for lab
 		labWall = labIn.create(0, 0, 'assets', 'scene7Top');
+		labIn.setAll('body.immovable' ,true);
+
+		labLin = labIn.create(0, 280, 'assets', 'scene7L');
+		labIn.setAll('body.immovable' ,true);
+
+		labRin = labIn.create(625, 283, 'assets', 'scene7R');
 		labIn.setAll('body.immovable' ,true);
 
 		//create lab
@@ -160,7 +166,7 @@ GamePlay7.prototype = {
 		game.physics.arcade.overlap(scanEffect, note4, note4Flavor, null, this);
 		game.physics.arcade.collide(player, crystal1);
 		//MAKE A SEPARATE COLLISION FOR THE REST OF THE WALL/ROOM
-		game.physics.arcade.collide(player, labWall);
+		game.physics.arcade.collide(player, labIn);
 		
 	},
 
