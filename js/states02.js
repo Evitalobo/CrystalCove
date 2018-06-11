@@ -172,26 +172,3 @@ GamePlay2.prototype = {
 	}
 }
 
-
-// define GameOver state and methods
-var GameOver = function(game) {};
-GameOver.prototype = {
-	preload: function() {
-		console.log('GameOver: preload');
-	},
-	create: function() {
-		console.log('GameOver: create');
-		game.stage.backgroundColor = "#000000";
-		// GUI status text.
-		menuText = game.add.text(75,250,'        You are in the game over state. \nPress SPACEBAR to go to the next state.', {fontSize: '32px', fill: '#FFFFFF' });
-	},
-	update: function() {
-		// GameOver logic
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.M)) 
-		{
-			game.state.start('MainMenu');
-		}
-	}
-}
-
-

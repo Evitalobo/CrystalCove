@@ -49,9 +49,8 @@ MainMenu.prototype =
 		game.load.audio('caveAmb', 'assets/audio/CaveDripping.mp3');
 		game.load.audio('shatter', 'assets/audio/Shatter.mp3');
 		game.load.audio('vibrate', 'assets/audio/cellPhoneVibrate.mp3');
-		game.load.audio('revelation', 'assets/audio/Revelation.mp3');
-		game.load.audio('placeStone', 'assets/audio/placeStone.mp3')
-
+		game.load.audio('revelation', 'assets/audio/Revelation.mp3')
+		game.load.audio('creditMusic', 'assets/audio/creditMusic.mp3')
 
 		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
 
@@ -82,7 +81,7 @@ MainMenu.prototype =
 	{
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
-    {
+		{
 			map = 0;
 			pickedUpTool = true;
 			updatedCutTool = true;
@@ -90,7 +89,7 @@ MainMenu.prototype =
 			crystal1Ct = 1;
 			crystal2Ct = 1;
 			crystal3Ct = 1;
-			game.state.start('GamePlay');
+			game.state.start('GameOver');
 		}
 	}
 }
@@ -111,9 +110,6 @@ GamePlay.prototype = {
 	create: function() 
 	{
 		console.log('GamePlay: create');
-
-		bondSound.play('', 0, 0, true);
-		cutSound.play('', 0, 0, true);
 
 		// this.autumnVoyage = game.add.audio('autumnVoyage');
 		// this.autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
@@ -247,8 +243,6 @@ GamePlay.prototype = {
 		toolVibrate = game.add.tween(handitool).to( { angle : 20 }, 500, Phaser.Easing.Linear.None, false, 0, 250, true);
 
 		menuText = game.add.bitmapText(15, game.height - 150, 'pixel', ' ', 24);
-		bondSound.play('', 0, 0, true);
-		cutSound.play('', 0, 0, true);
 
 		if (!pickedUpTool)
 		{
@@ -299,7 +293,7 @@ GamePlay.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
-		restart();
+		reset();
 
 		game.physics.arcade.collide(player, boundary);
 		game.physics.arcade.collide(player, ferns);
@@ -460,4 +454,53 @@ function boundDialogue()
 				player.body.y -= 5
 		}
 
+}
+
+
+// define GameOver state and methods
+var GameOver = function(game) {};
+GameOver.prototype = 
+{
+	preload: function() 
+	{
+		console.log('GameOver: preload');
+	},
+	create: function() 
+	{
+		console.log('GameOver: create');
+		this.game.scale.pageAlignHorizontally = true;
+		this.game.scale.pageAlignVertically = true;
+		this.game.scale.refresh();	
+		credits = game.add.sprite(0, 0, 'assets', 'EndScreen');
+
+	
+		autumnVoyage.stop();
+		// loop and play background music
+		creditMusic.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+
+
+		credit1Text = game.add.bitmapText(70, 50, 'pixel', 'x 0', 30);
+		credit2Text = game.add.bitmapText(70, 100, 'pixel', 'x 0', 30);
+		credit3Text = game.add.bitmapText(160, 150, 'pixel', 'x 0', 30);
+		credit4Text = game.add.bitmapText(160, 200, 'pixel', 'x 0', 25);
+		credit5Text = game.add.bitmapText(160, 270, 'pixel', 'x 0', 25);
+		credit6Text = game.add.bitmapText(70, 350, 'pixel', 'x 0', 20);
+		credit7Text = game.add.bitmapText(300, 570, 'pixel', 'x 0', 20);
+		
+		
+		credit1Text.text = 'Programmers: Ryan Santiago & Evita Lobo';
+		credit2Text.text = 'Environmental and Object art: Evita Lobo';
+		credit3Text.text = 'Music direction: Abdul Banglee';
+		credit4Text.text = '  Special thanks to our professors: \nNathan Altice and Elizabeth Swensen';
+		credit5Text.text = '            Thanks to our TAs: \nLaura Stevenson & Richard Grillotti';
+		credit6Text.text = '    Music: Autumn Voyage by Jagex Ltd, 8-Bit Select Menu Select \n  by TheDweebMan on Freesound.org, beeps3.mp3 by stevegos98     \non freesound.org, tone beep.wav by pan14 on freesound.org,\n   ufohovering.wav by WIM on freesound.org, scanner by skxr\non freesound.org, scanner beep.wav by kalisemorrison on freesound.org,\n glass3.wav by juskiddink on freesound.org, Wine Glass Resonation\n   30 sec.wav by joshenanigans on freesound.org, Game Powerup\n by josepharaoh99 on freesound.org, Cut Wood by Tristan_Lohengrin on\n   freesound.org , huh_nes.mp3 by levelplane on freesound.org';
+		credit7Text.text = 'PRESS R TO REPLAY';
+
+
+	},
+	update: function() 
+	{
+		
+	}
+	
 }
