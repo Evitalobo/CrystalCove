@@ -209,6 +209,7 @@ function cutCaveDoor(cutEffect, caveDoor)
 				dialogue = false;
 				line = 0;
 				cutEffect.body.x = -48;
+			}
 		}
 }
 		
