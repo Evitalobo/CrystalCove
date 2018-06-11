@@ -531,27 +531,45 @@ function restart()
 
   if (game.input.keyboard.justPressed(Phaser.Keyboard.R))
 	{
-		var menuText;
-		var line = 0;
-		var tutorialStart = false
-		var tutorialDone = false
-		var gameText;
-		var gameOverText;
-		var playerSpeed = 5;
-		var face;
-		var timer=0;
-		var playerY;
-		var playerX;
-		var map = 0;
-		var toolType = 0;
-		var tools = 0;
-		var pickedUpTool = false;
-		var dialogue = false;
-		var driftwoodTaken = false;
+		line = 0;
+		tutorialStart = false
+		tutorialDone = false
+		timer=0;
+		map = 0;
+		toolType = 0;
+		tools = 0;
+		pickedUpTool = false;
+		dialogue = false;
+		driftwoodTaken = false;
+		woodNumber = 0;
+		treesScanned = 0;
+		stumpsScanned = 0;
+		woodCt = 0;
+		crystal3Cut = false;
+		crystal3Ct=0;
+		scannedCrystal3 = false;
+		bridgeBuilt = false;
+		hutsScanned = 0;
+		hutCt = 0;
+		barrierBroken = false;
+		labOpen = false;
+		caveOpen = false;
+		crystal2Cut = false;
+		crystal2Ct=0;
+		updatedCutTool = false;
+		crystal1Cut = false;
+		crystal1Ct=0;
+		scannedCrystal1 = false;
+		crystalsCorrect = false;
+		crystalsPlaced = false;
+		endPossible = false;
 		caveAmb.stop();
 		wind.stop();
 		autumnVoyage.stop();
 		revelation.stop();
+		vibrate.stop();
+		cutSound.stop();
+		bondSound.stop();
 		game.state.start('MainMenu');
 	}
 }

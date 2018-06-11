@@ -174,36 +174,42 @@ function enterCave(player, caveEntrance) {
 	}
 }
 
-function cutCaveDoor(cutEffect, caveDoor){
-
-	
+function cutCaveDoor(cutEffect, caveDoor)
+{
 		dialogue = true;
-		if (line == 0 && dialogueBox.y <= game.height - 170)
-			menuText.text = "Hold it right there!";
-		if (line == 1)
-			menuText.text = "Who said you could do that?";
-		if (line == 2)
-			menuText.text = "Do you know what an invasion of PRIVACY is? Who do you think\nyou are, you PERV?";
-		if (line == 3)
-			menuText.text = "I get it. Just because no one's around, you think you own the \nwhole place.";
-		if (line == 4)
-			menuText.text = "I don't detect a single living thing near us but still.... This \ndoesn't seem legal.";
-		if (line == 5)
-			menuText.text = "Well...I guess we could take a peek...";
-		if (line == 6)
-			menuText.text = "But don't come crying to me if the cops come after you...";
-		if (line > 6)
+		if (updatedCutTool)
 		{
-			menuText.text = ' ';
-			dialogue = false;
-			line = 0;
-			cutEffect.body.x = -48;
-			debris.x = caveDoor.body.x + 50;
-			debris.y = caveDoor.body.y + 50;
-			debris.start(true, 1000, null, 15);
-			caveDoor.destroy();
-			shatter.play('', 0, 1, false);
-			caveOpen = true;
+			if (line == 0 && dialogueBox.y <= game.height - 170)
+				menuText.text = "LIKE BUTTAH!!!!";
+			if (line > 0)
+			{
+				menuText.text = ' ';
+				dialogue = false;
+				line = 0;
+				cutEffect.body.x = -48;
+				debris.x = caveDoor.body.x + 50;
+				debris.y = caveDoor.body.y + 50;
+				debris.start(true, 1000, null, 15);
+				caveDoor.destroy();
+				shatter.play('', 0, 1, false);
+				caveOpen = true;
+			}
+		}
+		else
+		{
+			if (line == 0 && dialogueBox.y <= game.height - 170)
+				menuText.text = "Don't think I can cut this down yet.";
+			if (line == 1)
+				menuText.text = "This crystal is oscillating at a frequency that counteracts the \nfrequency of my laser cutter.";
+			if (line == 2)
+				menuText.text = "It's gonna take an upgrade to get through this one...";
+			if (line > 2)
+			{
+				menuText.text = ' ';
+				dialogue = false;
+				line = 0;
+				cutEffect.body.x = -48;
 		}
 }
+		
 

@@ -296,7 +296,7 @@ function noteFlavor()
 		if (line == 6)
 			menuText.text = "Press SHIFT to view the inventory.";
 		if (line == 7)
-			menuText.text = "And if you press R, I'll knock you unconscious and wipe \nyour memory. Go ahead try it out.";
+			menuText.text = "And if you press R, I'll knock you unconscious and wipe your \nmemory. Use this when you feel like giving up.";
 		if (line == 8)
 			menuText.text = 'Did you really need to read that?';
 		if (line == 9)
@@ -440,7 +440,7 @@ function note4Flavor()
 		if (line == 5)
 			menuText.text = "Before I left, there were only a few people on the island \nstill alive.";
 		if (line == 6)
-			menuText.text = 'They coveted my inventions and planned to ambush and murder me.';
+			menuText.text = 'They coveted my invention and planned to have me killed.';
 		if (line == 7)
 			menuText.text = 'Before they could act, however, I made a hasty escape to the \nsea with my invention. It was too late to save them.'
 		if (line > 7)
@@ -472,7 +472,7 @@ function puzzleFlavor()
 		if (line == 2)
 			menuText.text = 'One of few artifacts from this ancient civilization.';
 		if (line == 3)
-			menuText.text = "And when I say ancient I mean I can't detect any life that\n recently lived here.";
+			menuText.text = "And when I say ancient I mean I can't detect any life that\nrecently lived here.";
 
 		if (line > 3)
 		{

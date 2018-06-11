@@ -211,8 +211,8 @@ function cutLabDoor(cutEffect, labDoor)
 			line = 0;
 			timer = 0;
 			cutEffect.body.x = -250;
-			debris.x = labDoor.x;
-			debris.y = labDoor.y;
+			debris.x = labDoor.x + 75;
+			debris.y = labDoor.y + 50;
 			debris.start(true, 1000, null, 15);
 			labDoor.destroy();
 			shatter.play('', 0, 1, false);
@@ -237,7 +237,7 @@ function cutLabDoor(cutEffect, labDoor)
 			menuText.text = "Heh! Get it? WALL?";
 		if (line == 7)
 			menuText.text = "Ahem...There's an actual wall here."
-		if (line > 4)
+		if (line > 7)
 		{
 			menuText.text = ' ';
 			dialogue = false;

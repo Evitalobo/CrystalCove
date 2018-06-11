@@ -89,7 +89,8 @@ GamePlay1.prototype = {
 
 
 		//spawning wood
-		for (i = 0; i < 12; i++){
+		for (i = 0; i < 12; i++)
+		{
 			if (i%2 == 0)
 				wood = woods.create(i*65, Math.random()*150 - 120, 'assets', 'obj5');
 			else
@@ -103,6 +104,13 @@ GamePlay1.prototype = {
 		{
 			if (!crystal3Cut)
 			{
+				for (i = 0; i < 12; i++)
+				{
+					wood = woods.create(i*57, Math.random()*500, 'assets', 'obj5');
+					wood.scale.setTo(0.3,0.3);
+					wood.body.setSize(130, 100, 130, 565);
+					wood.body.immovable = true;
+				}
 				crystal3 = game.add.sprite(730, 450, 'assets', 'crystal3');
 				crystal3.angle=90;
 				crystal3.scale.setTo(0.3);
@@ -133,7 +141,7 @@ GamePlay1.prototype = {
 	update: function() 
 	{
 		// GamePlay logic
-		//game.debug.physicsGroup(woods);
+		//game.debug.physicsGroup();
 
 		// If the player presses SPACEBAR, activate current tool function.
 		activateTool();
@@ -253,6 +261,7 @@ function cutCrystal3(cutEffect, crystal3)
 				debris.start(true, 1000, null, 15);
 				crystal3.destroy();
 				shatter.play('', 0, 1, false);
+				resonate.stop();
 				crystal3Cut = true;
 				crystal3Ct = 1;
 				tutorialDone=true;
