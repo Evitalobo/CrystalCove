@@ -89,11 +89,8 @@ MainMenu.prototype =
 			crystal1Ct = 1;
 			crystal2Ct = 1;
 			crystal3Ct = 1;
-<<<<<<< HEAD
+
 			game.state.start('GamePlay8');
-=======
-			game.state.start('GameOver');
->>>>>>> dd1062643fc53b837391e21094ca813aad686a50
 		}
 	}
 }
