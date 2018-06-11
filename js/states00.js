@@ -64,6 +64,7 @@ MainMenu.prototype =
 		this.game.scale.refresh();	
 		menu = game.add.sprite(0, 0, 'assets', 'Title');
 		addSounds();
+		revelation.stop();
 
 		// loop and play background music
 		autumnVoyage.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
@@ -83,15 +84,7 @@ MainMenu.prototype =
 		// main menu logic
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && game.cache.isSoundReady('cutSound') && game.cache.isSoundReady('wind') && game.cache.isSoundReady('bondSound')) 
 		{
-			map = 0;
-			pickedUpTool = true;
-			updatedCutTool = true;
-			tools = 3;
-			crystal1Ct = 1;
-			crystal2Ct = 1;
-			crystal3Ct = 1;
-
-			game.state.start('GamePlay8');
+			game.state.start('GamePlay');
 		}
 	}
 }
@@ -295,7 +288,7 @@ GamePlay.prototype = {
 
 		scannerBoxMovement();
 		showInventory();
-		reset();
+		restart();
 
 		game.physics.arcade.collide(player, boundary);
 		game.physics.arcade.collide(player, ferns);
@@ -477,8 +470,11 @@ GameOver.prototype =
 
 	
 		autumnVoyage.stop();
+		resonate.stop();
+		caveAmb.stop();
 		// loop and play background music
-		creditMusic.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+		game.time.events.add(500, playMusic, this);
+		game.time.events.add(1000, stopFade, this);
 
 
 		credit1Text = game.add.bitmapText(70, 50, 'pixel', 'x 0', 30);
@@ -498,11 +494,25 @@ GameOver.prototype =
 		credit6Text.text = '    Music: Autumn Voyage by Jagex Ltd, 8-Bit Select Menu Select \n  by TheDweebMan on Freesound.org, beeps3.mp3 by stevegos98     \non freesound.org, tone beep.wav by pan14 on freesound.org,\n   ufohovering.wav by WIM on freesound.org, scanner by skxr\non freesound.org, scanner beep.wav by kalisemorrison on freesound.org,\n glass3.wav by juskiddink on freesound.org, Wine Glass Resonation\n   30 sec.wav by joshenanigans on freesound.org, Game Powerup\n by josepharaoh99 on freesound.org, Cut Wood by Tristan_Lohengrin on\n   freesound.org , huh_nes.mp3 by levelplane on freesound.org';
 		credit7Text.text = 'PRESS R TO REPLAY';
 
+		whiteScreen = game.add.sprite(0, 0, 'assets', 'WhiteScreen');
+
+		whiteFadeOut = game.add.tween(whiteScreen).to( { alpha : 1 }, 1000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+
 
 	},
 	update: function() 
 	{
-		
+		restart();
 	}
 	
+}
+
+function playMusic()
+{
+	revelation.play('', 0, 1, true);	// ('marker', start position, volume (0-1), loop)
+}
+
+function stopFade()
+{
+	whiteScreen.kill();
 }

@@ -4,6 +4,7 @@ var crystalsPlaced = false;
 var midColor;
 var leftColor;
 var rightColor;
+var endPossible = false;
 
 var GamePlay8=function(game){};
 GamePlay8.prototype = {
@@ -70,6 +71,11 @@ GamePlay8.prototype = {
 			rightCrystal.alpha = 0;
 			leftCrystal.alpha = 0;
 		}
+
+		marker = game.add.sprite(380, 320, 'assets', 'marker');
+		marker.anchor.setTo(.5);
+		game.physics.arcade.enable(marker);
+		marker.alpha = 0;
 		
 		//Adding the player sprite->Position depending on the bounds of map
 		player = game.add.sprite(370, 530, 'scientist');
@@ -115,6 +121,8 @@ GamePlay8.prototype = {
 		crystalRAlpha = game.add.tween(rightCluster).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, true, 0, 2000, true);
 
 		whiteFadeIn = game.add.tween(whiteScreen).to( { alpha : 1 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
+
+		markerFade = game.add.tween(marker).to( { alpha : 1 }, 1000, Phaser.Easing.Linear.None, false, 0, 500, true);
 
 	},
 	update: function() 
@@ -220,13 +228,18 @@ GamePlay8.prototype = {
 		game.physics.arcade.overlap(bondEffect, rightCrystal, placeCrystals, null, this);
 		game.physics.arcade.overlap(bondEffect, midCrystal, placeCrystals, null, this);
 
-		/*game.physics.arcade.overlap(scanEffect, leftCrystal, slotFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, leftCrystal, slotFlavor, null, this);
 		game.physics.arcade.overlap(scanEffect, rightCrystal, slotFlavor, null, this);
-		game.physics.arcade.overlap(scanEffect, midCrystal, slotFlavor, null, this);*/
+		game.physics.arcade.overlap(scanEffect, midCrystal, slotFlavor, null, this);
+
+		game.physics.arcade.overlap(scanEffect, rightCluster, clusterFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, leftCluster, clusterFlavor, null, this);
 
 		game.physics.arcade.overlap(cutEffect, leftCrystal, switchLR, null, this);
 		game.physics.arcade.overlap(cutEffect, rightCrystal, switchMR, null, this);
 		game.physics.arcade.overlap(cutEffect, midCrystal, switchML, null, this);
+
+		game.physics.arcade.overlap(player, marker, endGame, null, this);
 	},
 
 }

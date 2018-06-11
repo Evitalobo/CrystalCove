@@ -212,6 +212,7 @@ GamePlay3.prototype = {
 			playerX = player.x;
 			game.state.start('GamePlay4');
 		}
+		restart();
 		
 
 

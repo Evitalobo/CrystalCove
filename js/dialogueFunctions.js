@@ -296,7 +296,7 @@ function noteFlavor()
 		if (line == 6)
 			menuText.text = "Press SHIFT to view the inventory.";
 		if (line == 7)
-			menuText.text = "Press R to go to the Main Menu.";
+			menuText.text = "And if you press R, I'll knock you unconscious and wipe \nyour memory. Go ahead try it out.";
 		if (line == 8)
 			menuText.text = 'Did you really need to read that?';
 		if (line == 9)
@@ -1355,5 +1355,207 @@ function caveFlavor()
 			scanEffect.body.x = -250;
 		}
 
+	}
+}
+
+function slotFlavor()
+{
+	dialogue = true;
+	scanSuccessful=true;
+	if (!crystalsPlaced && crystal1Ct == 1 && crystal2Ct == 1 && crystal3Ct == 1)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "These indents in the wall are the same shape as all the \ncrystals we've collected.";
+		if (line == 1)
+			menuText.text = "That probably means we're supposed to place them here.";
+		if (line == 2)
+			menuText.text = "You could probably BOND them to the wall pretty easily.";
+		if (line > 2)
+		{
+
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}		
+	}
+	else if (!crystalsPlaced)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "What peculiar shapes that are in the wall...";
+		if (line == 1)
+			menuText.text = "Wonder what they could be for...";
+		if (line == 2)
+			menuText.text = "This place IS gorgeous though, not gonna lie.";
+		if (line == 3)
+			menuText.text = "Alright! Enough standing around!";
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "The crystals are now embedded in the wall.";
+		if (line == 1)
+			menuText.text = "But I think you can move them around using the energy \nfrequency of my laser cutter.";
+		if (line == 2)
+			menuText.text = "If you figure out the right order, you might be able to \nfix everything!";
+		if (line == 3)
+			menuText.text = "I wonder what the order could be...";
+		if (line == 4)
+			menuText.text = "There must be a clue somewhere on this island...";
+		if (line > 4)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+	}
+}
+
+function clusterFlavor()
+{
+	dialogue = true;
+	scanSuccessful=true;
+	if (!crystalsPlaced)
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "These crystals here seem pretty important...";
+		if (line == 1)
+			menuText.text = "Thy're oscillating at a pretty low frequency as if reacting \ndirectly to something in this room.";
+		if (line == 2)
+			menuText.text = "If we can figure out how to raise their oscillation frequency, \nI bet something big will happen.";
+		if (line == 3)
+			menuText.text = "But how to do that.....";
+		if (line > 3)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+
+	}
+	else if (leftColor == 'P' && midColor == 'R' && rightColor == 'G')
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "The crystals are generating lot of sound now!";
+		if (line == 1)
+			menuText.text = "Wait....";
+		if (line == 2)
+			menuText.text = "Something's definitely happening!";
+		if (line == 3)
+			menuText.text = "I think the crystals are rejuvenating the island!!";
+		if (line == 4)
+			menuText.text = "No...";
+		if (line == 5)
+			menuText.text = "Not yet.";
+		if (line == 6)
+			menuText.text = "They're too drained of energy. They're gonna need to be \nrecharged by some kind of battery first.";
+		if (line == 7)
+			menuText.text = "I've pinpointed the location at which the battery must be in order \nto jumpstart the crystals.";
+		if (line == 8)
+		{
+			menuText.text = "I'll place a light marker at where it needs to go.";
+			markerFade.start();
+			endPossible = true;
+		}
+		if (line == 9)
+			menuText.text = "But where are we going to find a battery charged with \nLIFE ENERGY?";
+		if (line > 9)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+	}
+	else if (leftColor == 'P' || midColor == 'R' || rightColor == 'G')
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Is it me or are these crystals getting louder?";
+		if (line == 1)
+			menuText.text = "Might want to check back in on these when we get the \nright combination...";
+		if (line > 1)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+	}
+	else
+	{
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "The crystal isn't emitting much of a frequency at the moment.";
+		if (line == 1)
+			menuText.text = "Maybe try interacting with it once you've got the crystals in the \nright places.";
+		if (line > 1)
+		{
+			menuText.text = ' ';
+			dialogue = false;
+			line = 0;
+			scanSuccessful = false;
+			timer = 0;
+			scanEffect.body.x = -250;
+		}
+	}
+}
+
+function endGame()
+{
+	if(crystalsCorrect && endPossible)
+	{
+		dialogue = true;
+		if (line == 0 && dialogueBox.y <= game.height - 170)
+			menuText.text = "Wait, what are you doing?";
+		if (line == 1)
+			menuText.text = "Oh...";
+		if (line == 2)
+			menuText.text = "I get it now.";
+		if (line == 3)
+			menuText.text = "You're the perfect battery.";
+		if (line == 4)
+			menuText.text = "But you'll end up sealed away here.";
+		if (line == 5)
+			menuText.text = "Heh...";
+		if (line == 6)
+			menuText.text = "Maybe I misjudged you all this time.";
+		if (line == 7)
+			menuText.text = "You're willing to sacrifice yourself in order to correct your \npast mistakes.";
+		if (line == 8)
+			menuText.text = "I guess you're pretty cool after all.";
+		if (line == 9)
+			menuText.text = "I'll only say this once.";
+		if (line == 10)
+			menuText.text = "It was a pleasure and honor being with you...";
+		if (line == 11)
+			menuText.text = "...Master";
+		if (line > 11)
+		{
+			menuText.text = ' ';
+			dialogueBox.kill();
+			whiteFadeIn.start();
+			game.time.events.add(1000, rollCredits, this);
+		}
 	}
 }

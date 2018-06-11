@@ -520,14 +520,17 @@ function switchMR()
 		placeStone.play('', 0, 1, false);
 	}
 }
+
+function rollCredits()
+{
+	game.state.start('GameOver');
+}
   
 function restart()
 {
 
   if (game.input.keyboard.justPressed(Phaser.Keyboard.R))
 	{
-		game.state.start('MainMenu');
-		
 		var menuText;
 		var line = 0;
 		var tutorialStart = false
@@ -545,5 +548,10 @@ function restart()
 		var pickedUpTool = false;
 		var dialogue = false;
 		var driftwoodTaken = false;
+		caveAmb.stop();
+		wind.stop();
+		autumnVoyage.stop();
+		revelation.stop();
+		game.state.start('MainMenu');
 	}
 }

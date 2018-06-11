@@ -165,6 +165,7 @@ GamePlay1.prototype = {
 			playerY = player.body.y;
 			game.state.start('GamePlay2');
 		}
+		restart();
 
 		if(crystal1Cut && crystal2Cut){
 			game.physics.arcade.collide(player, crystal3);

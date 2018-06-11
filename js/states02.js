@@ -162,13 +162,7 @@ GamePlay2.prototype = {
 			playerY = player.body.y;
 			game.state.start('GamePlay3');
 		}
-
-		//menustateswitch
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.M))
-		{
-			game.state.start('MainMenu');
-
-		}
+		restart();
 	}
 }
 
