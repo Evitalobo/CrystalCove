@@ -1,5 +1,5 @@
 //INSIDE OF CAVE-> FINAL MAP
-var crystalsCorrect = 0;
+var crystalsCorrect = false;
 var crystalsPlaced = false;
 var midColor;
 var leftColor;
@@ -22,6 +22,7 @@ GamePlay8.prototype = {
 		bondSound.play('', 0, 0, true);
 		cutSound.play('', 0, 0, true);
 		autumnVoyage.stop();
+		resonate.play('', 0, 0, true);
 		wind.stop();
 		dialogue=false;
 		caveAmb.play('', 0, 1, true);
@@ -48,6 +49,7 @@ GamePlay8.prototype = {
 		leftCrystal = game.add.sprite(295, 210, 'assets', 'leftCrystalGreen');
 		game.physics.arcade.enable(leftCrystal);
 		leftCrystal.anchor.setTo(.5);
+		leftCrystal.body.setSize(100, 73, 0, 0);
 		leftColor = 'G';
 		leftCrystal.animations.add('purple', ['leftCrystalPurple'], 1, true);
 		leftCrystal.animations.add('red', ['leftCrystalRed'], 1, true);
@@ -56,6 +58,7 @@ GamePlay8.prototype = {
 		rightCrystal = game.add.sprite(470, 215, 'assets', 'rightCrystalRed');
 		game.physics.arcade.enable(rightCrystal);
 		rightCrystal.anchor.setTo(.5);
+		rightCrystal.body.setSize(115, 71, 20, 0);
 		rightColor = 'R';
 		rightCrystal.animations.add('purple', ['rightCrystalPurple'], 1, true);
 		rightCrystal.animations.add('red', ['rightCrystalRed'], 1, true);
@@ -69,11 +72,8 @@ GamePlay8.prototype = {
 		}
 		
 		//Adding the player sprite->Position depending on the bounds of map
-		if (map == 5)
-		{
-			player = game.add.sprite(370, 530, 'scientist');
-			player.anchor.setTo(.5);
-		}
+		player = game.add.sprite(370, 530, 'scientist');
+		player.anchor.setTo(.5);
 
 		game.physics.arcade.enable(player);
 		//game.camera.follow(player);
@@ -108,13 +108,13 @@ GamePlay8.prototype = {
 		whiteScreen = game.add.sprite(0, 0, 'assets', 'WhiteScreen');
 		whiteScreen.alpha = 0;
 
-		crystalRScale = game.add.tween(leftCluster.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, false, 0, 500, true);
-		crystalRAlpha = game.add.tween(leftCluster).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
+		crystalLScale = game.add.tween(leftCluster.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, true, 0, 500, true);
+		crystalLAlpha = game.add.tween(leftCluster).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, true, 0, 2000, true);
 
-		crystalLScale = game.add.tween(rightCluster.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, false, 0, 500, true);
-		crystalLAlpha = game.add.tween(rightCluster).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 2000, true);
+		crystalRScale = game.add.tween(rightCluster.scale).to( { x : 1.5, y : 1.5 }, 1000, Phaser.Easing.Linear.None, true, 0, 500, true);
+		crystalRAlpha = game.add.tween(rightCluster).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, true, 0, 2000, true);
 
-		whiteFadeIn = game.add.tween(whiteScreen).to( { alpha : 0 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
+		whiteFadeIn = game.add.tween(whiteScreen).to( { alpha : 1 }, 1000, Phaser.Easing.Linear.None, false, 0, 1000, true);
 
 	},
 	update: function() 
@@ -142,21 +142,57 @@ GamePlay8.prototype = {
 		else if (leftColor == 'G')
 			leftCrystal.animations.play('green');
 		else
-			leftCrystal.animation.play('purple');
+			leftCrystal.animations.play('purple');
 
 		if(midColor == 'R')
 			midCrystal.animations.play('red');
 		else if (midColor == 'G')
 			midCrystal.animations.play('green');
 		else
-			midCrystal.animation.play('purple');
+			midCrystal.animations.play('purple');
 
 		if(rightColor == 'R')
 			rightCrystal.animations.play('red');
 		else if (rightColor == 'G')
 			rightCrystal.animations.play('green');
 		else
-			rightCrystal.animation.play('purple');
+			rightCrystal.animations.play('purple');
+
+		if(leftColor == 'P' && midColor == 'R' && rightColor == 'G')
+		{
+			resonate.volume = 1;
+			crystalLScale.resume();
+			crystalLAlpha.resume();
+			crystalRScale.resume();
+			crystalRAlpha.resume();
+			crystalsCorrect = true;
+		}
+		else if (leftColor == 'P' || midColor == 'R' || rightColor == 'G')
+		{
+			resonate.volume = .2;
+			crystalLScale.pause();
+			crystalLAlpha.pause();
+			crystalRScale.pause();
+			crystalRAlpha.pause();
+			leftCluster.alpha = .9;
+			leftCluster.scale.setTo(1);
+			rightCluster.alpha = .9;
+			rightCluster.scale.setTo(1);
+			crystalsCorrect = false;
+		}
+		else
+		{
+			resonate.volume = 0;
+			crystalLScale.pause();
+			crystalLAlpha.pause();
+			crystalRScale.pause();
+			crystalRAlpha.pause();
+			leftCluster.alpha = .9;
+			leftCluster.scale.setTo(1);
+			rightCluster.alpha = .9;
+			rightCluster.scale.setTo(1);
+			crystalsCorrect = false;
+		}
 
 		//go to beach state of near top world bound
 		if(player.body.y > 550 && player.body.x > 300 && player.body.x < 430)
@@ -183,7 +219,14 @@ GamePlay8.prototype = {
 		game.physics.arcade.overlap(bondEffect, leftCrystal, placeCrystals, null, this);
 		game.physics.arcade.overlap(bondEffect, rightCrystal, placeCrystals, null, this);
 		game.physics.arcade.overlap(bondEffect, midCrystal, placeCrystals, null, this);
-		
+
+		/*game.physics.arcade.overlap(scanEffect, leftCrystal, slotFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, rightCrystal, slotFlavor, null, this);
+		game.physics.arcade.overlap(scanEffect, midCrystal, slotFlavor, null, this);*/
+
+		game.physics.arcade.overlap(cutEffect, leftCrystal, switchLR, null, this);
+		game.physics.arcade.overlap(cutEffect, rightCrystal, switchMR, null, this);
+		game.physics.arcade.overlap(cutEffect, midCrystal, switchML, null, this);
 	},
 
 }

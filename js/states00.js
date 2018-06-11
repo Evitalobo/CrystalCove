@@ -90,7 +90,7 @@ MainMenu.prototype =
 			crystal1Ct = 1;
 			crystal2Ct = 1;
 			crystal3Ct = 1;
-			game.state.start('GamePlay');
+			game.state.start('GamePlay8');
 		}
 	}
 }

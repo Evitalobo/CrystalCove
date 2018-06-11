@@ -486,6 +486,40 @@ function placeCrystals()
 		crystal3Ct = 0;
 		crystalsPlaced = true;
 	}
+}
+
+function switchLR()
+{
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && crystalsPlaced)
+	{
+		var temp = leftColor;
+		leftColor = rightColor;
+		rightColor = temp;
+		placeStone.play('', 0, 1, false);
+	}
+}
+
+function switchML()
+{
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && crystalsPlaced)
+	{
+		var temp = leftColor;
+		leftColor = midColor;
+		midColor = temp;
+		placeStone.play('', 0, 1, false);
+	}
+}
+
+function switchMR()
+{
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && crystalsPlaced)
+	{
+		var temp = rightColor;
+		rightColor = midColor;
+		midColor = temp;
+		placeStone.play('', 0, 1, false);
+	}
+}
   
 function restart()
 {

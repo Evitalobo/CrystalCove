@@ -465,14 +465,14 @@ function puzzleFlavor()
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
 		{
-			menuText.text = 'Seems like a triangle with three different colored shapes.';
+			menuText.text = 'Some kind of pattern has been carved into this wall...';
 		}
 		if (line == 1)
-			menuText.text = 'It should be helpful to remember it for later.';
+			menuText.text = "Maybe it'll end up being useful?";
 		if (line == 2)
-			menuText.text = 'One of the few artifacts of history from this ancient civilization.';
+			menuText.text = 'One of few artifacts from this ancient civilization.';
 		if (line == 3)
-			menuText.text = "Ancient in terms of... I can't detect any humans that\n recently lived here.";
+			menuText.text = "And when I say ancient I mean I can't detect any life that\n recently lived here.";
 
 		if (line > 3)
 		{
@@ -493,19 +493,21 @@ function diaryFlavor()
 	if (dialogue)
 	{
 		if(line == 0 && dialogueBox.y <= game.height - 170)
-		{
-			menuText.text = 'Day 23: I have been at sea for nearly a month now.\n Still no sight of land.';
-		}
+			menuText.text = "What's this? Someone's journal?";
 		if (line == 1)
-			menuText.text = 'Day 36: It has been over a month.A storm blew me off \nof course. I need to figure out where I am. ';
+			menuText.text = "Day 23: I have been at sea for nearly a month now. Things \nseem like they're going well so far.";;
+		if (line == 1)
+			menuText.text = 'Day 36: It has been over a month. A storm threw me off course. \nI need to figure out where I am. ';
 		if (line == 2)
-			menuText.text = 'Day 42: I am almost out of food rations. I need to set sail \ndespite the consequences.';
+			menuText.text = 'Day 42: I am nearly out of supplies. I may need to start \nrationing things out more sparingly.';
 		if (line == 3)
-			menuText.text = "Day 50: I am down to my last meal... I don't think I'll make it\n back alive.";
+			menuText.text = "Day 56: I am down to the last of my supplies... I don't think \nI'll make it another five days.";
 		if (line == 4)
-			menuText.text = "Day 60: I've been hallucinating... I can't tell what's real anymore.\n I'm tired.";
+			menuText.text = "Day 60: I am tired. So very tired. I think I may have seen a\npegasus on the water...";
+		if (line == 5)
+			menuText.text = "Man, sucks to be whoever this guy was.";
 
-		if (line > 4)
+		if (line > 5)
 		{
 			menuText.text = ' ';
 			dialogue = false;
@@ -983,7 +985,7 @@ function crystal1Flavor()
 		if(line == 1)
 			menuText.text = "I didn't get anything from it.";
 		if(line == 2)
-			menuText.text = "It's stupid, purple, useless, and stupid.";
+			menuText.text = "It's stupid, purple, useless, and STUPID.";
 		if (line > 2)
 		{
 			menuText.text = ' ';
