@@ -18,7 +18,7 @@ function addSounds()
 		vibrate = game.add.audio('vibrate');
 		caveAmb = game.add.audio('caveAmb');
 		revelation = game.add.audio('revelation');
-		placeStone = game.add.audio('placeStone')
+		placeStone = game.add.audio('placeStone');
 }
 function createUI()
 {

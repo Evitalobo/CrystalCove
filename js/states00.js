@@ -51,6 +51,7 @@ MainMenu.prototype =
 		game.load.audio('vibrate', 'assets/audio/cellPhoneVibrate.mp3');
 		game.load.audio('revelation', 'assets/audio/Revelation.mp3')
 		game.load.audio('creditMusic', 'assets/audio/creditMusic.mp3')
+		game.load.audio('placeStone', 'assets/audio/placeStone.mp3');
 
 		game.load.bitmapFont('pixel', 'assets/fonts/pixel.png', 'assets/fonts/pixel.xml');
 
